@@ -13,9 +13,9 @@
 /* Variables  */
 :root {
   --color_Blue: #3f93f1;
-  --color_Dark1: #1e1e1e;
-  --color_Dark2: #252527;
-  --color_Light1: #dfdfdf;
+  --color_Dark1: #2596be;
+  --color_Dark2: #909595;
+  --color_Light1: #F3f7f8;
   --color_Light2: #c4c4c4;
 }
 
@@ -49,8 +49,10 @@
 .logo-box img {
   font-size: 30px;
   height: 50px;
-  width: 100px;
-  min-width: 78px;
+  width: 3px;
+  min-width: 50px;
+  margin-left: 15px;
+  margin-top: 10px;
   text-align: center;
   line-height: 50px;
   transition: all 0.5s ease;
@@ -205,12 +207,12 @@
 }
 .home .toggle-sidebar i {
   font-size: 35px;
-  color: var(--color_Dark1);
+  color: var(--color_Dark2);
   margin-left: 15px;
 }
 .home .toggle-sidebar .text {
   font-size: 25px;
-  color: var(--color_Dark1);
+  color: var(--color_Dark2);
   font-weight: 600;
 }
 
