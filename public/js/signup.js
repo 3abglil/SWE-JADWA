@@ -87,11 +87,11 @@ nextBtnSec.addEventListener("click", (e) => {
     check[3].style.opacity = "1";
   } else {
     if (mail.value === "") {
-    //   slidePage.style.marginLeft = "-25%";
-    //   eror[2].innerHTML = "E-Mail can't be empty";
-    //   mail.style.border = "2px solid red";
-    //   fail[2].style.opacity = "1";
-    //   check[2].style.opacity = "0";
+      slidePage.style.marginLeft = "-25%";
+      eror[2].innerHTML = "E-Mail can't be empty";
+      mail.style.border = "2px solid red";
+      fail[2].style.opacity = "1";
+      check[2].style.opacity = "0";
     } else {
       eror[2].innerHTML = "";
       mail.style.border = "2px solid green";
@@ -99,11 +99,11 @@ nextBtnSec.addEventListener("click", (e) => {
       check[2].style.opacity = "1";
     }
     if (phone.value === "") {
-    //   slidePage.style.marginLeft = "-25%";
-    //   eror[3].innerHTML = "You Must Enter A Phone Number";
-    //   phone.style.border = "2px solid red";
-    //   fail[3].style.opacity = "1";
-    //   check[3].style.opacity = "0";
+      slidePage.style.marginLeft = "-25%";
+      eror[3].innerHTML = "You Must Enter A Phone Number";
+      phone.style.border = "2px solid red";
+      fail[3].style.opacity = "1";
+      check[3].style.opacity = "0";
     } else {
       eror[3].innerHTML = "";
       phone.style.border = "2px solid green";
@@ -115,11 +115,11 @@ nextBtnSec.addEventListener("click", (e) => {
 nextBtnThird.addEventListener("click", (e) => {
   if (dob.value !== "" && gender.value !== "") {
     if (dob.value < 18) {
-    //   slidePage.style.marginLeft = "-50%";
-    //   eror[4].innerHTML = "You Must Be 18 Or Older";
-    //   dob.style.border = "2px solid red";
-    //   fail[4].style.opacity = "1";
-    //   check[4].style.opacity = "0";
+      slidePage.style.marginLeft = "-50%";
+      eror[4].innerHTML = "You Must Be 18 Or Older";
+      dob.style.border = "2px solid red";
+      fail[4].style.opacity = "1";
+      check[4].style.opacity = "0";
     } else {
       e.preventDefault();
       slidePage.style.marginLeft = "-75%";
@@ -134,11 +134,11 @@ nextBtnThird.addEventListener("click", (e) => {
     }
   } else {
     if (dob.value === "") {
-    //   slidePage.style.marginLeft = "-50%";
-    //   eror[4].innerHTML = "Date Of Birth Cannot be empty";
-    //   dob.style.border = "2px solid red";
-    //   fail[4].style.opacity = "1";
-    //   check[4].style.opacity = "0";
+      slidePage.style.marginLeft = "-50%";
+      eror[4].innerHTML = "Date Of Birth Cannot be empty";
+      dob.style.border = "2px solid red";
+      fail[4].style.opacity = "1";
+      check[4].style.opacity = "0";
     } else {
       eror[4].innerHTML = "";
       fn.style.border = "2px solid green";
@@ -150,15 +150,15 @@ nextBtnThird.addEventListener("click", (e) => {
 submitBtn.addEventListener("click", function () {
   if (user.value !== "" && pass.value !== "" && passconf.value !== "") {
     if (pass.value !== passconf.value) {
-    //   slidePage.style.marginLeft = "-75%";
-    //   eror[6].innerHTML = "Password dowsn't Match";
-    //   eror[7].innerHTML = "Password dowsn't Match";
-    //   passconf.style.border = "2px solid red";
-    //   pass.style.border = "2px solid red";
-    //   fail[6].style.opacity = "1";
-    //   fail[7].style.opacity = "1";
-    //   check[6].style.opacity = "0";
-    //   check[7].style.opacity = "0";
+      slidePage.style.marginLeft = "-75%";
+      eror[6].innerHTML = "Password dowsn't Match";
+      eror[7].innerHTML = "Password dowsn't Match";
+      passconf.style.border = "2px solid red";
+      pass.style.border = "2px solid red";
+      fail[6].style.opacity = "1";
+      fail[7].style.opacity = "1";
+      check[6].style.opacity = "0";
+      check[7].style.opacity = "0";
     } else {
       eror[7].innerHTML = "";
       passconf.style.border = "2px solid green";
@@ -180,11 +180,11 @@ submitBtn.addEventListener("click", function () {
     }
   } else {
     if (user.value === "") {
-    //   slidePage.style.marginLeft = "-75%";
-    //   eror[5].innerHTML = "Username Cannot be empty";
-    //   user.style.border = "2px solid red";
-    //   fail[5].style.opacity = "1";
-    //   check[5].style.opacity = "0";
+      slidePage.style.marginLeft = "-75%";
+      eror[5].innerHTML = "Username Cannot be empty";
+      user.style.border = "2px solid red";
+      fail[5].style.opacity = "1";
+      check[5].style.opacity = "0";
     } else {
       eror[5].innerHTML = "";
       user.style.border = "2px solid green";
@@ -192,11 +192,11 @@ submitBtn.addEventListener("click", function () {
       check[5].style.opacity = "1";
     }
     if (pass.value === "") {
-    //   slidePage.style.marginLeft = "-75%";
-    //   eror[6].innerHTML = "passsword Cannot be empty";
-    //   pass.style.border = "2px solid red";
-    //   fail[6].style.opacity = "1";
-    //   check[6].style.opacity = "0";
+      slidePage.style.marginLeft = "-75%";
+      eror[6].innerHTML = "passsword Cannot be empty";
+      pass.style.border = "2px solid red";
+      fail[6].style.opacity = "1";
+      check[6].style.opacity = "0";
     } else {
       eror[6].innerHTML = "";
       pass.style.border = "2px solid green";
@@ -204,11 +204,11 @@ submitBtn.addEventListener("click", function () {
       check[6].style.opacity = "1";
     }
     if (passconf.value === "") {
-    //   slidePage.style.marginLeft = "-75%";
-    //   eror[7].innerHTML = "Passsword Confirmation Cannot be empty";
-    //   passconf.style.border = "2px solid red";
-    //   fail[7].style.opacity = "1";
-    //   check[7].style.opacity = "0";
+      slidePage.style.marginLeft = "-75%";
+      eror[7].innerHTML = "Passsword Confirmation Cannot be empty";
+      passconf.style.border = "2px solid red";
+      fail[7].style.opacity = "1";
+      check[7].style.opacity = "0";
     } else {
       eror[7].innerHTML = "";
       passconf.style.border = "2px solid green";
