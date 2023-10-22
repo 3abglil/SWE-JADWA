@@ -10,7 +10,7 @@ closeform.addEventListener("click", function() {
 
 openform.addEventListener("click", function() {
   form.style.display = "block";
-  pbody.style.filter="blur(20px)";
+  pbody.style.filter="blur(0px)";
 });
 
 // fields animation
