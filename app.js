@@ -11,6 +11,10 @@ import { fileURLToPath } from 'url';
 const app = express();
 
 
+
+import Admin_Router  from "./routes/admin.js";
+import index_Router  from "./routes/index.js";
+// import index_router  from "../routes/index.js";
 export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 
@@ -37,26 +41,11 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 
 
-  app.get('/', async (req, res) => {
-  //   async function insertData() {
-  //     // const { data, error } = await supabase
-  //     //   .from('users')
-  //     //   .insert({Email:"gello"});
-  //     const { data, error } = await supabase
-  // .from('users')
-  // .select("name")
-    
-  //     if (error) {
-  //       console.error(error);
-  //       return;
-  //     }
-    
-  //     console.log('Data inserted successfully:', data);
-  //   }
-    
-  //   insertData();
-  res.render("admin");
-});
+ 
+app.use('/', index_Router);
+app.use('/admin', Admin_Router);
+
+
 
 app.listen(8000, () => {
   console.log('Server listening on port 8000');
