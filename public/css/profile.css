@@ -1,0 +1,144 @@
+body {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    z-index: 1;
+    background: linear-gradient(-45deg, black, blanchedalmond, white, black);
+    background-size: 400% 400%;
+    height: 100vh;
+    animation: animate 15s ease infinite;
+}
+
+input.ccc:disabled {
+    background-color: #f0f0f0;
+    width: 65%;
+}
+
+.ee {
+    border: 1px solid;
+    border-radius: 3.5px;
+    padding: 2%;
+    width: 65%;
+}
+
+div.title {
+    font-size: 4%;
+    margin: 2% auto;
+    width: 80%;
+    height: auto;
+    background-color: #d6d6d6;
+}
+
+h1.head {
+    color: #000;
+    margin: 1% 2%;
+    font-weight: 100;
+    font-size: 3%;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.form-container {
+    margin-top: 2%; /* Adjust this value to control the space between the navigation bar and the form */
+    text-align: center;
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+div.two {
+    margin: 2% 4% 0;
+}
+
+div.one {
+    width: 80%;
+    margin: 2% auto;
+    padding: 2%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 3.5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 4px 4px;
+    padding-top: 2%;
+}
+
+.cc {
+    border: 1px solid;
+    border-radius: 3.5px;
+    padding: 2%;
+}
+
+.ccc {
+    border: 1px solid;
+    border-radius: 3.5px;
+    padding: 2%;
+    margin-top: 2%;
+}
+
+.cccc {
+    width: 30%;
+    max-width: 150px;
+    background-color: rgb(31, 90, 238);
+    color: white;
+    transition: all 1s;
+    border: 1px solid;
+    border-radius: 3.5px;
+    padding: 2%;
+}
+
+.cccc:hover {
+    width: 35%;
+    background-color: rgb(31, 90, 238);
+    box-shadow: -2px 2px 2px #000;
+}
+
+img.i {
+    margin: 0 auto;
+}
+
+/* Center the form */
+form.q {
+    text-align: center;
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+    div.title {
+        margin: 2% auto;
+        width: 90%;
+    }
+
+    h1.head {
+        margin: 1% 2%;
+    }
+
+    div.two,
+    div.one {
+        width: 100%;
+        margin: 2% 0;
+    }
+
+    div.one {
+        padding: 2%;
+    }
+
+    .cc,
+    .ccc,
+    .cccc {
+        width: 100%;
+        max-width: none;
+    }
+
+    img.i {
+        margin: 0 auto;
+    }
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

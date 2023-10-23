@@ -14,6 +14,9 @@ const app = express();
 
 import Admin_Router  from "./routes/admin.js";
 import index_Router  from "./routes/index.js";
+import profile_Router  from "./routes/profile.js";
+import about_Router  from "./routes/about.js";
+
 // import index_router  from "../routes/index.js";
 export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
@@ -45,6 +48,9 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 app.use('/', index_Router);
 app.use('/admin', Admin_Router);
 app.use('/index', index_Router);
+app.use('/profile', profile_Router);
+app.use('/about', about_Router);
+
 
 
 
