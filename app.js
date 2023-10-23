@@ -44,6 +44,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
  
 app.use('/', index_Router);
 app.use('/admin', Admin_Router);
+app.use('/index', index_Router);
 
 
 

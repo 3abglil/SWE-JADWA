@@ -1,162 +1,230 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
 
-<head>
-    <!-- <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./bootstrap-5.0.2-dist/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/index.css" />
+
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="./bootstrap-5.0.2-dist/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <!-- Title -->
+    <title>Traventure</title>
+  </head>
+  <body>
+    <!-- Navbar  -->
 
 
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-</head>
-
-<body>
-    <div id="pbody">
-        <div class="top-bar">
-            <div class="search-bar">
-                <div class="search-container">
-                    <input type="text" placeholder="Search...">
-                    <button>Search</button>
-                </div>
-            </div>
-            <div class="user">
-                <span class="user-name">Abdelrahman</span>
-                <i class='bx bxs-user'></i>
-            </div>
+    <div
+      id="carouselExampleControls"
+      class="my-carousel carousel slide"
+      data-bs-ride="carousel"
+      data-interval="100"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            src="https://images.unsplash.com/photo-1519055676067-4f45655f6f4a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            class="d-block w-100 imgCarousel"
+            alt="TRAVENTURE"
+          />
         </div>
-
-        <div class="message">
-            <p>Welcome to our website!</p>
+        <div class="carousel-item item-1">
+          <img
+            src="https://images.unsplash.com/photo-1544220830-7da42df1ff8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            class="d-block w-100 imgCarousel"
+            alt="TRAVENTURE"
+          />
         </div>
-
-
-         <div class="card-container">
-        <div class="card">
-            <img src="images/medical.jpg" alt="Product 1">
-            <div class="card-body">
-                <h5 class="card-title">Medical Insurance</h5>
-                <p class="card-text">Description of Product 1.</p>
-                <a href="#" class="btn btn-primary">Learn More</a>
-            </div>
+        <div class="carousel-item item-2">
+          <img
+            src="https://images.unsplash.com/photo-1519944734258-61d6d3e542f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            class="d-block w-100 imgCarousel"
+            alt="TRAVENTURE"
+          />
         </div>
-
-        <div class="card">
-            <img src="images/car.avif" alt="Product 2">
-            <div class="card-body">
-                <h5 class="card-title">Car Insurance</h5>
-                <p class="card-text">Description of Product 2.</p>
-                <a href="#fillform" class="btn btn-primary" id="OPEN">Learn More</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="images/life2.jpeg" alt="Product 1">
-            <div class="card-body">
-                <h5 class="card-title">Life Insurance</h5>
-                <p class="card-text">Description of Product 3.</p>
-                <a href="#" class="btn btn-primary">Learn More</a>
-            </div>
-        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleControls"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleControls"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
+    <!-- Navbar  Ends-->
 
-    <div id="fillform">
-        <button id="CLOSE" class="fbutton">
-            <i class="fa-regular fa-circle-xmark fa-2xl"></i>
-        </button>
-        <form action="#" method="post">
-            <div id="floatcont">
-                <div class="form-control fdata">
-                    <input type="text" required />
-                    <label>First Name</label>
+ 
+
+    <!-- Body Section -->
+    <section class="main-section">
+      <!-- Services Section -->
+      <div class="section p-5">
+        <div class="container text-center mb-3">
+          <div class="row justify-content-center">
+            <div class="#">OUR SERVICES</div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row text-center justify-content-between">
+            <div class="col-md">
+              <div class="card service-card">
+                <div class="card-body text-center">
+                  <i class="fas fa-hiking" style="font-size: 50px"></i>
+                  <h4 class="card-title">
+                    <p class="services">Camping</p>
+                  </h4>
                 </div>
-                <div class="form-control fdata">
-                    <input type="text" required />
-                    <label>Last Name</label>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="card service-card">
+                <div class="card-body text-center">
+                  <i class="fas fa-map-marked-alt" style="font-size: 50px"></i>
+                  <h4 class="card-title">
+                    <p class="services">Tracking</p>
+                  </h4>
                 </div>
+              </div>
             </div>
-
-            <div class="form-control fdata">
-                <input type="date" required />
-            </div>
-
-
-
-
-
-
-            <div class="form-control fdata" id="email">
-                <input type="text" required />
-                <label>Email</label>
-            </div>
-
-            <div class="form-control fdata" id="phone">
-                <input type="number" required />
-                <label>Phone Number</label>
-            </div>
-
-            <div class="rating-text">
-                <p>Gender :</p>
-            </div>
-            <div class="choose">
-                <div class="rating-container">
-                    <div class="rating">
-                        <form class="rating-form">
-
-                            <label for="super-happy">
-                                <input type="radio" name="rating" class="super-happy inp" id="super-happy"
-                                    value="super-happy" />
-                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512">
-                                    <path
-                                        d="M112 48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm40 304V480c0 
-                                17.7-14.3 32-32 32s-32-14.3-32-32V256.9L59.4 304.5c-9.1 15.1-28.8 20-43.9 10.9s-20-28.8-10.9-43.9l58.3-97c17.4-28.9 48.6-46.6 82.3-46.6h29.7c33.7
-                                0 64.9 17.7 82.3 46.6l58.3 97c9.1 15.1 4.2 34.8-10.9 43.9s-34.8 4.2-43.9-10.9L232 256.9V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V352H152z" />
-                                </svg> </label>
-
-                            <label for="happy">
-                                <input type="radio" name="rating" class="happy inp" id="happy" value="happy" checked />
-                                <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                                    viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                    <path
-                                        d="M160 0a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM88 384H70.2c-10.9 0-18.6-10.7-15.2-21.1L93.3 248.1 59.4 304.5c-9.1 15.1-28.8 20-43.9 10.9s-20-28.8-10.9-43.9l53.6-89.2c20.3-33.7 56.7-54.3 96-54.3h11.6c39.3 0 75.7 20.6 96 54.3l53.6 89.2c9.1 15.1 4.2 34.8-10.9 43.9s-34.8 4.2-43.9-10.9l-33.9-56.3L265 362.9c3.5 10.4-4.3 21.1-15.2 21.1H232v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V384H152v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V384z" />
-                                </svg>
-                                </svg> </label>
-
-
-
-                        </form>
-                    </div>
+            <div class="col-md">
+              <div class="card service-card">
+                <div class="card-body text-center">
+                  <i class="fas fa-swimmer" style="font-size: 50px"></i>
+                  <h4 class="card-title">
+                    <p class="services">Fun Activities</p>
+                  </h4>
                 </div>
+              </div>
             </div>
-
-            <div class="form-control fdata adress">
-                <input type="text" id="Address"required />
-                <label for="Address" id="LAB">Address</label>
+            <div class="col-md">
+              <div class="card service-card">
+                <div class="card-body text-center">
+                  <i class="fa-solid fa-signs-post" style="font-size: 50px"></i>
+                  <h4 class="card-title">
+                    <p class="services">Tour Guide</p>
+                  </h4>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-
-
-            <div class="container">
-                <button id="btn"class="button">
-                    <p id="btnText">Submit</p>
-                    <div class="check-box">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                            <path fill="transparent" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-                        </svg>
-                    </div>
-                </button>
+      <!-- Packages -->
+      <section class="p-5">
+        <div class="container text-center mb-3">
+          <div class="row justify-content-center">
+            <div class="col col-12 packages-text">BEST PACKAGES</div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row text-center justify-content-between g-4">
+            <div class="col-md">
+              <div class="card bg-light text-dark package">
+                <img
+                  src="/images/medical.jpg"
+                  class="card-img-top" alt="Argentina"
+                />
+                <div class="card-body text-center">
+                  <h5 class="card-title">Medical Insurance</h5>
+                  <p class="card-text">
+                  </p>
+                  <a href="/book" class="btn btn-book">Book Now</a>
+                </div>
+              </div>
             </div>
+            <div class="col-md">
+              <div class="card bg-light text-dark package">
+                <img
+                  src="/images/car.avif"
+                  class="card-img-top" 
+                  alt="TRAVENTURE"
+                />
+                <div class="card-body text-center">
+                  <h5 class="card-title">Car Insurance</h5>
+                  <p class="card-text">
+                  </p>
+                  <a href="/book" class="btn btn-book">Book Now</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="card bg-light text-dark package">
+                <img
+                  src="/images/life2.jpeg"
+                  class="card-img-top"
+                  alt="TRAVENTURE"
+                />
+                <div class="card-body text-center">
+                  <h5 class="card-title">Life Insurance</h5>
+                  <p class="card-text">
+                  </p>
+                  <a href="/book" class="btn btn-book">Book Now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="center-div">
+          <br /><br />
+          <a href="/book" class="btn btn-book">Explore More</a>
+        </div>
+      </section>
+      <!-- End Packages -->
+    </section>
+    <!-- End Body Section -->
 
-        </form>
+    <!-- FOOTER -->
+    
+    <footer> <%- include('./partials/footer') %></footer>
 
-    </div>
 
-</body>
-<script src="./public/js/form.js"></script>
-
+  </body>
 </html>

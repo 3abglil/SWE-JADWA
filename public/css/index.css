@@ -1,573 +1,173 @@
-/* styles.css */
-
-/* Reset some default styles */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  margin: 0;
-  padding: 0;
+.navbar {
+  z-index: 150;
 }
 
-.top-bar {
-    background-color: #2596be;
-    color: #fff;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-} */
-
-.search-container {
-    display: flex;
-    align-items: center;
-} 
-
-.search-container input[type="text"] {
-  padding: 8px;
-  border: none;
-  border-radius: 3px;
+.navbar-collapse {
+  /* position: fixed;
+  left: 60%; */
+  /* top: 1%; */
+  margin-left: 510px;
 }
 
-.search-container button {
-    background-color:  #2596be;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-left: 5px;
+@media screen and (max-width: 1000px) {
+  .navbar-collapse {
+    left: 50%;
+  }
+}
+#d-block w-100 imgCarousel{
+height:100%;
 }
 
-.user {
-  display: flex;
-  align-items: center;
+.nav-link:hover {
+  border-bottom: 3px solid white;
 }
 
-.user-name {
-  margin-right: 5px;
+.my-carousel {
+  margin-top: -80px;
 }
 
-.message {
-    background-color: #2596be;
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
-}
-
-.card-container {
-    display: flex;
-    justify-content: center; /* Center the cards horizontally */
-    align-items: center; /* Center the cards vertically */
-    padding: 20px;
-    border-radius: 15px; /* Apply curved edges to the cards */
-
-}
-
-.card {
-    width: 250px;
-    background-color: #f5f5f5;
-    margin: 10px;
-    border: none;
-    border-radius: 15px; /* Apply curved edges to the cards */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-}
-
-.card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 15px;
-    object-fit: cover;
-}
-
-.card-body {
-    padding: 1rem;
-    border-radius: 15px; /* Apply curved edges to the cards */
-
-}
-
-.card-title {
-    font-size: 1.5rem; /* Increase the font size for the title */
-    margin-bottom: 10px;
-}
-
-
-.card-text {
-  font-size: 1rem;
-  margin-bottom: 15px;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 3px;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-}
-
-/* form css */
-
-#fillform {
-  display: none;
-  align-items: center;
-  position: absolute;
-  left: 30%;
-  top: 10%;
-  width: 600px;
+.my-carousel .carousel-item {
   height: 800px;
-  /* background-color:rgb(232,232,232); */
-  /* background-color:rgb(245,245,245); */
-  /* background-color:rgb(248,248,248); */
-  background-image: linear-gradient(
-    to bottom,
-    rgb(248, 248, 248, 1),
-    rgb(0, 128, 128, 0.5)
-  );
-
-  border-radius: 50px;
 }
 
-#fillform .fbutton {
-  position: absolute;
-  left: 530px;
-  top: 30px;
-  border-color: transparent;
-  /* color: transparent; */
-  background-color: transparent;
-}
-
-#fillform form .fdata {
-  position: relative;
-  left: 50px;
-  /* top: 100px; */
-  /* size: 50px; */
-  border-radius: 50px;
-  margin-top: 20px;
-}
-#fillform form .label {
-  position: relative;
-  left: 50px;
-  top: 100px;
-  margin-top: -30px;
-}
-#fillform form .gender {
-  margin-top: 80px;
-}
-#fillform form .address {
-  border-radius: 15px;
-  width: 800%;
-  height: 75px;
-  resize: none;
-  position: relative;
-  top: 50px;
-  left: 50px;
-}
-#Address{
-  position: relative;
-  resize: none;
-  left: 50px;
-  top: 50px;
-  width: 260%;
-  height: 100px;
-}
-#LAB{
-  position: relative;
-  left: 80px;
-  top: -10px;
-}
-#fillform form .fname {
-  margin-right: 60px;
-}
-
-
-#floatcont {
-  /* padding: 20px; */
-  display: flex;
-}
-
-.form-control {
-  position: relative;
-  margin: 20px 0;
-  width: 180px;
-  /* margin-top: px; */
-}
-
-#floatcont .form-control input,
-.form-control input,
-.form-control textarea {
-  border: 0;
-  border-radius: 30px;
-  border-bottom: 2px solid #333;
-  padding: 15px 10px;
-  display: block;
-  font-size: 18px;
-  font-family: "Muli", sans-serif;
-  width: 100%;
-  transition: 0.1s ease-in;
-  margin-top: 30px;
-}
-
-.form-control input:focus,
-.form-control textarea:focus,
-.form-control input:valid,
-.form-control textarea:valid {
-  border-bottom-color: rgb(0, 128, 128);
-  outline: none;
-}
-
-.form-control input:focus + label span,
-.form-control input:valid + label span,
-.form-control textarea:focus + label span,
-.form-control textarea:valid + label span {
-  color: rgb(0, 128, 128);
-  transform: translateY(-35px);
-}
-
-#floatcont .form-control label {
-  position: absolute;
-  top: 45px;
-  left: 20px;
-}
-
-#floatcont > :first-child {
-  margin-right: 40px;
-}
-
-.form-control label {
-  position: absolute;
-  top: 15px;
-  left: 20px;
-}
-
-.form-control label span {
-  display: inline-block;
-  font-size: 18px;
-  min-width: 5px;
-  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-#phone,
-#email {
-  width: 50%;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* #gender {
-  position: relative;
-  left: 50px;
-  top: 5px;
-  font-size: large;
-}
-#gender > :first-child {
-  margin-bottom: 20px;
-} */
-
-
-/* radio button */
-
-.choose {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	margin: auto;
-	/* -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 16, 0.19), 0 0.3rem 0.3rem rgba(0, 0, 16, 0.23); */
-	/* box-shadow: 0 0.5rem 1rem rgba(0, 0, 16, 0.19), 0 0.3rem 0.3rem rgba(0, 0, 16, 0.23); */
-	/* background-color: rgb(255, 255, 255); */
-	padding: 0.8rem;
-	width: 33rem;
-}
-
-.rating-container {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	padding: 0.4rem 0.8rem;
-	width: 100%;
-}
-
-.rating-text p {
-	color: rgba(0, 0, 16, 0.8);
-	font-size: 1.3rem;
-	padding: 0.3rem;
-}
-
-.rating {
-
-	background-color: rgb(0, 128, 128, 0.3);
-  border-color: white;
-	padding: 0.4rem 0.4rem 0.1rem 0.4rem;
-	border-radius: 2.2rem;
-  
-}
-
-svg {
-	fill: rgb(242, 242, 242);
-	height: 50px;
-	width: 50px;
-	margin: 0.2rem;
-  
-}
-
-
-
-.rating-text {
-  position: absolute;
-  left: 60px;
-  top: 53%;
-}
-
-.choose{
-  position: relative;
-  left: 100px;
-}
-
-
-
-#radios label {
-	position: relative;
-}
-
-input[type="radio"] {
-	position: absolute;
-	opacity: 0;
-}
-
-input[type="radio"] + svg {
-	-webkit-transition: all 0.2s;
-	transition: all 0.2s;
-}
-
-input + svg {
-	cursor: pointer;
-}
-
-input[class="super-happy"]:hover + svg,
-input[class="super-happy"]:checked + svg,
-input[class="super-happy"]:focus + svg {
-	fill: rgb(0, 109, 217);
-}
-
-input[class="happy"]:hover + svg,
-input[class="happy"]:checked + svg,
-input[class="happy"]:focus + svg {
-	fill: rgb(0, 204, 79);
-}
-
-
-
-/* .rating-text p {
-	color: rgba(0, 0, 16, 0.8);
-	font-size: 1.3rem;
-	padding: 0.3rem;
-} */
-/* .rating-form-2 svg {
-	height: 3rem;
-	width: 3rem;
-	margin: 0.5rem;
-} */
-
-/* #radios label {
-	position: relative;
-} */
-/* @media screen and (max-width: 650px) and (max-height: 700px) {
-	body,
-	html {
-		font-size: 0.7rem;
-	}
-	header h1 {
-		font-size: 4em;
-	}
-	footer p {
-		font-size: 2em;
-	}
-}
-
-@media screen and (max-height: 700px) {
-	body,
-	html {
-		font-size: 0.7rem;
-	}
-	header h1 {
-		font-size: 4em;
-	}
-	footer p {
-		font-size: 2em;
-	}
-}
-
-@media screen and (max-width: 650px) {
-	body,
-	html {
-		font-size: 0.7rem;
-	}
-	header h1 {
-		font-size: 4em;
-	}
-	footer p {
-		font-size: 2em;
-	}
-}
-
-@media screen and (max-width: 450px) and (max-height: 550px) {
-	body,
-	html {
-		font-size: 0.6rem;
-	}
-	header h1 {
-		font-size: 4.6em;
-	}
-	footer p {
-		font-size: 3em;
-	}
-}
-
-@media screen and (max-height: 550px) {
-	body,
-	html {
-		font-size: 0.6rem;
-	}
-	header h1 {
-		font-size: 4.6em;
-	}
-	footer p {
-		font-size: 3em;
-	}
-}
-
-@media screen and (max-width: 450px) {
-	body,
-	html {
-		font-size: 0.6rem;
-	}
-	header h1 {
-		font-size: 4.6em;
-	}
-	footer p {
-		font-size: 3em;
-	}
-}
-
-@media screen and (max-width: 400px) and (max-height: 500px) {
-	body,
-	html {
-		height: 500px;
-		width: 400px;
-	}
-}
-
-@media screen and (max-height: 500px) {
-	body,
-	html {
-		height: 500px;
-	}
-}
-
-@media screen and (max-width: 400px) {
-	body,
-	html {
-		width: 400px;
-	}
-} */
-
-
-
-
-
-/* submit button */
-.container{
-  width: 50%;
-  height: 100px;
-
-    display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 40px;
-  margin-left: 23%;
-}
-
-.button{
-  width: 270px;
-  height: 80px;
-  border: none;
-  outline: none;
-  background: rgb(255, 255, 255,0.5);
-  color:  rgb(0, 128, 128);
-  font-size: 22px;
-  border-radius: 40px;
-  text-align: center;
-  box-shadow: 0 6px 20px -5px rgba(0,0,0,0.4);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.check-box{
-  width: 80px;
-  height: 80px;
-  border-radius: 40px;
-  box-shadow: 0 0 12px -2px rgba(0,0,0,0.5);
+.carousel-item img {
   position: absolute;
   top: 0;
-  right: -40px;
-  opacity: 0;
+  left: 0;
+  min-height: 800px;
+}
+.pricing
+{
+    background-color:cadetblue;
+    display: flex;
+    font-weight: bold;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    cursor:pointer;
+}
+.services-text,
+.packages-text {
+  font-size: 2.5rem;
+  font-family: "Mouse Memoirs", sans-serif;
 }
 
-.check-box svg{
-  width: 40px;
-  margin: 20px;
+.service {
+  height: 100px;
+  border-radius: 20%;
+  background-image: linear-gradient(to right, #4ca1af, #c4e0e5);
 }
 
-svg path{
-  stroke-width: 3;
-  stroke: #fff;
-  stroke-dasharray: 34;
-  stroke-dashoffset: 34;
-  stroke-linecap: round;
+/* .service-card :hover {
+  color: black;
+  border-radius: 5%;
+  background-image: linear-gradient(to right, #4ca1af, #c4e0e5);
+  cursor: pointer;
+} */
+
+.service-card {
+  color: white;
+  border: 0px solid transparent;
+  border-radius: 5%;
+  background-color: rgb(90, 142, 163);
 }
 
-.active{
-  /* background: #ff2b75; */
-  background:  rgb(0, 128, 128, 0.3);
-  color: #fff;
-  transition: 1s;
+@media screen and (max-width: 770px) {
+  .service-card {
+    margin-top: 20px;
+  }
 }
 
-.active .check-box{
-  right: 0;
-  opacity: 1;
-  transition: 1s;
+.img {
+  background-image: url("./travel-svgrepo-com.svg");
+  height: 30px;
+  width: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.active p{
-  margin-right: 125px;
-  transition: 1s;
+.package {
+  border-radius: 5%;
 }
 
-.active svg path{
-  stroke-dashoffset: 0;
-  transition: 1s;
-  transition-delay: 1s;
+.btn-book:hover {
+  background-image: linear-gradient(to right, #4ca1af, #c4e0e5);
+  cursor: pointer;
+  color: black;
+}
 
+.btn-book {
+  background-color: rgb(90, 142, 163);
+  color: white;
+}
 
+.footer {
+  background: url("./images/footer-bg.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
 
+.footer .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 3rem;
+}
+
+.footer .box-container .box h3 {
+  color: var(--white);
+  font-size: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+.footer .box-container .box a {
+  color: var(--light-white);
+  font-size: 1rem;
+  padding-bottom: 1rem;
+  display: block;
+}
+
+.footer .box-container .box a i {
+  color: rgb(90, 142, 163);
+  padding-right: 0.5rem;
+  transition: 0.2s linear;
+}
+
+.footer .box-container .box a:hover i {
+  padding-right: 2rem;
+}
+
+.box {
+  margin-top: 40px;
+}
+
+.services {
+  text-decoration: none;
+  color: white;
+}
+.center-div{
+  text-align: center;
+}
+@media (max-width: 768px) {
+  /* Styles for screens smaller than 768px */
+  h1 {
+    font-size: 24px;
+  }
+}
+.col-md{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  padding: 0px;
+  border-radius: 10%;
+}
+.card {
+  border-radius: 10%;
+  height: 100%;
+}
+.card-img-top{
+  border-radius: 10%;
 }
