@@ -16,120 +16,20 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
     <!-- Styles  -->
-    <link rel="stylesheet" href="../public/css/adminDashboard.css" />
+    <link rel="stylesheet" href="css/adminDashboard.css" />
     <link
     href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="../public/css/dashboard.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
 
   </head>
 
   <body>
     
-    <!-- <%- include('./partials/aside.ejs')%> -->
+   <%- include('./partials/aside.ejs')%> 
   
-  <div class="sidebar close">
-    <!-- ========== Logo ============  -->
-    <a href="#" class="logo-box">
-      <img src="../public/images/profile.jpg" />
-      <!-- <i class='bx bxl-xing'></i> -->
-      <div class="logo-name"></div>
-    </a>
-  
-    <!-- ========== List ============  -->
-    <ul class="sidebar-list">
-      <!-- -------- Non Dropdown List Item ------- -->
-      <li>
-        <div class="title">
-          <a href="/admin" class="link">
-            <box-icon name="user"></box-icon>
-            <i class="bx bx-grid-alt"></i>
-            <span class="name">Dashboard</span>
-          </a>
-          <!-- <i class='bx bxs-chevron-down'></i> -->
-        </div>
-        <div class="submenu">
-          <a href="/admin" class="link submenu-title">Dashboard</a>
-          <!-- submenu links here  -->
-        </div>
-      </li>
-  
-      <!-- -------- Dropdown List Item ------- -->
-      <li class="dropdown">
-        <div class="title">
-          <a href="#" class="link">
-            <i class="bx bx-user"></i> <span class="name">Users</span>
-          </a>
-          <i class="bx bxs-chevron-down"></i>
-        </div>
-        <div class="submenu">
-          <a href="#" class="link submenu-title">Users</a>
-          <a href="/admin/adduser" class="link">Add user</a>
-          <a href="/admin/view&edituser" class="link">View & Edit</a>
-  
-        </div>
-      </li>
-  
-      <!-- -------- Dropdown List Item ------- -->
-      <li class="dropdown">
-        <div class="title">
-          <a href="#" class="link">
-            <i id="fawsomeicons" class="fas fa-chalkboard-teacher"></i>
-            <span class="name">Products</span>
-          </a>
-          <i class="bx bxs-chevron-down"></i>
-        </div>
-        <div class="submenu">
-          <a href="#" class="link submenu-title"> products</a>
-          <a href="/admin/addproduct" class="link">Add products</a>
-          <a href="/admin/view&editprod" class="link">View & edit</a>
-  
-        </div>
-      </li>
-  
-      <!-- -------- Non Dropdown List Item ------- -->
-      <li>
-        <div class="title">
-          <a href="/" class="link">
-            <i class="bx bx-home"></i>
-            <span class="name">Home</span>
-          </a>
-          <!-- <i class='bx bxs-chevron-down'></i> -->
-        </div>
-        <div class="submenu">
-          <a href="/" class="link submenu-title">Home</a>
-          <!-- submenu links here  -->
-        </div>
-      </li>
-  
-      <!-- -------- Non Dropdown List Item ------- -->
-      <li>
-        <div class="title">
-          <a href="https://dashboard.tawk.to/?lang=en#/chat" class="link">
-            <i class="bx bx-chat"></i>
-            <span class="name">Chat</span>
-          </a>
-          <!-- <i class='bx bxs-chevron-down'></i> -->
-        </div>
-        <div class="submenu">
-          <!-- for hover from outside -->
-          <a href="https://dashboard.tawk.to/?lang=en#/chat" class="link submenu-title">Chat</a>
-          <!-- submenu links here  -->
-        </div>
-      </li>
-    </ul>
-  </div>
-  
-  <!-- ============= Home Section =============== -->
-  <section class="home">
-    <div class="toggle-sidebar">
-      <i class="bx bx-menu"></i>
-      <div class="text">RABET</div>
-    </div>
-
-
-
+ 
 
     <!-- MAIN -->
       <main>
@@ -141,7 +41,7 @@
               <div class="card">
                 <div class="head">
                   <div>
-                    <!-- <h2><%=employees.length%></h2> -->
+                    
                     <p>customers</p>
                   </div>
                   <i class="bx bx-trending-up icon"></i>
@@ -153,7 +53,7 @@
               <div class="card">
                 <div class="head">
                   <div>
-                    <!-- <h2><%=employees.length%></h2> -->
+                    
                     <p>new customers</p>
                   </div>
                   <i class="bx bx-trending-up icon"></i>
@@ -165,7 +65,7 @@
               <div class="card">
                 <div class="head">
                   <div>
-                    <!-- <h2><%=ord.length%></h2> -->
+                    
                     <p>total orders</p>
                   </div>
                   <i class="bx bx-trending-up icon"></i>
@@ -177,7 +77,7 @@
               <div class="card">
                 <div class="head">
                   <div>
-                    <!-- <h2><%=ord.length%></h2> -->
+                   
                     <p>products sell</p>
                   </div>
                   <i class="bx bx-trending-up icon"></i>
@@ -213,8 +113,8 @@
     <!-- MAIN -->
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="../public/js/script.js"></script>
+    <script src="js/script.js"></script>
     <!-- Link JS -->
-    <script src="../public/js/adminDashboard.js"></script>
+    <script src="js/adminDashboard.js"></script>
   </body>
 </html>
