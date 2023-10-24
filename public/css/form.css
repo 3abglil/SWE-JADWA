@@ -1,0 +1,438 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@900&family=Rubik:wght@900&display=swap');
+
+#fillform {
+  /* display: none; */
+  align-items: center;
+  position: absolute;
+  left: 30%;
+  top: 10%;
+  width: 600px;
+  height: 900px;
+  /* background-color:rgb(232,232,232); */
+  /* background-color:rgb(245,245,245); */
+  /* background-color:rgb(248,248,248); */
+  background-image: linear-gradient(
+    to bottom,
+    rgb(248, 248, 248, 1),
+    rgb(0, 128, 128, 0.5)
+  );
+
+  border-radius: 50px;
+}
+
+#fillform .fbutton {
+  position: absolute;
+  left: 530px;
+  top: 30px;
+  border-color: transparent;
+  /* color: transparent; */
+  background-color: transparent;
+}
+
+#fillform form .fdata {
+  position: relative;
+  left: 50px;
+  /* top: 100px; */
+  /* size: 50px; */
+  border-radius: 50px;
+  margin-top: 20px;
+}
+#fillform form .label {
+  position: relative;
+  left: 50px;
+  top: 100px;
+  margin-top: -30px;
+  font-family: 'Oswald', sans-serif;
+font-family: 'Rubik', sans-serif;
+}
+#fillform form .gender {
+  margin-top: 80px;
+}
+#fillform form .address {
+  border-radius: 15px;
+  width: 800%;
+  height: 75px;
+  resize: none;
+  position: relative;
+  top: 50px;
+  left: 50px;
+  font-family: 'Oswald', sans-serif;
+font-family: 'Rubik', sans-serif;
+}
+#Address{
+  position: relative;
+  resize: none;
+  left: 50px;
+  top: 50px;
+  width: 260%;
+  height: 100px;
+  font-family: 'Oswald', sans-serif;
+font-family: 'Rubik', sans-serif;
+}
+#LAB{
+  position: relative;
+  left: 80px;
+  top: -70px;
+  font-family: 'Oswald', sans-serif;
+font-family: 'Rubik', sans-serif;
+}
+#fillform form .fname {
+  margin-right: 60px;
+  font-family: 'Oswald', sans-serif;
+font-family: 'Rubik', sans-serif;
+}
+
+
+#floatcont {
+  /* padding: 20px; */
+  display: flex;
+}
+
+.form-control {
+  position: relative;
+  margin: 20px 0;
+  width: 180px;
+  /* margin-top: px; */
+}
+
+#floatcont .form-control input,
+.form-control input,
+.form-control textarea {
+  border: 0;
+  border-radius: 30px;
+  border-bottom: 2px solid #333;
+  padding: 15px 10px;
+  display: block;
+  font-size: 18px;
+  font-family: "Muli", sans-serif;
+  width: 100%;
+  transition: 0.1s ease-in;
+  margin-top: 30px;
+  font-family: 'Oswald', sans-serif;
+font-family: 'Rubik', sans-serif;
+}
+
+.form-control input:focus,
+.form-control textarea:focus,
+.form-control input:valid,
+.form-control textarea:valid {
+  border-bottom-color: rgb(0, 128, 128);
+  outline: none;
+  font-family: 'Oswald', sans-serif;
+font-family: 'Rubik', sans-serif;
+}
+
+.form-control input:focus + label span,
+.form-control input:valid + label span,
+.form-control textarea:focus + label span,
+.form-control textarea:valid + label span {
+  color: rgb(0, 128, 128);
+  transform: translateY(-35px);
+  font-family: 'Oswald', sans-serif;
+font-family: 'Rubik', sans-serif;
+}
+
+#floatcont .form-control label {
+  position: absolute;
+  top: 45px;
+  left: 20px;
+  font-family: 'Oswald', sans-serif;
+font-family: 'Rubik', sans-serif;
+}
+
+#floatcont > :first-child {
+  margin-right: 40px;
+}
+
+.form-control label {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-family: 'Oswald', sans-serif;
+font-family: 'Rubik', sans-serif;
+}
+
+.form-control label span {
+  display: inline-block;
+  font-size: 18px;
+  min-width: 5px;
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  font-family: 'Oswald', sans-serif;
+font-family: 'Rubik', sans-serif;
+}
+
+#phone{
+  width: 50%;
+  font-family: 'Oswald', sans-serif;
+  font-family: 'Rubik', sans-serif;
+}
+#email {
+  width: 80%;
+  font-family: 'Oswald', sans-serif;
+  font-family: 'Rubik', sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* #gender {
+  position: relative;
+  left: 50px;
+  top: 5px;
+  font-size: large;
+}
+#gender > :first-child {
+  margin-bottom: 20px;
+} */
+
+
+/* radio button */
+.rating {
+  
+	background-color: rgba(0, 0, 16, 0.8);
+	padding: 0.4rem 0.4rem 0.1rem 0.4rem;
+	border-radius: 2.2rem;
+  height: 75px;
+  width: 350px;
+  margin-left: 20%;
+  margin-top: 50px;
+}
+
+.rating-text p {
+  margin-left: 20%;
+  position: absolute;
+  top: 47.5%;
+  left: 10%;
+  font-family: 'Oswald', sans-serif;
+font-family: 'Rubik', sans-serif;
+	color: #FFF;
+	font-size: 1.3rem;
+	padding: 0.3rem;
+}
+
+svg {
+  position: relative;
+  left: 50%;
+	fill: rgb(242, 242, 242);
+	height: 3.6rem;
+	width: 3.6rem;
+	margin: 0.2rem;
+}
+
+
+
+
+
+input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+}
+
+input[type="radio"] + svg {
+	-webkit-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+input + svg {
+	cursor: pointer;
+}
+
+input[class="super-happy"]:hover + svg,
+input[class="super-happy"]:checked + svg,
+input[class="super-happy"]:focus + svg {
+  fill:rgb(255, 105, 180);
+}
+
+input[class="happy"]:hover + svg,
+input[class="happy"]:checked + svg,
+input[class="happy"]:focus + svg {
+  fill: rgb(0, 109, 217);
+}
+
+
+
+/* @media screen and (max-width: 650px) and (max-height: 700px) {
+	body,
+	html {
+		font-size: 0.7rem;
+	}
+	header h1 {
+		font-size: 4em;
+	}
+	footer p {
+		font-size: 2em;
+	}
+}
+
+@media screen and (max-height: 700px) {
+	body,
+	html {
+		font-size: 0.7rem;
+	}
+	header h1 {
+		font-size: 4em;
+	}
+	footer p {
+		font-size: 2em;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	body,
+	html {
+		font-size: 0.7rem;
+	}
+	header h1 {
+		font-size: 4em;
+	}
+	footer p {
+		font-size: 2em;
+	}
+}
+
+@media screen and (max-width: 450px) and (max-height: 550px) {
+	body,
+	html {
+		font-size: 0.6rem;
+	}
+	header h1 {
+		font-size: 4.6em;
+	}
+	footer p {
+		font-size: 3em;
+	}
+}
+
+@media screen and (max-height: 550px) {
+	body,
+	html {
+		font-size: 0.6rem;
+	}
+	header h1 {
+		font-size: 4.6em;
+	}
+	footer p {
+		font-size: 3em;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	body,
+	html {
+		font-size: 0.6rem;
+	}
+	header h1 {
+		font-size: 4.6em;
+	}
+	footer p {
+		font-size: 3em;
+	}
+}
+
+@media screen and (max-width: 400px) and (max-height: 500px) {
+	body,
+	html {
+		height: 500px;
+		width: 400px;
+	}
+}
+
+@media screen and (max-height: 500px) {
+	body,
+	html {
+		height: 500px;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	body,
+	html {
+		width: 400px;
+	}
+} */
+
+
+
+
+
+/* submit button */
+.container{
+  width: 50%;
+  height: 100px;
+
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+  margin-left: 23%;
+}
+
+.button{
+  width: 270px;
+  height: 80px;
+  border: none;
+  outline: none;
+  background: rgb(255, 255, 255,0.5);
+  color:  rgb(0, 128, 128);
+  font-size: 22px;
+  border-radius: 40px;
+  text-align: center;
+  box-shadow: 0 6px 20px -5px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.check-box{
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  box-shadow: 0 0 12px -2px rgba(0,0,0,0.5);
+  position: absolute;
+  top: 0;
+  right: -40px;
+  opacity: 0;
+}
+
+.check-box svg{
+  width: 40px;
+  margin: 20px;
+}
+
+#sb-btn #p-sb-btn {
+  stroke-width: 3;
+  stroke: #fff;
+
+  stroke-dashoffset: 34;
+  stroke-linecap: round;
+}
+
+.active{
+  /* background: #ff2b75; */
+  background:  rgb(0, 128, 128, 0.3);
+  color: #fff;
+  transition: 1s;
+}
+
+.active .check-box{
+  right: 0;
+  opacity: 1;
+  transition: 1s;
+}
+
+.active p{
+  margin-right: 125px;
+  transition: 1s;
+}
+
+.active svg path{
+  stroke-dashoffset: 0;
+  transition: 1s;
+  transition-delay: 1s;
+
+
+
+}

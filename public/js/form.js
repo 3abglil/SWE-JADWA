@@ -1,17 +1,17 @@
-const closeform=document.getElementById("CLOSE");
-const openform=document.getElementById("OPEN");
-const form = document.getElementById("fillform")
-const page = document.getElementById("pbody")
+// const closeform=document.getElementById("CLOSE");
+// const openform=document.getElementById("OPEN");
+// const form = document.getElementById("fillform")
+// const page = document.getElementById("pbody")
 
-closeform.addEventListener("click", function() {
-  form.style.display = "none";
-  pbody.style.filter="blur(0px)";
-});
+// closeform.addEventListener("click", function() {
+//   form.style.display = "none";
+//   pbody.style.filter="blur(0px)";
+// });
 
-openform.addEventListener("click", function() {
-  form.style.display = "block";
-  pbody.style.filter="blur(0px)";
-});
+// openform.addEventListener("click", function() {
+//   form.style.display = "block";
+//   pbody.style.filter="blur(0px)";
+// });
 
 // fields animation
 const inputs = document.querySelectorAll('.form-control input');
@@ -36,10 +36,11 @@ btn.onclick = () => {
     btn.classList.add("active");
     
     setTimeout(()=>{
-      form
-      form.style.display = "none";
-      pbody.style.filter="blur(0px)";
+      // form
+      // form.style.display = "none";
+      // pbody.style.filter="blur(0px)";
       
   },3000);
 
 };
+
