@@ -224,6 +224,7 @@
   justify-content: center;
   align-items: center;
   padding: 20px 100px;
+  left: -8vw;
 }
 
 .container:after {
@@ -233,7 +234,7 @@
   height: 100%;
   left: 0;
   top: 0;
-  background: url("img/bg.jpg") no-repeat center;
+  /* background: url("img/bg.jpg") no-repeat center; */
   background-size: cover;
   filter: blur(50px);
   z-index: -1;

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {handleApp , handlesignin , handleSignup} from "../controller/applications.js";
+import {handleApp , handlesignin , handleSignup , handleLogOut} from "../controller/applications.js";
 
 import express from "express";
 import bodyParser from "body-parser";
@@ -20,7 +20,12 @@ app.use(
 const router = Router();
 
 router.get("/", (req, res) => {
-  res.render("index");
+  res.render("index",{ user: (req.session.user === undefined ? "" : req.session.user) });
+});
+
+
+router.get('/about', async(req, res)=> {
+  res.render('about',{ user: (req.session.user === undefined ? "" : req.session.user) });
 });
 
 
@@ -40,6 +45,10 @@ router.get("/signup", (req, res) => {
   res.render("reg");
 });
 router.post("/signup",handleSignup);
+
+router.get('/logout', handleLogOut);
+
+
 
 
 
