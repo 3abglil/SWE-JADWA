@@ -3,18 +3,18 @@ import { handleAdminSignup } from "../controller/applications.js";
 const router = Router();
 
 router.get("/",(req,res)=>{
-    res.render("admin")
+    res.render("admin",{ user: (req.session.user === undefined ? "" : req.session.user) })
 });     
 
 
 router.get('/adduser',(req,res)=>{
-    res.render('adduser');
+    res.render('adduser',{ user: (req.session.user === undefined ? "" : req.session.user) });
 });
 router.post('/adduser',handleAdminSignup);
 
 
 router.get('/addproduct',(req,res)=>{
-    res.render('addproduct');
+    res.render('addproduct',{ user: (req.session.user === undefined ? "" : req.session.user) });
     
 })
 
