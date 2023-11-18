@@ -76,7 +76,13 @@
   
   <nav class="navbar navbar-expand-md navbar-dark">
     <div class="container nav-contents">
-      <a href="/" class="navbar-brand"><b>JADWA</b></a>
+     
+
+      <% if(user === "") { %>   <a href="/" class="navbar-brand"><b>JADWA</b></a>
+        <% } else { %>
+          <a href="/" class="navbar-brand"><b>Welcome <%=user.Fname%> </b></a>
+           
+        <% } %>
   
       <button
         class="navbar-toggler"
@@ -101,23 +107,25 @@
             <a href="/about" class="nav-link about">About</a>
           </li>
   
-          <% if(user === "") { %>
+          <% if (user === "") { %>
             <li class="nav-item">
               <a href="/login" class="nav-link login">Login/Sign Up</a>
             </li>
           <% } else { %>
-            <% if(user.type==="admin") { %>
+            <% if (user.type === "admin") { %>
+            
               <li class="nav-item">
                 <a href="/admin" class="nav-link">Admin</a>
               </li>
+            <% } else { %>
+             
+              <li class="nav-item">
+                <a href="/profile" class="nav-link">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a href="/logout" class="nav-link">Logout</a>
+              </li>
             <% } %>
-            <li class="nav-item">
-              <a href="/profile" class="nav-link">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a href="/logout" class="nav-link">Logout</a>
-            </li>
-          
           <% } %>
           
           

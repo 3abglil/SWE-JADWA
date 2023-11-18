@@ -61,6 +61,7 @@ const handlesignin = async (req, res) => {
         cred[0].Password == req.body.logpassword
       ) {
         req.session.user = cred[0];
+        console.log(req.session.user.Email)
         res.redirect('/');
       } 
     }
