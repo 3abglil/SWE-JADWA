@@ -45,14 +45,14 @@
                             </div>
                         </td>
                         <td class="people-des">
-                          <p><%= us.Email %></p> 
+                          <p name="email"><%= us.Email %></p> 
                         </td>
                         <td class="role">
                           <p><%= us.Lname %></p> 
                         </td>
                         <td class="edit">
                           <% if (us.Email!==user.Email ){ %>
-                          <% if (us.Type==='client' ){ %>
+                          <% if (us.role=='C' ){ %>
                             <a href="/admin/toAdmin/<%= us.id %>">Make Admin</a>
                             <% } else{ %>
                               <a href="/admin/toClient/<%= us.id %>">Make Client</a>

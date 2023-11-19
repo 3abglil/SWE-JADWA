@@ -99,6 +99,26 @@ const GET = async (req, res) => {
     //   };
 
 
+    const toAdmin = async (req, res, next) => {
+      try {
+        const { data: cred, error } = await supabase
+          .from("users")
+          .select()
+          .eq("Email", req.body.logusername );
+    
+        if (cred) {
+          if (
+            cred[0].Email == req.body.logusername &&
+            cred[0].Password == req.body.logpassword
+          ) {
+            req.session.user = cred[0];
+            res.redirect('/admin');
+          } 
+        }
+      } catch (error) {
+        res.send(`Sign-in failed: ${error.message}`);
+      }
+    }
 
 
 export { GET, deleteUser };

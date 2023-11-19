@@ -14,8 +14,12 @@ router.get("/",isAdmin,(req,res)=>{
 router.get('/adduser',isAdmin,(req,res)=>{
     res.render('adduser',{ user: (req.session.user === undefined ? "" : req.session.user) });
 });
+router.get('/view&edituser',isAdmin,GET,(req,res)=>{
+    res.render('viwe&edituser',{ user: (req.session.user === undefined ? "" : req.session.user) });
+});
 
-router.get('/view&edituser',isAdmin,GET);
+// router.get('/view&edituser',isAdmin,GET);
+
 router.delete('/delete/:id ',isAdmin,deleteUser);
 
 router.post('/adduser',isAdmin,handleAdminSignup);
