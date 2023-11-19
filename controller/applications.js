@@ -61,8 +61,7 @@ const handlesignin = async (req, res) => {
         cred[0].Password == req.body.logpassword
       ) {
         req.session.user = cred[0];
-        console.log(req.session.user.Email)
-        res.redirect('/');
+        res.redirect('/admin');
       } 
     }
   } catch (error) {
@@ -81,6 +80,7 @@ const handleSignup = async (req, res) => {
           Lname: req.body.Lname,
           Email: req.body.Email,
           Password: req.body.Password==req.body.ConfirmPassword?req.body.Password:"",
+          role:"C"
         },
       ])
       .select();
@@ -136,6 +136,7 @@ const handleAdminSignup = async (req, res) => {
           Password: req.body.Password,
           Phone: req.body.Phone,
           Address: req.body.Address,
+          role: "C",
         },
       ])
       .select();
@@ -154,8 +155,9 @@ const handleAdminSignup = async (req, res) => {
 };
 
 const isAdmin = (req, res, next) => {
-  if (req.session.user !== undefined && req.session.user.type == 'admin') { 
+  if (req.session.user !== undefined && req.session.user.role == 'A') { 
   next();
+  console.log(req.session.user.role);
 } else {
   res.redirect('error'); 
 }
@@ -163,7 +165,7 @@ const isAdmin = (req, res, next) => {
 
 const handleLogOut = async (req , res)=>{
   req.session.destroy();
-res.redirect('/');
+  res.redirect('/');
 }
 
-export { handleApp, handlesignin , handleSignup , handleLogOut , handleAdminSignup };
+export { handleApp, handlesignin , handleSignup , handleLogOut , handleAdminSignup , isAdmin};
