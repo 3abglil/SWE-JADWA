@@ -1,10 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
 import session from "express-session";
-import path from "path";
+import path, { resolve } from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
-
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
@@ -154,6 +153,34 @@ const handleAdminSignup = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  try {
+    // Assuming you have the user's unique identifier, such as userId, in req.params.id
+    const userId = req.params.id;
+
+    // Use Supabase's delete method to remove the user based on their unique identifier
+    const { data, error } = await supabase
+      .from("users")
+      .delete()
+      .eq("id", userId); // Assuming the field in your database is named 'id'
+
+    if (error) {
+      throw new Error(error.message);
+    }
+      // User successfully deleted
+      
+      res.status(200).end();
+    
+  } catch (error) {
+    res.status(500).send("An error occurred during user deletion: " + error.message);
+    // Promise.resolve();
+  }
+};
+
+
+
+
+
 // const isAdmin = (req, res, next) => {
 //   if (req.session.user !== undefined && req.session.user.role == 'A') { 
 //   next();
@@ -168,4 +195,4 @@ const handleLogOut = async (req , res)=>{
   res.redirect('/');
 }
 
-export { handleApp, handlesignin , handleSignup , handleLogOut , handleAdminSignup };
+export { handleApp, handlesignin , handleSignup , handleLogOut , handleAdminSignup ,deleteUser};

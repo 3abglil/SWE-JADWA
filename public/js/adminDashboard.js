@@ -26,3 +26,34 @@ toggleSidebar.addEventListener("click", () => {
 logo.addEventListener("click", () => {
   sidebar.classList.toggle("close");
 });
+
+  function deleteUser(id) {
+    console.log(id);
+    fetch(`/admin/delete/${id}`, {
+      method: 'DELETE'
+    })
+      .then(response => {
+        if (response.ok) {
+          // Remove the deleted user element from the DOM
+          const deletedUserElement = document.getElementById(`user-${id}`);
+          if (deletedUserElement) {
+            deletedUserElement.remove();
+            
+          } else {
+            console.error('Deleted user element not found in the DOM.');
+          }
+        } else {
+          console.error('Error removing user:', response.status);
+          // Handle the error
+        }
+      })
+      .catch(error => {
+        console.error('Error removing user:', error);
+        // Handle the error
+      });
+  }
+  
+
+
+
+

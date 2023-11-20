@@ -52,39 +52,39 @@ const GET = async (req, res) => {
 };
 
 
-    const deleteUser = async (req, res) => {
-        try {
-          // Fetch user with the specified id
-          const userIdToDelete = String(req.params.id).trim();
-          const { data: users, error } = await supabase
-            .from('users')
-            .select('*')
-            .eq('id', userIdToDelete);
+    // const deleteUser = async (req, res) => {
+    //     try {
+    //       // Fetch user with the specified id
+    //       const userIdToDelete = String(req.params.id).trim();
+    //       const { data: users, error } = await supabase
+    //         .from('users')
+    //         .select('*')
+    //         .eq('id', userIdToDelete);
       
-          if (error) {
-            throw error;
-          }
+    //       if (error) {
+    //         throw error;
+    //       }
       
-          // If user found, delete it
-          if (users && users.length > 0) {
-            const { error: deleteError } = await supabase
-              .from('users')
-              .delete()
-              .eq('id', userIdToDelete);
+    //       // If user found, delete it
+    //       if (users && users.length > 0) {
+    //         const { error: deleteError } = await supabase
+    //           .from('users')
+    //           .delete()
+    //           .eq('id', userIdToDelete);
       
-            if (deleteError) {
-              throw deleteError;
-            }
+    //         if (deleteError) {
+    //           throw deleteError;
+    //         }
       
-            console.log(`User with id ${userIdToDelete} deleted successfully.`);
-          } else {
-            console.log(`User with id ${userIdToDelete} not found.`);
-          }
-        } catch (error) {
-          console.error('Error deleting user:', error.message);
-          throw error;
-        }
-      };
+    //         console.log(`User with id ${userIdToDelete} deleted successfully.`);
+    //       } else {
+    //         console.log(`User with id ${userIdToDelete} not found.`);
+    //       }
+    //     } catch (error) {
+    //       console.error('Error deleting user:', error.message);
+    //       throw error;
+    //     }
+    //   };
     //   const deletee = async  (req, res) => {
     //     try {
     //         const userIdToDelete = String(req.params.id).trim(); // Convert to string
@@ -121,4 +121,4 @@ const GET = async (req, res) => {
     }
 
 
-export { GET, deleteUser };
+export { GET ,GetAllUsers };
