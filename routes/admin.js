@@ -1,6 +1,6 @@
 import {Router} from "express"
-import { handleAdminSignup,deleteUser} from "../controller/applications.js";
-import { GET } from "../controller/adminusercontrol.js";
+//import { handleAdminSignup,} from "../controller/applications.js";
+import { GET,deleteUser ,handleAdminSignup ,toAdmin ,toClient , edituser ,editinguser } from "../controller/adminusercontrol.js";
 const router = Router();
 router.use((req, res, next) => {
     if (req.session.user !== undefined && req.session.user.role === 'A') {
@@ -26,6 +26,12 @@ router.get('/view&edituser',GET,(req,res)=>{
 });
 
 router.delete('/delete/:id', deleteUser);
+router.get('/toAdmin/:id', toAdmin);
+router.get('/toClient/:id', toClient);
+router.get('/edituser/:id',edituser)
+router.post('/editinguser/:id',editinguser)
+
+
 
 
 router.post('/adduser',handleAdminSignup);

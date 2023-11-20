@@ -21,6 +21,37 @@ app.use(session({
 
 import supabase from "../models/database.js";
 
+
+
+const handleAdminSignup = async (req, res) => {
+  try {
+    const { data: creed, error } = await supabase
+      .from("users")
+      .insert([
+        {
+          Fname: req.body.Fname,
+          Lname: req.body.Lname,
+          Email: req.body.Email,
+          Password: req.body.Password,
+          Phone: req.body.Phone,
+          Address: req.body.Address,
+          role: "C",
+        },
+      ])
+      .select();
+
+    if (error) {
+      throw new Error(error.message); // Throw an error if there is an error during insertion
+    }
+
+    if (creed) {
+      res.redirect("/admin/view&edituser");
+    }
+  } catch (error) {
+    res.status(500).send("An error occurred during sign up: " + error.message);
+  }
+};
+
 const GetAllUsers = async (req, res) => {
 
     try {
@@ -51,74 +82,131 @@ const GET = async (req, res) => {
     }
 };
 
+const deleteUser = async (req, res) => {
+  try {
+    // Assuming you have the user's unique identifier, such as userId, in req.params.id
+    const userId = req.params.id;
 
-    // const deleteUser = async (req, res) => {
-    //     try {
-    //       // Fetch user with the specified id
-    //       const userIdToDelete = String(req.params.id).trim();
-    //       const { data: users, error } = await supabase
-    //         .from('users')
-    //         .select('*')
-    //         .eq('id', userIdToDelete);
-      
-    //       if (error) {
-    //         throw error;
-    //       }
-      
-    //       // If user found, delete it
-    //       if (users && users.length > 0) {
-    //         const { error: deleteError } = await supabase
-    //           .from('users')
-    //           .delete()
-    //           .eq('id', userIdToDelete);
-      
-    //         if (deleteError) {
-    //           throw deleteError;
-    //         }
-      
-    //         console.log(`User with id ${userIdToDelete} deleted successfully.`);
-    //       } else {
-    //         console.log(`User with id ${userIdToDelete} not found.`);
-    //       }
-    //     } catch (error) {
-    //       console.error('Error deleting user:', error.message);
-    //       throw error;
-    //     }
-    //   };
-    //   const deletee = async  (req, res) => {
-    //     try {
-    //         const userIdToDelete = String(req.params.id).trim(); // Convert to string
-    //         await deleteUser(userIdToDelete);
-        
-    //         // Respond to the client accordingly
-    //         res.send(`User with id ${userIdToDelete} deleted successfully.`);
-    //       } catch (error) {
-    //         console.error('Error deleting user:', error.message);
-    //         res.status(500).send('Internal Server Error');
-    //       }
-    //   };
+    // Use Supabase's delete method to remove the user based on their unique identifier
+    const { data, error } = await supabase
+      .from("users")
+      .delete()
+      .eq("id", userId); // Assuming the field in your database is named 'id'
 
-
-    const toAdmin = async (req, res, next) => {
-      try {
-        const { data: cred, error } = await supabase
-          .from("users")
-          .select()
-          .eq("Email", req.body.logusername );
-    
-        if (cred) {
-          if (
-            cred[0].Email == req.body.logusername &&
-            cred[0].Password == req.body.logpassword
-          ) {
-            req.session.user = cred[0];
-            res.redirect('/admin');
-          } 
-        }
-      } catch (error) {
-        res.send(`Sign-in failed: ${error.message}`);
-      }
+    if (error) {
+      throw new Error(error.message);
     }
+      // User successfully deleted
+      
+      res.status(200).end();
+    
+  } catch (error) {
+    res.status(500).send("An error occurred during user deletion: " + error.message);
+    // Promise.resolve();
+  }
+};
 
 
-export { GET ,GetAllUsers };
+
+
+   
+
+    const toAdmin = async (req, res) => {
+      const userId = req.params.id;
+  
+      try {
+         
+          const { data, error } = await supabase
+              .from('users')
+              .update({ role: 'A' })
+              .eq('id', userId);
+  
+          if (error) {
+              console.error('Error updating user role to admin:', error);
+              res.status(500).json({ error: 'Internal Server Error' });
+          } else {
+              res.redirect('/admin/view&edituser'); 
+          }
+      } catch (error) {
+          console.error('Error making user admin:', error);
+          res.status(500).json({ error: 'Internal Server Error' });
+      }
+  };
+
+  const toClient = async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        const { data, error } = await supabase
+            .from('users')
+            .update({ role: 'C' })
+            .eq('id', userId);
+
+        if (error) {
+            console.error('Error updating user role to client:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        } else {
+            res.redirect('/admin/view&edituser'); 
+        }
+    } catch (error) {
+        console.error('Error making user client:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+
+const edituser = async (req, res) => {
+  try {
+      // Fetch the product from Supabase based on the provided ID
+      const { data, error } = await supabase
+          .from('users')
+          .select('*')
+          .eq('id', req.params.id);
+
+      if (error) {
+          console.error('Error fetching product:', error);
+          return res.status(500).send('Internal Server Error');
+      }
+
+      if (data && data.length > 0) {
+          // Render the editprod view with the product data
+          res.render('edituseradmin', { edituser: data[0], user: (req.session.user === undefined ? "" : req.session.user) });
+      } else {
+          // Product not found
+          res.status(404).send('User not found');
+      }
+  } catch (error) {
+      console.error('Error fetching product:', error);
+      res.status(500).send('Internal Server Error');
+  }
+};
+
+const editinguser = async (req, res) => {
+  try {
+      const userId = req.params.id;
+      const { Fname, Lname , Phone, Address } = req.body;
+
+      const { data, error } = await supabase
+          .from('users')
+          .update({ Fname, Lname , Phone, Address })
+          .eq('id', userId);
+
+      if (error) {
+          console.error('Error updating user:', error);
+          return res.status(500).send('Internal Server Error');
+      }
+
+      res.redirect('/admin/view&edituser');
+  } catch (error) {
+      console.error('Error updating user:', error);
+      res.status(500).send('Internal Server Error');
+  }
+};
+
+
+
+
+    
+
+
+export { GET , deleteUser , handleAdminSignup ,toAdmin , toClient ,edituser ,editinguser};
