@@ -67,7 +67,7 @@ app.use('/profile', profile_Router);
 
 
 app.listen(8000, () => {
-  console.log('Server listening on port 8000');
+  console.log('Server listening on port http://localhost:8000');
 }); 
 
 
