@@ -52,7 +52,7 @@
                         </td>
                         <td class="edit">
                           <% if (us.Email!==user.Email ){ %>
-                          <% if (us.role=='C' ){ %>
+                          <% if (us.role==='C' ){ %>
                             <a href="/admin/toAdmin/<%= us.id %>">Make Admin</a>
                             <% } else{ %>
                               <a href="/admin/toClient/<%= us.id %>">Make Client</a>

@@ -112,10 +112,18 @@
               <a href="/login" class="nav-link login">Login/Sign Up</a>
             </li>
           <% } else { %>
-            <% if (user.type === "admin") { %>
+            <% if (user.role === "A") { %>
             
               <li class="nav-item">
                 <a href="/admin" class="nav-link">Admin</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="/profile" class="nav-link">Profile</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/logout" class="nav-link">Logout</a>
               </li>
             <% } else { %>
              

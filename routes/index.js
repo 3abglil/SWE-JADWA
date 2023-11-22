@@ -45,6 +45,18 @@ router.get("/signup", (req, res) => {
   res.render("reg");
 });
 router.post("/signup",handleSignup);
+router.post('/check-email', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const isEmailTaken = await checkEmailExistence(email);
+    res.json({ exists: isEmailTaken });
+  } catch (error) {
+    res.status(500).send('Error checking email existence: ' + error.message);
+  }
+});
+
+
 
 router.get('/logout', handleLogOut);
 

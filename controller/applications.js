@@ -69,59 +69,45 @@ const handlesignin = async (req, res) => {
 };
 
 const handleSignup = async (req, res) => {
-
   try {
-    const { data:cred, error } = await supabase
+    // Check if the email already exists
+    const existingUser = await supabase
+      .from("users")
+      .select("*")
+      .eq("Email", req.body.Email);
+
+    if (existingUser.data && existingUser.data.length > 0) {
+      // Email already exists, handle accordingly (e.g., send an error response)
+      return res.status(400).send("Email is already taken");
+    }
+
+    // If the email doesn't exist, proceed with the signup
+    const { data: cred, error } = await supabase
       .from("users")
       .insert([
         {
           Fname: req.body.Fname,
           Lname: req.body.Lname,
           Email: req.body.Email,
-          Password: req.body.Password==req.body.ConfirmPassword?req.body.Password:"",
-          role:"C"
+          Password: req.body.Password,
+          Phone: req.body.Phone,
+          Address: req.body.Address,
+          role: "C",
         },
       ])
       .select();
-    if(cred){
-      req.session.user=cred[0];
+
+    if (cred) {
+      req.session.user = cred[0];
       res.redirect("/");
     }
   } catch (error) {
-    res.status(500).send("An error occurred during sign up." + error);
+    res.status(500).send("An error occurred during sign up." + error.message);
   }
-
 };
 
-// const handleAdminSignup = async (req, res) => {
-//   try {
-//     const { data:creed, error } = await supabase
-//       .from("users")
-//       .insert([
-//         {
-//           Fname: req.body.Fname,
-//           Lname: req.body.Lname,
-//           Email: req.body.Email,
-//           Password: req.body.Password,
-//           Phone: req.body.Phone,
-//           Address: req.body.Address,
-//           // Gender: req.body.sex == "male" ? req.body.sex : "female",
-          
-//         },
-//       ])
-//       .select();
-//       console.log(req.body.Fname+req.body.Lname + req.body.Email +req.body.Password+req.body.Phone+req.body.Address  );
-//     if(creed){
 
-//       console.log(creed[0]);
-//       req.session.user=creed[0];
-//       res.render("index");
-//     }
-//   } catch (error) {
-//     res.status(500).send("An error occurred during sign up." + error.message);
-//   }
 
-// };
 
 const handleAdminSignup = async (req, res) => {
   try {

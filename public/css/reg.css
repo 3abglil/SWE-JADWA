@@ -62,7 +62,6 @@ body {
   width: 100%;
   object-fit: cover;
   z-index: 12;
-
 }
 
 .container-form {
@@ -75,12 +74,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
 }
 
 .form-content .login-form,
 .form-content .signup-form {
-  width: calc(100%/ 2-25px)
+  width: calc(100% / 2 - 25px);
 }
 
 form .form-content .title {
@@ -107,6 +105,11 @@ form .signup-form .title:before {
 form .form-content .input-boxes {
   margin-top: 30px;
   width: 350px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
 }
 
 .error-box {
@@ -184,6 +187,8 @@ form .form-content label {
   cursor: pointer;
 }
 
-form .form-content label:hover {
-  text-decoration: underline;
+
+.error {
+  color: red;
+  font-size: 12px;
 }
