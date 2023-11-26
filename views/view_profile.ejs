@@ -10,21 +10,21 @@
 
 <body>
   <header id="abth"><%- include('./partials/header')%></header>
-        <div class="member-container">
-            <a href="/">
-                <div class="arr back">
-                    <div></div>
-                </div>
-            </a>
-            <img src="/images/profile.jpg" alt="photo">
-            <h1>
-                <%=user.Fname+"  "+user.Lname%>
+  <div class="member-container">
+    <a href="/">
+      <div class="arr back">
+        <div></div>
+      </div>
+    </a>
+    <img src="/images/profile.jpg" alt="photo">
+    <h1>
+      <%=user.Fname+" "+user.Lname%>
             </h1>
-            <form method="get" >
-                <input type="submit" value="Edit profile" class="button">
-            </form>
-          </div>
-        <footer> <%- include('./partials/footer') %></footer>
+            <form method=" get">
+        <input type="submit" value="Edit profile" class="button">
+        </form>
+  </div>
+  <footer> <%- include('./partials/footer') %></footer>
 </body>
 
 </html>

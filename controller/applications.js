@@ -13,11 +13,13 @@ app.use(
     extended: true,
   })
 );
-app.use(session({
-  secret:'key to sign the cookie',
-  resave:false,
-  saveUninitialized:false,
-}))
+app.use(
+  session({
+    secret: "key to sign the cookie",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 import supabase from "../models/database.js";
 
@@ -44,15 +46,12 @@ const handleApp = async (req, res, next) => {
   }
 };
 
-
 const handlesignin = async (req, res) => {
   try {
-
-
     const { data: cred, error } = await supabase
       .from("users")
       .select()
-      .eq("Email", req.body.logusername );
+      .eq("Email", req.body.logusername);
 
     if (cred) {
       if (
@@ -60,8 +59,8 @@ const handlesignin = async (req, res) => {
         cred[0].Password == req.body.logpassword
       ) {
         req.session.user = cred[0];
-        res.redirect('/');
-      } 
+        res.redirect("/");
+      }
     }
   } catch (error) {
     res.send(`Sign-in failed: ${error.message}`);
@@ -106,8 +105,24 @@ const handleSignup = async (req, res) => {
   }
 };
 
+const checkEmail = async (req, res) => {
+  try {
+    // Check if the email already exists
+    const existingUser = await supabase
+      .from("users")
+      .select("*")
+      .eq("Email", req.body.Email);
 
-
+    if (existingUser.data && existingUser.data.length > 0) {
+      res.send("taken");
+    } else {
+      res.send("available");
+    }
+  } catch (error) {
+    res.status(500).send("An error occurred during sign up." + error.message);
+  }
+  console.log(req.body.Email);
+};
 
 const handleAdminSignup = async (req, res) => {
   try {
@@ -139,23 +154,18 @@ const handleAdminSignup = async (req, res) => {
   }
 };
 
-
-
-
-
-
 // const isAdmin = (req, res, next) => {
-//   if (req.session.user !== undefined && req.session.user.role == 'A') { 
+//   if (req.session.user !== undefined && req.session.user.role == 'A') {
 //   next();
 //   console.log(req.session.user.role);
 // } else {
-//   res.redirect('error'); 
+//   res.redirect('error');
 // }
 // };
 
-const handleLogOut = async (req , res)=>{
+const handleLogOut = async (req, res) => {
   req.session.destroy();
-  res.redirect('/');
-}
+  res.redirect("/");
+};
 
-export { handleApp, handlesignin , handleSignup , handleLogOut  };
+export { handleApp, handlesignin, handleSignup, handleLogOut, checkEmail };

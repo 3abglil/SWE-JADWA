@@ -44,11 +44,11 @@ nextBtnFirst.addEventListener("click", (e) => {
     check[0].style.opacity = "1";
   } else {
     if (fn.value === "") {
-    //   slidePage.style.marginLeft = "0%";
-    //   eror[0].innerHTML = "Fisrt name can't be empty";
-    //   fn.style.border = "2px solid red";
-    //   fail[0].style.opacity = "1";
-    //   check[0].style.opacity = "0";
+      //   slidePage.style.marginLeft = "0%";
+      //   eror[0].innerHTML = "Fisrt name can't be empty";
+      //   fn.style.border = "2px solid red";
+      //   fail[0].style.opacity = "1";
+      //   check[0].style.opacity = "0";
     } else {
       eror[0].innerHTML = "";
       fn.style.border = "2px solid green";
@@ -56,11 +56,11 @@ nextBtnFirst.addEventListener("click", (e) => {
       check[0].style.opacity = "1";
     }
     if (ln.value === "") {
-    //   slidePage.style.marginLeft = "0%";
-    //   eror[1].innerHTML = "Last name can't be empty";
-    //   ln.style.border = "2px solid red";
-    //   fail[1].style.opacity = "1";
-    //   check[1].style.opacity = "0";
+      //   slidePage.style.marginLeft = "0%";
+      //   eror[1].innerHTML = "Last name can't be empty";
+      //   ln.style.border = "2px solid red";
+      //   fail[1].style.opacity = "1";
+      //   check[1].style.opacity = "0";
     } else {
       eror[1].innerHTML = "";
       ln.style.border = "2px solid green";
@@ -176,7 +176,7 @@ submitBtn.addEventListener("click", function () {
       user.style.border = "2px solid green";
       fail[5].style.opacity = "0";
       check[5].style.opacity = "1";
-      window.location.href="./html/home.html";
+      window.location.href = "./html/home.html";
     }
   } else {
     if (user.value === "") {

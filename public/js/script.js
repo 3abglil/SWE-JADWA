@@ -22,7 +22,6 @@ window.addEventListener("click", function (e) {
       }
     }
   });
- 
 });
 
 // Apexchart

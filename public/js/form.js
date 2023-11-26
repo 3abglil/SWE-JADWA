@@ -14,33 +14,31 @@
 // });
 
 // fields animation
-const inputs = document.querySelectorAll('.form-control input');
-const labels = document.querySelectorAll('.form-control label');
+const inputs = document.querySelectorAll(".form-control input");
+const labels = document.querySelectorAll(".form-control label");
 
-labels.forEach(label => {
+labels.forEach((label) => {
   label.innerHTML = label.innerText
-    .split('')
-    .map((letter, idx) => `<span style="
+    .split("")
+    .map(
+      (letter, idx) => `<span style="
         transition-delay: ${idx * 50}ms
-      ">${letter}</span>`)
-    .join('');
+      ">${letter}</span>`
+    )
+    .join("");
 });
-
 
 // submit button
 const btn = document.querySelector("#btn");
 const btnText = document.querySelector("#btnText");
 
 btn.onclick = () => {
-    btnText.innerHTML = "Thanks";
-    btn.classList.add("active");
-    
-    setTimeout(()=>{
-      // form
-      // form.style.display = "none";
-      // pbody.style.filter="blur(0px)";
-      
-  },3000);
+  btnText.innerHTML = "Thanks";
+  btn.classList.add("active");
 
+  setTimeout(() => {
+    // form
+    // form.style.display = "none";
+    // pbody.style.filter="blur(0px)";
+  }, 3000);
 };
-

@@ -2,230 +2,233 @@
 <html lang="en" dir="Itr">
 
 <head>
-    <meta charset="UTF-8">
-    <title> Login and registration form in HTML & CSS</title>
-    <link rel="stylesheet" href="../css/reg.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        .error {
-          color: red;
-          font-size: 12px;
-        }
-      </style>
-
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <!-- <script src="/js/ajax.js"></script>  -->
-    <!--<script scr="https://ajax.googleaois.com/ajax/libs/jquery/3.6.4/jquery.min.js"> </script> -->
+  <meta charset="UTF-8">
+  <title> Login and registration form in HTML & CSS</title>
+  <link rel="stylesheet" href="../css/reg.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <script src="/js/ajax.js"></script>
 
-    <script>
-        // const validation = [
-        //     body("username").notEmpty().withMessage("Username is required"),
-        //     body("email").isEmail().withMessage("Invalid email"),
-        //     body("password")
-        //         .isLength({ min: 6 })
-        //         .withMessage("Password must be at least 6 characters")
-        //         .matches(
-        //             /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&^])[A-Za-z\d@$!%?&^]+$/
-        //         )
-        //         .withMessage(
-        //             "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character"
-        //         ),
-        //     body("confirmPassword")
-        //         .custom((value, { req }) => value === req.body.password)
-        //         .withMessage("Passwords do not match"),
-        // ];
-    
-      
-        function validateForm() {
-    var isValid = true;
+  <!-- <script src="/js/ajax.js"></script>  -->
+  <!--<script scr="https://ajax.googleaois.com/ajax/libs/jquery/3.6.4/jquery.min.js"> </script> -->
 
-    // Reset error messages
-    var errorElements = document.getElementsByClassName('error');
-    for (var i = 0; i < errorElements.length; i++) {
-      errorElements[i].innerHTML = '';
+
+  <style>
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+  </style>
+  <script>
+    // const validation = [
+    //     body("username").notEmpty().withMessage("Username is required"),
+    //     body("email").isEmail().withMessage("Invalid email"),
+    //     body("password")
+    //         .isLength({ min: 6 })
+    //         .withMessage("Password must be at least 6 characters")
+    //         .matches(
+    //             /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&^])[A-Za-z\d@$!%?&^]+$/
+    //         )
+    //         .withMessage(
+    //             "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character"
+    //         ),
+    //     body("confirmPassword")
+    //         .custom((value, { req }) => value === req.body.password)
+    //         .withMessage("Passwords do not match"),
+    // ];
+
+
+    function validateForm() {
+      var isValid = true;
+
+      // Reset error messages
+      var errorElements = document.getElementsByClassName('error');
+      for (var i = 0; i < errorElements.length; i++) {
+        errorElements[i].innerHTML = '';
+      }
+
+      // Validate first name
+      var firstName = document.getElementById('Fname').value;
+      if (firstName.trim() === '') {
+        document.getElementById('firstNameError').innerHTML = 'First name is required';
+        isValid = false;
+      }
+
+      // Validate last name
+      var lastName = document.getElementById('Lname').value;
+      if (lastName.trim() === '') {
+        document.getElementById('lastNameError').innerHTML = 'Last name is required';
+        isValid = false;
+      }
+
+      // Validate email
+      var email = document.getElementById('Email').value;
+      if (email.trim() === '') {
+        document.getElementById('emailError').innerHTML = 'Email is required';
+        isValid = false;
+      } else if (!email.includes('@')) {
+        document.getElementById('emailError').innerHTML = 'Invalid email';
+        isValid = false;
+      }
+
+      // Validate password
+      var password = document.getElementById('Password').value;
+      if (password.trim() === '') {
+        document.getElementById('passwordError').innerHTML = 'Password is required';
+        isValid = false;
+      }
+
+      // Validate confirm password
+      var confirmPassword = document.getElementById('ConfirmPassword').value;
+      if (confirmPassword.trim() === '') {
+        document.getElementById('confirmPasswordError').innerHTML = 'Confirm password is required';
+        isValid = false;
+      } else if (password !== confirmPassword) {
+        document.getElementById('confirmPasswordError').innerHTML = 'Passwords do not match';
+        isValid = false;
+      }
+
+      // Validate age
+      var phone = document.getElementById('Phone').value;
+      if (phone.trim() === '') {
+        document.getElementById('PhoneError').innerHTML = 'Phone is required';
+        isValid = false;
+      }
+
+
+      var add = document.getElementById('Address').value;
+      if (add.trim() === '') {
+        document.getElementById('AddressError').innerHTML = 'Address is required';
+        isValid = false;
+      }
+
+      return isValid;
     }
 
-    // Validate first name
-    var firstName = document.getElementById('Fname').value;
-    if (firstName.trim() === '') {
-      document.getElementById('firstNameError').innerHTML = 'First name is required';
-      isValid = false;
-    }
-
-    // Validate last name
-    var lastName = document.getElementById('Lname').value;
-    if (lastName.trim() === '') {
-      document.getElementById('lastNameError').innerHTML = 'Last name is required';
-      isValid = false;
-    }
-
-    // Validate email
-    var email = document.getElementById('Email').value;
-    if (email.trim() === '') {
-      document.getElementById('emailError').innerHTML = 'Email is required';
-      isValid = false;
-    } else if (!email.includes('@')) {
-      document.getElementById('emailError').innerHTML = 'Invalid email';
-      isValid = false;
-    }
-
-    // Validate password
-    var password = document.getElementById('Password').value;
-    if (password.trim() === '') {
-      document.getElementById('passwordError').innerHTML = 'Password is required';
-      isValid = false;
-    }
-
-    // Validate confirm password
-    var confirmPassword = document.getElementById('ConfirmPassword').value;
-    if (confirmPassword.trim() === '') {
-      document.getElementById('confirmPasswordError').innerHTML = 'Confirm password is required';
-      isValid = false;
-    } else if (password !== confirmPassword) {
-      document.getElementById('confirmPasswordError').innerHTML = 'Passwords do not match';
-      isValid = false;
-    }
-
-    // Validate age
-    var phone = document.getElementById('Phone').value;
-    if (phone.trim() === '') {
-      document.getElementById('PhoneError').innerHTML = 'Phone is required';
-      isValid = false;
-    }
 
 
-    var add = document.getElementById('Address').value;
-    if (add.trim() === '') {
-      document.getElementById('AddressError').innerHTML = 'Address is required';
-      isValid = false;
-    }
-
-    return isValid;
-  }
-  
-      
-    
-    </script>
+  </script>
 
 
 
-    <script>
-        // function validate() {
-        //     if (document.getElementById('unresult').innerHTML.includes('taken'))
-        //         return false;
-        //     else
-        //         return true;
-        // }
-    </script>
+  <script>
+    // function validate() {
+    //     if (document.getElementById('unresult').innerHTML.includes('taken'))
+    //         return false;
+    //     else
+    //         return true;
+    // }
+  </script>
 </head>
 
 <body>
 
-    <div class="nav">
+  <div class="nav">
+  </div>
+  <div class="container">
+    <input type="checkbox" id="flip" class="m2">
+    <div class="cover">
+      <div class="front">
+        <img src="../images/signup.jpg" alt="">
+      </div>
     </div>
-    <div class="container">
-        <input type="checkbox" id="flip" class="m2">
-        <div class="cover">
-            <div class="front">
-                <img src="../images/signup.jpg" alt="">
+    <form action="/login" method="post">
+      <div class="form-content">
+        <div class="login-form">
+          <div class="title"> Login </div>
+          <div class="input-boxes">
+            <div class="input-box">
+              <i class="fas fa-envelope"></i>
+              <input type="text" name="logusername" placeholder="Enter your username" required>
             </div>
+            <div class="input-box">
+              <i class="fas fa-lock"></i>
+              <input type="password" name="logpassword" placeholder="Enter your password" required>
+            </div>
+            <div class="button input-box">
+              <input type="submit" value="Submit">
+            </div>
+            <br>
+            <br>
+            <div class="text"> Don't have an account?
+              <br>
+              <br>
+              <label for="flip"> Sign up now </label>
+            </div>
+          </div>
         </div>
-        <form action="/login" method="post">
-            <div class="form-content">
-                <div class="login-form">
-                    <div class="title"> Login </div>
-                    <div class="input-boxes">
-                        <div class="input-box">
-                            <i class="fas fa-envelope"></i>
-                            <input type="text" name="logusername" placeholder="Enter your username" required>
-                        </div>
-                        <div class="input-box">
-                            <i class="fas fa-lock"></i>
-                            <input type="password" name="logpassword" placeholder="Enter your password" required>
-                        </div>
-                        <div class="button input-box">
-                            <input type="submit" value="Submit">
-                        </div>
-                        <br>
-                        <br>
-                        <div class="text"> Don't have an account?
-                            <br>
-                            <br>
-                            <label for="flip"> Sign up now </label>
-                        </div>
-                    </div>
-                </div>
-                <br>
-        </form>
-        <form action="/signup" method="post" onsubmit="return validateForm()">
-            <div class="signup-form">
-              <div class="title">Sign Up</div>
-              <div class="input-boxes">
-          
-                <div class="input-box">
-                  <i class="fas fa-user"></i>
-                  <input type="text" name="Fname" id="Fname" placeholder="Enter Your First Name">
-                  <span id="firstNameError" class="error"></span>
-                </div>
-          
-                <div class="input-box">
-                  <i class="fas fa-user"></i>
-                  <input type="text" name="Lname" id="Lname" placeholder="Enter Your Last Name">
-                  <span id="lastNameError" class="error"></span>
-                </div>
-          
-                <div class="input-box">
-                  <i class="fas fa-envelope"></i>
-                  <input type="email" name="Email" id="Email" placeholder="Enter your Email">
-                  <span id="emailError" class="error"></span>
-                  <input type="hidden" name="type" value="client">
-                </div>
-          
-                <div class="input-box">
-                  <i class="fas fa-lock"></i>
-                  <input type="password" name="Password" id="Password" placeholder="Enter your Password">
-                  <span id="passwordError" class="error"></span>
-                </div>
-          
-                <div class="input-box">
-                  <i class="fas fa-lock"></i>
-                  <input type="password" name="ConfirmPassword" id="ConfirmPassword" placeholder="Re Enter your Password">
-                  <span id="confirmPasswordError" class="error"></span>
-                </div>
-          
-                <div class="input-box">
-                  <i class="fas fa-lock"></i>
-                  <input type="text" name="Phone" id="Phone" placeholder="phone">
-                  <span id="PhoneError" class="error"></span>
-                </div>
+        <br>
+    </form>
+    <form action="/signup" method="post" onsubmit="return validateForm()">
+      <div class="signup-form">
+        <div class="title">Sign Up</div>
+        <div class="input-boxes">
 
-                <div class="input-box">
-                    <i class="fas fa-lock"></i>
-                    <input type="text" name="Address" id="Address" placeholder="address">
-                    <span id="AddressError" class="error"></span>
-                  </div>
-          
-                <div class="button input-box">
-                  <input type="submit" value="Submit">
-                </div>
-          
-                <br>
-                <br>
-                <div class="text"> Have already account?
-                  <br>
-                  <br>
-                  <label for="flip">Login Now </label>
-                </div>
-              </div>
-            </div>
-          </form>
-    </div>
+          <div class="input-box">
+            <i class="fas fa-user"></i>
+            <input type="text" name="Fname" id="Fname" placeholder="Enter Your First Name" required>
+            <span id="firstNameError" class="error"></span>
+          </div>
+
+          <div class="input-box">
+            <i class="fas fa-user"></i>
+            <input type="text" name="Lname" id="Lname" placeholder="Enter Your Last Name" required>
+            <span id="lastNameError" class="error"></span>
+          </div>
+
+          <div class="input-box">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="Email" id="Email" placeholder="Enter your Email" required>
+            <span id="emailError" class="error"></span>
+            <input type="hidden" name="type" value="client">
+          </div>
+
+          <div class="input-box">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="Password" id="Password" placeholder="Enter your Password" required>
+            <span id="passwordError" class="error"></span>
+          </div>
+
+          <div class="input-box">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="ConfirmPassword" id="ConfirmPassword" placeholder="Re Enter your Password"
+              required>
+            <span id="confirmPasswordError" class="error"></span>
+          </div>
+
+          <div class="input-box">
+            <i class="fas fa-lock"></i>
+            <input type="text" name="Phone" id="Phone" placeholder="phone" required>
+            <span id="PhoneError" class="error"></span>
+          </div>
+
+          <div class="input-box">
+            <i class="fas fa-lock"></i>
+            <input type="text" name="Address" id="Address" placeholder="address" required>
+            <span id="AddressError" class="error"></span>
+          </div>
+
+          <div class="button input-box">
+            <input type="submit" value="Submit">
+          </div>
+
+          <br>
+          <br>
+          <div class="text"> Have already account?
+            <br>
+            <br>
+            <label for="flip">Login Now </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 
 
-    </div>
+  </div>
 
 </body>
 

@@ -1,46 +1,58 @@
-import {Router} from "express"
+import { Router } from "express";
 //import { handleAdminSignup,} from "../controller/applications.js";
-import { GET,deleteUser ,handleAdminSignup ,toAdmin ,toClient , edituser ,editinguser } from "../controller/adminusercontrol.js";
+import {
+  GET,
+  deleteUser,
+  handleAdminSignup,
+  toAdmin,
+  toClient,
+  edituser,
+  editinguser,
+} from "../controller/adminusercontrol.js";
 const router = Router();
 router.use((req, res, next) => {
-    if (req.session.user !== undefined && req.session.user.role === 'A') {
-        next();
-        console.log(req.session.user.role);
-    }
-    else {
-        res.render('err', { err: 'You are not an Admin',user: (req.session.user === undefined ? "" : req.session.user) })
-    }
+  if (req.session.user !== undefined && req.session.user.role === "A") {
+    next();
+    console.log(req.session.user.role);
+  } else {
+    res.render("err", {
+      err: "You are not an Admin",
+      user: req.session.user === undefined ? "" : req.session.user,
+    });
+  }
 });
 
-router.get("/",(req,res)=>{
-    res.render("admin",{ user: (req.session.user === undefined ? "" : req.session.user) })
-});     
-
-
-router.get('/adduser',(req,res)=>{
-    res.render('adduser',{ user: (req.session.user === undefined ? "" : req.session.user) });
+router.get("/", (req, res) => {
+  res.render("admin", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
 });
 
-router.get('/view&edituser',GET,(req,res)=>{
-    res.render('viwe&edituser',{ user: (req.session.user === undefined ? "" : req.session.user) });
+router.get("/adduser", (req, res) => {
+  res.render("adduser", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
 });
 
-router.delete('/delete/:id', deleteUser);
-router.get('/toAdmin/:id', toAdmin);
-router.get('/toClient/:id', toClient);
-router.get('/edituser/:id',edituser)
-router.post('/editinguser/:id',editinguser)
+router.get("/view&edituser", GET, (req, res) => {
+  res.render("viwe&edituser", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
+});
 
+router.delete("/delete/:id", deleteUser);
+router.get("/toAdmin/:id", toAdmin);
+router.get("/toClient/:id", toClient);
+router.get("/edituser/:id", edituser);
+router.post("/editinguser/:id", editinguser);
 
-
-
-router.post('/adduser',handleAdminSignup);
+router.post("/adduser", handleAdminSignup);
 // router.get('/view&edituser',isAdmin,GET);
 
-
-router.get('/addproduct',(req,res)=>{
-    res.render('addproduct',{ user: (req.session.user === undefined ? "" : req.session.user) });
-})
-
+router.get("/addproduct", (req, res) => {
+  res.render("addproduct", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
+});
 
 export default router;
