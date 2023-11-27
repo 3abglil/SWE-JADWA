@@ -8,11 +8,87 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Loacl Warehouse </title>
+  <title>JADWA</title>
 </head>
 
+
+<script>
+   
+    function fname(field) {
+        if (field === "") {  
+          document.getElementById("fn").innerHTML = "*";
+    
+        }
+        else{
+          document.getElementById("fn").innerHTML = " ";
+
+        }
+
+      }
+
+      function lname(field) {
+        if (field === "") {
+          
+          document.getElementById("ln").innerHTML = "*";
+    
+        }
+        else{
+            document.getElementById("ln").innerHTML = " ";
+
+        }
+      }
+
+      function address(field) {
+        if (field === "") {
+          
+          document.getElementById("ad").innerHTML = "*";
+    
+        }
+        else{
+            document.getElementById("ad").innerHTML = " ";
+
+        }   
+      }
+
+  function tel(field) {
+    var field = /^01[0-2,5]{1}[0-9]{8}$/;
+    if (field.match(pattern)) {
+      document.getElementById("ph").innerHTML = " ";
+
+    } else {
+      document.getElementById("ph").innerHTML = "*";
+
+    }
+  }
+
+  function validate(form) {
+    let fail = "";
+  
+    // Add validation results to the fail variable
+    fail += fname(form.Fname.value);
+    fail += lname(form.Lname.value);
+    fail += address(form.Address.value);
+    fail += tel(form.phone.value);
+  
+    // Check if any validation failed
+    if (fail !== "") {
+        
+      // Prevent form submission
+      return false;
+    }
+  
+    // Form is valid, allow submission
+    return true;
+  }
+
+
+
+</script>
+
+
+
 <body>
-  <header id="abth"> <%-include(". /partials/header") %></header>
+  <header id="abth"> <%-include("./partials/header.ejs") %></header>
 
   <div class="sectionv">
     <div class="video-container">
@@ -29,30 +105,47 @@
     </div>
     <div class="one">
       <h1> </h1><br><br>
-      <form action="/user/edit" method="post" class="q" onsubmit="return val(this)">
-        <input class="ccc" type="text" name="username" placeholder="" disabled><br><br>
+
+      
+      <form action="/profile/edituser" method="post" class="q" onsubmit="return validate(this)">
+
+
+        <span id="fn" style="color: red;font-size:90%;"></span>
+        <input class="ccc" type="text" name="Fname" value="<%=user.Fname%>" >
+
+
+        <span id="ln" style="color: red;font-size:90%;"></span>
+        <input class="ccc" type="text" name="Lname" value="<%=user.Lname%>" ><br><br>
+
 
         <span id="em" style="color: red;font-size:90%;"></span>
+        <input class="ee" type="text" name="email" value="<%=user.Email%>" disabled><br><br>
 
-        <input class="ee" type="text" name="email" placeholder="Email " value=""><br><br>
 
-        <!-- <span id="name" style="color: red;font-size:90%;"></span>
-            <input class="ccc" type="text" name="first" placeholder="First Name " > <span id="namee" style="color: red;font-size: 90%;"></span> <span><input class="ccc" type="text" name="last" placeholder="Last Name " ></span><br><br>
-             -->
-        <span id="pass" style="color: red;font-size:90%;"></span>
-        <input class="cc" type="password" name="password" placeholder="password "> <span id="passs"
-          style="color:red ;font-size:90%;"></span> <span> <input class="cc" type="password" name="cpassword"
-            placeholder="Confirm password ">
-          <div id="lpass" style="color: red;font-size:70%; margin-bottom: -15px; "></div>
 
-        </span><br><br>
-        <input class="cc" type="text" name="Address" placeholder="Address " value="">
+        
+        <!-- <span id="pass" style="color: red;font-size:90%;"></span>
+        <input class="cc" type="password" name="password" placeholder="password "> 
+        <span id="passs" style="color:red ;font-size:90%;"></span> 
+        <input class="cc" type="password" name="cpassword" placeholder="Confirm password ">
+        <div id="lpass" style="color: red;font-size:70%; margin-bottom: -15px; "></div> -->
 
-        <span id="ph" style="color: red;"></span> <input class="cc" type="text" name="phone" placeholder="phone no. "
-          value=""><span></span><br><br>
+
+        <span id="ad" style="color: red;"></span>
+        <input class="cc" type="text" name="Address" value="<%=user.Address%>">
+
+
+
+         <span id="ph" style="color: red;"></span>
+         <input class="cc" type="text" name="phone" value="<%=user.Phone%>"> <br><br>
+
+
         <input type="submit" value="  Save Changes" class="cccc">
 
       </form>
+      
+    <a href="#">change password</a>
+
 
 
     </div>
@@ -62,79 +155,5 @@
 
 </body>
 
-<script>
-  function pass1(field, field2) {
-    if (field == "" || field2 == "") {
-      document.getElementById("pass").innerHTML = "*";
-      document.getElementById("passs").innerHTML = "*";
-      return "kkk";
-    }
-
-    else if (field.length < 4) {
-      document.getElementById("lpass").innerHTML = "enter more than 4 characters";
-      return "kkk";
-    }
-
-    else if (field.length > 12) {
-      document.getElementById("lpass").innerHTML = "enter less than 12 characters";
-      return "kkk";
-    }
-
-    else if (field != field2) {
-      document.getElementById("lpass").innerHTML = "Incorrect password";
-      return "lll";
-    }
-
-    else {
-      document.getElementById("pass").innerHTML = "";
-      document.getElementById("passs").innerHTML = "";
-      document.getElementById("lpass").innerHTML = "";
-      return "";
-    }
-
-  }
-
-
-
-
-  function tel(field) {
-    var pattern = /^01[0-2,5]{1}[0-9]{8}$/;
-    if (field.match(pattern)) {
-      document.getElementById("ph").innerHTML = " ";
-
-      return "";
-
-    } else {
-      document.getElementById("ph").innerHTML = "*";
-
-    }
-  }
-  function email(field) {
-    pattern = /^\S+@\S+\.\S+$/;
-    if (field.match(pattern)) {
-      document.getElementById("em").innerHTML = " ";
-
-      return "";
-
-    } else {
-      document.getElementById("em").innerHTML = "*";
-
-    }
-
-  }
-  function val(form) {
-    fail = "";
-    // fail+=email(form.email.value);
-    fail += pass1(form.password.value, form.cpassword.value);
-
-
-    fail += tel(form.phone.value);
-    if (fail == "") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-</script>
 
 </html>

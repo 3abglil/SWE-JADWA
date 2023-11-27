@@ -154,18 +154,41 @@ const handleAdminSignup = async (req, res) => {
   }
 };
 
-// const isAdmin = (req, res, next) => {
-//   if (req.session.user !== undefined && req.session.user.role == 'A') {
-//   next();
-//   console.log(req.session.user.role);
-// } else {
-//   res.redirect('error');
-// }
-// };
+const editUserrr = async (req, res) => {
+
+  try {
+    // Update the user data without updating the password
+    const { data, error } = await supabase
+      .from('users')
+      .update({
+        Fname: req.body.Fname,
+        Lname: req.body.Lname,
+        Phone: req.body.phone,
+        Address: req.body.Address,
+      })
+      .eq('id', req.session.user.id);
+
+    if (error) {
+      throw error;
+    }
+    console.log('Request Body:', req.body);
+
+    // Update the session user object
+    req.session.user.Fname = req.body.Fname;
+    req.session.user.Lname = req.body.Lname;
+    req.session.user.Phone = req.body.phone;
+    req.session.user.Address = req.body.Address;
+
+    res.redirect('/profile');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
 const handleLogOut = async (req, res) => {
   req.session.destroy();
   res.redirect("/");
 };
 
-export { handleApp, handlesignin, handleSignup, handleLogOut, checkEmail };
+export { handleApp, handlesignin, handleSignup, handleLogOut, checkEmail , editUserrr };
