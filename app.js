@@ -1,6 +1,5 @@
-// import supabase from './models/database.js';
-import express from "express";
-import bodyParser from "body-parser";
+import express from 'express';
+import bodyParser from 'body-parser';
 import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -53,8 +52,9 @@ app.use("/index", index_Router);
 app.use("/profile", profile_Router);
 
 app.listen(8000, () => {
-  console.log("Server listening on port http://localhost:8000");
-});
+  console.log('Server listening on port http://localhost:8000');
+}); 
+
 
 // import express from 'express';
 // import bodyParser from 'body-parser';
@@ -75,6 +75,8 @@ app.listen(8000, () => {
 // //   secret:'key to sign the cookie',
 // // }))
 // app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 // app.use(bodyParser.json());
 // app.use(
