@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
-
+import logger from "morgan";
 import session from "express-session";
 // import supabase from './models/database.js';
 
@@ -11,6 +11,7 @@ const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(logger("dev"));
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -50,9 +51,23 @@ app.use("/", index_Router);
 app.use("/admin", Admin_Router);
 app.use("/user", user_Router);
 
-app.listen(8000, () => {
-  console.log('Server listening on port http://localhost:8000');
-}); 
+app.use(function (err, req, res, next) {
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
+  res.status(err.status || 500);
+  res.render("pages/err");
+});
+
+// 404 page if ml2ash el page
+app.use((req, res) => {
+  res
+    .status(404)
+    .render("pages/404", {
+      user: req.session.user === undefined ? "" : req.session.user,
+    });
+});
+
+export default app;
 
 
 // import express from 'express';
