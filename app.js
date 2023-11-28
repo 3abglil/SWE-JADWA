@@ -25,10 +25,10 @@ app.use(
   })
 );
 
-import Admin_Router from "./routes/admin.js";
-import index_Router from "./routes/index.js";
-import profile_Router from "./routes/profile.js";
-import about_Router from "./routes/about.js";
+import Admin_Router from "./routes/admin.rout.js";
+import index_Router from "./routes/index.rout.js";
+import user_Router from "./routes/user.rout.js"
+
 
 // import index_router  from "../routes/index.js";
 export const __filename = fileURLToPath(import.meta.url);
@@ -48,8 +48,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", index_Router);
 app.use("/admin", Admin_Router);
-app.use("/index", index_Router);
-app.use("/profile", profile_Router);
+app.use("/user", user_Router);
 
 app.listen(8000, () => {
   console.log('Server listening on port http://localhost:8000');

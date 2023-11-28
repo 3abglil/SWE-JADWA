@@ -1,10 +1,10 @@
 import { Router } from "express";
 import {
-  handleApp,
   handlesignin,
   handleSignup,
   handleLogOut,
   checkEmail,
+  editUserrr,
 } from "../controller/applications.js";
 
 import express from "express";
@@ -25,26 +25,12 @@ app.use(
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.render("index", {
-    user: req.session.user === undefined ? "" : req.session.user,
-  });
+router.get('/viewprofile', async(req, res)=> {
+  res.render('profile',{ user: (req.session.user === undefined ? "" : req.session.user) });
 });
 
-router.get("/about", async (req, res) => {
-  res.render("about", {
-    user: req.session.user === undefined ? "" : req.session.user,
-  });
-});
+router.post("/edituser", editUserrr);
 
-router.get("/form", async (req, res) => {
-  res.render("form");
-});
-router.post("/form", handleApp);
-
-router.get("/login", (req, res) => {
-  res.render("reg");
-});
 router.post("/login", handlesignin);
 
 router.get("/signup", (req, res) => {

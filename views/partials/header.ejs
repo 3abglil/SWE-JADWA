@@ -87,7 +87,7 @@
 
               <% if (user==="" ) { %>
                 <li class="nav-item">
-                  <a href="/login" class="nav-link login">Login/Sign Up</a>
+                  <a href="/user/signup" class="nav-link login">Login/Sign Up</a>
                 </li>
                 <% } else { %>
                   <% if (user.role==="A" ) { %>
@@ -97,19 +97,19 @@
                     </li>
 
                     <li class="nav-item">
-                      <a href="/profile" class="nav-link">Profile</a>
+                      <a href="/user/viewprofile" class="nav-link">Profile</a>
                     </li>
 
                     <li class="nav-item">
-                      <a href="/logout" class="nav-link">Logout</a>
+                      <a href="/user/logout" class="nav-link">Logout</a>
                     </li>
                     <% } else { %>
 
                       <li class="nav-item">
-                        <a href="/profile" class="nav-link">Profile</a>
+                        <a href="/user/viewprofile" class="nav-link">Profile</a>
                       </li>
                       <li class="nav-item">
-                        <a href="/logout" class="nav-link">Logout</a>
+                        <a href="/user/logout" class="nav-link">Logout</a>
                       </li>
                       <% } %>
                         <% } %>

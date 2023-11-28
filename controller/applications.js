@@ -179,7 +179,7 @@ const editUserrr = async (req, res) => {
     req.session.user.Phone = req.body.phone;
     req.session.user.Address = req.body.Address;
 
-    res.redirect('/profile');
+    res.redirect('/user/viewprofile');
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
