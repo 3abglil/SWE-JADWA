@@ -21,18 +21,18 @@ app.use(
 const router = Router();
 
 router.get("/", (req, res) => {
-  res.render("index", {
+  res.render("pages/index", {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 });
 
 router.get("/about", async (req, res) => {
-  res.render("about", {
+  res.render("pages/about", {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 });
 router.get("/form", async (req, res) => {
-  res.render("form");
+  res.render("pages/form");
 });
 router.post("/form", handleApp);
 export default router;

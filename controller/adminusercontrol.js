@@ -71,7 +71,7 @@ const GetAllUsers = async (req, res) => {
 const GET = async (req, res) => {
   try {
     const users = await GetAllUsers();
-    res.render("view&edituser", {
+    res.render("pages/view&edituser", {
       users: users,
       user: req.session.user === undefined ? "" : req.session.user,
     });
@@ -162,7 +162,7 @@ const edituser = async (req, res) => {
 
     if (data && data.length > 0) {
       // Render the editprod view with the product data
-      res.render("edituseradmin", {
+      res.render("pages/edituseradmin", {
         edituser: data[0],
         user: req.session.user === undefined ? "" : req.session.user,
       });

@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", index_Router);
 app.use("/admin", Admin_Router);
-app.use("/reg", user_Router);
+app.use("/user", user_Router);
 
 app.listen(8000, () => {
   console.log('Server listening on port http://localhost:8000');

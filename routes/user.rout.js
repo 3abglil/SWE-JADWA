@@ -26,7 +26,7 @@ app.use(
 const router = Router();
 
 router.get('/viewprofile', async(req, res)=> {
-  res.render('profile',{ user: (req.session.user === undefined ? "" : req.session.user) });
+  res.render('pages/profile',{ user: (req.session.user === undefined ? "" : req.session.user) });
 });
 
 router.post("/edituser", editUserrr);
@@ -34,7 +34,7 @@ router.post("/edituser", editUserrr);
 router.post("/login", handlesignin);
 
 router.get("/signup", (req, res) => {
-  res.render("reg");
+  res.render("pages/reg");
 });
 router.post("/signup", handleSignup);
 router.post("/check-email", async (req, res) => {

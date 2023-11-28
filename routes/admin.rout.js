@@ -15,7 +15,7 @@ router.use((req, res, next) => {
     next();
     console.log(req.session.user.role);
   } else {
-    res.render("err", {
+    res.render("pages/err", {
       err: "You are not an Admin",
       user: req.session.user === undefined ? "" : req.session.user,
     });
@@ -23,19 +23,19 @@ router.use((req, res, next) => {
 });
 
 router.get("/", (req, res) => {
-  res.render("admin", {
+  res.render("pages/admin", {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 });
 
 router.get("/adduser", (req, res) => {
-  res.render("adduser", {
+  res.render("pages/adduser", {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 });
 
 router.get("/view&edituser", GET, (req, res) => {
-  res.render("viwe&edituser", {
+  res.render("pages/viwe&edituser", {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 });
@@ -50,7 +50,7 @@ router.post("/adduser", handleAdminSignup);
 // router.get('/view&edituser',isAdmin,GET);
 
 router.get("/addproduct", (req, res) => {
-  res.render("addproduct", {
+  res.render("pages/addproduct", {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 });
