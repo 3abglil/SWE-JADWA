@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add product</title>
+
+  <!-- Box Icons  -->
+  <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+  <!-- Styles  -->
+  <link rel="stylesheet" href="/css/adminDashboard.css" />
+</head>
+
+<body>
+  <%- include('../partials/aside.ejs')%>
+
+
+    <!-- add prod -->
+    <section class="home">
+        <div class="container">
+            <div class="right">
+                <h2 id="j">Add Medical Packages</h2>
+                <form action="/admin/addproduct" method="post" enctype="multipart/form-data">
+                    <select class="field" name="type">
+                    <option value="">Type</option>
+                    <option value="Basic">Basic</option>
+                    <option value="Standard">Standard</option>
+                    <option value="Premium">Premium</option>
+                    </select>
+                    <input type="text" name="price" class="field" placeholder="Package's Price" />
+                    <input type="text" name="Hospitalization and Surgery" class="field" placeholder="Hospitalization and/or Surgery=ex:full/mid cover" />
+                    <input type="text" name="Emergency" class="field" placeholder="Emergency=full/mid cover" />
+                    <input type="text" name="Medication Coverage" class="field" placeholder="Medication Coverage=70%" />
+                    <input type="text" name="Clinics Coverage" class="field" placeholder="Clinics Coverage:70%" />
+                    <input type="text" name="X-ray and Scans Coverage" class="field" placeholder="X-ray and Scans Coverage:70%" />
+                    <input type="text" name="Maternity Coverage" class="field" placeholder="Maternity Coverage:3000 limit" />
+                    <input type="text" name="Dental Coverage" class="field" placeholder="Dental:500 limit " />
+                    <input type="text" name="Optical Coverage" class="field" placeholder="optical:not covered" />
+                    <input type="text" name="Pre-existing Conditions " class="field" placeholder="Pre-existing Conditions:Not covered" />
+                    <input type="submit" class="btn" value="ADD">
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Link JS -->
+    <script src="/js/adminDashboard.js"></script>
+
+</body>
+
+</html>

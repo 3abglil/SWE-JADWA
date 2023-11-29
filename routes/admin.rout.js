@@ -49,8 +49,20 @@ router.post("/editinguser/:id", editinguser);
 router.post("/adduser", handleAdminSignup);
 // router.get('/view&edituser',isAdmin,GET);
 
-router.get("/addproduct", (req, res) => {
-  res.render("pages/addproduct", {
+router.get("/AddCarPackage", (req, res) => {
+  res.render("pages/AddCarPackage", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
+});
+
+router.get("/AddMedicalPackage", (req, res) => {
+  res.render("pages/AddMedicalPackage", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
+});
+
+router.get("/AddLifePackage", (req, res) => {
+  res.render("pages/AddLifePackage", {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 });
