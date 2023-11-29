@@ -34,5 +34,10 @@ router.get("/about", async (req, res) => {
 router.get("/form", async (req, res) => {
   res.render("pages/form");
 });
-router.post("/form", handleApp);
+
+router.get("/car", async (req, res) => {
+  res.render("pages/car", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });});
+
 export default router;
