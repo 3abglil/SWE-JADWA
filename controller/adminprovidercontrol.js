@@ -6,12 +6,6 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 
 const app = express();
-import fileUpload from "express-fileupload";
-
-
-app.use(fileUpload());
-
-
 
 // Other middleware configurations
 app.use(express.urlencoded({ extended: false }));
@@ -29,11 +23,10 @@ app.use(
   })
 );
 
-
 import supabase from "../models/database.js";
 // Multer configuration
 
-import multer from 'multer';
+import multer from "multer";
 
 // const addProviders = async (req, res) => {
 //     try {
@@ -70,46 +63,51 @@ import multer from 'multer';
 //     }
 // };
 
-
-
 //HAMADAAA
 const addProviders = async (req, res) => {
   try {
     console.log("Before Supabase Insert");
     const providerName = req.body.name;
-    const providerLogo = req.files;
+    // const providerLogo = req.files;
+    let imgFile;
+    let uploadPath;
+    let vall;
+    if (req.files !== null) {
+      if (Object.keys(req.files).length !== 0) {
+        imgFile = req.files.logo;
 
-    let base64Image=null;
-    if (providerLogo) {
-      base64Image = providerLogo.buffer.toString('base64');
+        uploadPath = "./public/images/" + providerName + ".jpg";
+        // Use the mv() method to place the file somewhere on your server
+        imgFile.mv(uploadPath, function (err) {
+          if (err) return res.status(500).send(err);
+        });
+        vall = providerName + ".jpg";
+      }
     }
+    // let base64Image=null;
+    // if (providerLogo) {
+    //   base64Image = providerLogo.buffer.toString('base64');
+    // }
     // Convert binary data to base64-encoded string
     // Insert the new provider into the 'Providers' table
     console.log(req.body);
-    const { data, error } = await supabase
-      .from('Providers')
-      .insert([
-        {
-          name: providerName,
-          image: base64Image,
-        },
-      ]);
+    const { data, error } = await supabase.from("Providers").insert([
+      {
+        name: providerName,
+        image: vall,
+      },
+    ]);
     console.log("After Supabase Insert");
     if (error) {
       throw new Error(error.message);
     }
     res.redirect("/admin/addproviders");
-    
   } catch (error) {
     console.error("Error:", error.message);
-    res.status(500).send("An error occurred during adding provider: " + error.message);
+    res
+      .status(500)
+      .send("An error occurred during adding provider: " + error.message);
   }
 };
-
-
-
-
-  
-  
 
 export { addProviders };
