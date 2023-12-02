@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add User</title>
+  <title>Add provider</title>
 
   <!-- Box Icons  -->
   <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
@@ -27,15 +25,13 @@
       <div class="container">
         <div class="right">
           <h2 id="j">Add Provider</h2>
-          <form action="/admin/addprovider" method="post" enctype="multipart/form-data">
-  
-            <input type="text" name="providerId" class="field" placeholder="Provider ID" />
-            <input type="text" name="providerName" class="field" placeholder="Provider Name" />
-            
+          <form action="/admin/addproviders" method="post">
+            <!-- enctype="multipart/form-data" -->
+            <input type="text" name="name" class="field" placeholder="Provider Name" />
             <!-- File input for the provider logo -->
-            <label for="providerLogo" class="file-label">Choose Provider Logo:</label>
-            <input type="file" name="providerLogo" id="providerLogo" accept="image/*" class="file-input" />
-  
+            <label for="logo" class="file-label">Choose Provider Logo:</label>
+            <input type="file" name="logo" id="logo"/> 
+            <!-- id="providerLogo" accept="image/*" class="file-input"  -->
             <input type="submit" class="btn" value="ADD">
           </form>
 

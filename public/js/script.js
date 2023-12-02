@@ -68,3 +68,30 @@ var options = {
 
 var chart = new ApexCharts(document.querySelector("#chart"), options);
 chart.render();
+////////////////////////////////////////////////
+// const form = document.getElementById("form");
+
+// form.addEventListener("submit", async (e) => {
+//     e.preventDefault();
+//     const name = document.getElementById("name");
+//     const logo = document.getElementById("logo");
+//     const formData = new FormData();
+
+//     formData.append("name", name.value);
+//     formData.append("logo", logo.files[0]);
+
+//     try {
+//         const response = await fetch("http://localhost:8000/admin/addproviders", {
+//             method: 'POST',
+//             body: formData,
+//         });
+
+//         if (response.ok) {
+//             console.log('Provider added successfully');
+//         } else {
+//             console.error('Failed to add provider');
+//         }
+//     } catch (error) {
+//         console.error('Error during fetch:', error);
+//     }
+// });

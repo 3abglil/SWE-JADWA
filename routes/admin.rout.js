@@ -1,4 +1,11 @@
 import { Router } from "express";
+import express from "express";
+
+import fileUpload from "express-fileupload";
+import multer from 'multer';
+const app = express();
+app.use(fileUpload());
+
 //import { handleAdminSignup,} from "../controller/applications.js";
 import {
   GET,
@@ -9,7 +16,19 @@ import {
   edituser,
   editinguser,
 } from "../controller/adminusercontrol.js";
+
+import {
+  addProviders
+} from "../controller/adminprovidercontrol.js";
 const router = Router();
+import bodyParser from 'body-parser';
+
+router.use( bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }))
+const upload = multer({ dest: './public/images' }); // Adjust the destination directory as needed
+// const upload = multer({ storage: multer.memoryStorage() });
+
+
 router.use((req, res, next) => {
   if (req.session.user !== undefined && req.session.user.role === "A") {
     next();
@@ -54,6 +73,11 @@ router.get("/addproviders", (req, res) => {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 });
+
+router.post("/addproviders",addProviders);
+//upload.single('providerLogo'),addProviders
+
+
 router.get("/view&editproviders", (req, res) => {
   res.render("pages/view&editproviders", {
     user: req.session.user === undefined ? "" : req.session.user,

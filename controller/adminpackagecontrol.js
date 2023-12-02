@@ -22,3 +22,33 @@ app.use(
 );
 
 import supabase from "../models/database.js";
+
+const AddCarPackage = async (req, res) => {
+    try {
+      const { data: creed, error } = await supabase
+        .from("CarPackages")
+        .insert([
+          {
+            Personal_Accident: req.body.Personal_Accident,
+            COinsurance: req.body.COinsurance,
+            AgencyCOinsurance: req.body.AgencyCOinsurance,
+            Roadside_Assistance: req.body.Roadside_Assistance,
+            Civil_Liability: req.body.Civil_Liability,
+            Police_Report: req.body.Police_Report,
+            Dfixing:req.body.Dfixing,
+          },
+        ])
+        .select();
+  
+      if (error) {
+        throw new Error(error.message); // Throw an error if there is an error during insertion
+      }
+  
+      if (creed) {
+        res.redirect("/admin/view&editproviders");
+      }
+    } catch (error) {
+      res.status(500).send("An error occurred during sign up: " + error.message);
+    }
+  };
+  export{AddCarPackage}

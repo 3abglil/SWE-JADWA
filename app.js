@@ -5,9 +5,11 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import logger from "morgan";
 import session from "express-session";
+import fileUpload from "express-fileupload";
 // import supabase from './models/database.js';
-
 const app = express();
+app.use(fileUpload());
+
 
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
