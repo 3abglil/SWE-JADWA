@@ -9,6 +9,7 @@ app.use(fileUpload());
 //import { handleAdminSignup,} from "../controller/applications.js";
 import {
   GET,
+  GETP,
   deleteUser,
   handleAdminSignup,
   toAdmin,
@@ -29,17 +30,17 @@ const upload = multer({ dest: './public/images' }); // Adjust the destination di
 // const upload = multer({ storage: multer.memoryStorage() });
 
 
-router.use((req, res, next) => {
-  if (req.session.user !== undefined && req.session.user.role === "A") {
-    next();
-    console.log(req.session.user.role);
-  } else {
-    res.render("pages/err", {
-      err: "You are not an Admin",
-      user: req.session.user === undefined ? "" : req.session.user,
-    });
-  }
-});
+// router.use((req, res, next) => {
+//   if (req.session.user !== undefined && req.session.user.role === "A") {
+//     next();
+//     console.log(req.session.user.role);
+//   } else {
+//     res.render("pages/err", {
+//       err: "You are not an Admin",
+//       user: req.session.user === undefined ? "" : req.session.user,
+//     });
+//   }
+// });
 
 router.get("/", (req, res) => {
   res.render("pages/admin", {
@@ -61,10 +62,10 @@ router.get("/view&edituser", GET, (req, res) => {
 });
 
 
-router.get("/view&editproviders",GET , (req, res) => {
-  res.render("pages/viwe&editproviders", {
-    user: req.session.user === undefined ? "" : req.session.user,
-  });
+router.get("/view&editproviders",GETP , (req, res) => {
+  // res.render("pages/viwe&editproviders", {
+  //   user: req.session.user === undefined ? "" : req.session.user,
+  // });
 });
 
 
