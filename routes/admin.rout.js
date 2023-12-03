@@ -108,7 +108,8 @@ router.get("/AddCarPackage", async(req, res) => {
 router.post("/AddCarPackage", AddCarPackage);
 
 
-router.get("/abdelrahmaaaan", async(req, res) => {//ghyr rout get all packages 
+router.get("/abdelrahmaaaan", async(req, res) => {//m7desh yegeee gnbha na hzbotha (suezyy)
+  //ghyr rout ----get all packages 
   const packages = await getCarPackages();
   res.render("pages/AddCarPackage", {
     user: req.session.user === undefined ? "" : req.session.user,
@@ -117,7 +118,8 @@ router.get("/abdelrahmaaaan", async(req, res) => {//ghyr rout get all packages
 });
 
 
-router.get("/abdelrahmaaaan/:id", async(req, res) => {//specific package by id 
+router.get("/abdelrahmaaaan/:id", async(req, res) => {//m7desh yegeee gnbha na hzbotha (suezyy)
+  //specific package by id 
   const packages = await getCarPackages(req.params.id);
   res.render("pages/AddCarPackage", {
     user: req.session.user === undefined ? "" : req.session.user,

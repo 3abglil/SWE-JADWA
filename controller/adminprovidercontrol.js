@@ -24,44 +24,6 @@ app.use(
 );
 
 import supabase from "../models/database.js";
-// Multer configuration
-
-import multer from "multer";
-
-// const addProviders = async (req, res) => {
-//     try {
-//         const providerName = req.body.name;
-//         const providerLogo = req.file;
-
-//         if (!providerLogo) {
-//             throw new Error('Provider logo not found');
-//         }
-
-//         // Convert binary data to base64-encoded string
-//         const base64Image = providerLogo.buffer.toString('base64');
-
-//         // Insert the new provider into the 'Providers' table
-//         const { data, error } = await supabase
-//             .from('Providers')
-//             .insert([
-//                 {
-//                     name: providerName,
-//                     image: base64Image,
-//                 },
-//             ]);
-
-//         if (error) {
-//             throw new Error(error.message);
-//         }
-
-//         if (data) {
-//             res.json({ message: 'Provider added successfully', data });
-//         }
-//     } catch (error) {
-//         console.error('Error during provider addition:', error);
-//         res.status(500).json({ error: 'Internal server error during provider addition' });
-//     }
-// };
 
 //HAMADAAA
 const addProviders = async (req, res) => {
@@ -112,7 +74,7 @@ const addProviders = async (req, res) => {
 
 const getAllProviders = async (req, res) => {
   try {
-    // Select all users from the 'users' table
+    // Select all providers from the 'Poviders' table
     const { data, error } = await supabase.from("Providers").select("*");
 
     if (error) {
@@ -125,6 +87,5 @@ const getAllProviders = async (req, res) => {
     throw error;
   }
 }
-
 
 export { addProviders,getAllProviders };

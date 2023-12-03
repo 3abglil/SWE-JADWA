@@ -70,8 +70,8 @@ const AddCarPackage = async (req, res) => {
 
   const getCarPackages = async (id) => { 
     try {
-      // Select all users from the 'users' table
-      let query=supabase.from("CarPackages").select("providers(id, name),price");
+      // Select all packages from the 'CarPackages' table
+      let query=supabase.from("CarPackages").select("providers(id, name),id,price,Personal_Accident,COinsurance,AgencyCOinsurance,Roadside_Assistance,Civil_Liability,Police_Report,Dfixing");
       if(id){
         query=query.eq("id", req.body.id);
       }
@@ -87,48 +87,5 @@ const AddCarPackage = async (req, res) => {
       throw error;
     }
   }
-
-
-  // const handleSignup = async (req, res) => {
-  //   try {
-  //     // Check if the email already exists
-  //     const existingUser = await supabase
-  //       .from("users")
-  //       .select("*")
-  //       .eq("Email", req.body.Email);
-  
-  //     if (existingUser.data && existingUser.data.length > 0) {
-  //       // Email already exists, handle accordingly (e.g., send an error response)
-  //       return res.status(400).send("Email is already taken");
-  //     }
-  
-  //     // If the email doesn't exist, proceed with the signup
-  //     const { data: cred, error } = await supabase
-  //       .from("users")
-  //       .insert([
-  //         {
-  //           Fname: req.body.Fname,
-  //           Lname: req.body.Lname,
-  //           Email: req.body.Email,
-  //           Password: req.body.Password,
-  //           Phone: req.body.Phone,
-  //           Address: req.body.Address,
-  //           role: "C",
-  //         },
-  //       ])
-  //       .select();
-  
-  //     if (cred) {
-  //       req.session.user = cred[0];
-  //       res.redirect("/");
-  //     }
-  //   } catch (error) {
-  //     res.status(500).send("An error occurred during sign up." + error.message);
-  //   }
-  // };
-
-
-
-
 
   export{AddCarPackage,getCarPackages}
