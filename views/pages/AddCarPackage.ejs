@@ -23,26 +23,34 @@
       <div class="container">
         <div class="right">
           <h2 id="j">Add Car Packages</h2>
-          <form action="/admin/addproduct" method="post" enctype="multipart/form-data">
+          <form action="/admin/addCarPackage" method="post">
+            <!-- enctype="multipart/form-data" -->
             <select class="field" name="type">
               <option value="">Type</option>
               <option value="Basic">Basic</option>
               <option value="Standard">Standard</option>
               <option value="Premium">Premium</option>
             </select>
-            <input type="text" name="price" class="field" placeholder="Package's Price" />
+            <input type="number" name="price" class="field" placeholder="Package's Price" />
             <input type="text" name="Dfixing" class="field" placeholder="Direct fixing" />
             <input type="text" name="COinsurance" class="field" placeholder="COinsurance" />
             <input type="text" name="AgencyCOinsurance" class="field" placeholder="AgencyCOinsurance" />
-            <input type="text" name="Roadside Assistance" class="field" placeholder="Roadside Assistance" />
-            <input type="text" name="Personal Accident" class="field" placeholder="Personal Accident" />
-            <input type="text" name="Civil Liability" class="field" placeholder="Civil Liability" />
-            <input type="text" name="Police Report" class="field" placeholder="Police Report" />
+            <input type="text" name="Roadside_Assistance" class="field" placeholder="Roadside Assistance" />
+            <input type="text" name="Personal_Accident" class="field" placeholder="Personal Accident" />
+            <input type="text" name="Civil_Liability" class="field" placeholder="Civil Liability" />
+            <input type="text" name="Police_Report" class="field" placeholder="Police Report" />
             <!-- <textarea name="description" class="field" placeholder="Enter Product description"></textarea> -->
             <!-- <input type="file" name="img" class="field" placeholder="image"> -->
+            <select class="field" name="providerId">
+              <option value="">provider</option>
+              <% providers.forEach((prov, index) => { %>
+                <option value="<%=prov.id%>"><%=prov.name%></option>
+                <% }) %>
+              </select>
+            
             <input type="submit" class="btn" value="ADD">
           </form>
-
+        
         </div>
       </div>
     </section>

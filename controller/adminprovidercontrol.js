@@ -110,4 +110,21 @@ const addProviders = async (req, res) => {
   }
 };
 
-export { addProviders };
+const getAllProviders = async (req, res) => {
+  try {
+    // Select all users from the 'users' table
+    const { data, error } = await supabase.from("Providers").select("*");
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching Providers:", error.message);
+    throw error;
+  }
+}
+
+
+export { addProviders,getAllProviders };

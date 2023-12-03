@@ -18,8 +18,11 @@ import {
   editinguser,
 } from "../controller/adminusercontrol.js";
 
+import {AddCarPackage,getCarPackages
+} from "../controller/adminpackagecontrol.js";
+
 import {
-  addProviders
+  addProviders,getAllProviders
 } from "../controller/adminprovidercontrol.js";
 const router = Router();
 import bodyParser from 'body-parser';
@@ -94,9 +97,31 @@ router.post("/addproviders",addProviders);
 
 
 
-router.get("/AddCarPackage", (req, res) => {
+router.get("/AddCarPackage", async(req, res) => {
+  const providers = await getAllProviders();
   res.render("pages/AddCarPackage", {
     user: req.session.user === undefined ? "" : req.session.user,
+    providers:providers
+  });
+});
+
+router.post("/AddCarPackage", AddCarPackage);
+
+
+router.get("/abdelrahmaaaan", async(req, res) => {//ghyr rout get all packages 
+  const packages = await getCarPackages();
+  res.render("pages/AddCarPackage", {
+    user: req.session.user === undefined ? "" : req.session.user,
+    packages:packages
+  });
+});
+
+
+router.get("/abdelrahmaaaan/:id", async(req, res) => {//specific package by id 
+  const packages = await getCarPackages(req.params.id);
+  res.render("pages/AddCarPackage", {
+    user: req.session.user === undefined ? "" : req.session.user,
+    packages:packages
   });
 });
 
