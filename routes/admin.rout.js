@@ -54,10 +54,20 @@ router.get("/adduser", (req, res) => {
 });
 
 router.get("/view&edituser", GET, (req, res) => {
-  res.render("pages/viwe&edituser", {
+  res.render("pages/view&edituser", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
+
+});
+
+
+router.get("/view&editproviders",GET , (req, res) => {
+  res.render("pages/viwe&editproviders", {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 });
+
+
 
 router.delete("/delete/:id", deleteUser);
 router.get("/toAdmin/:id", toAdmin);
@@ -78,11 +88,9 @@ router.post("/addproviders",addProviders);
 //upload.single('providerLogo'),addProviders
 
 
-router.get("/view&editproviders", (req, res) => {
-  res.render("pages/view&editproviders", {
-    user: req.session.user === undefined ? "" : req.session.user,
-  });
-});
+
+
+
 
 
 router.get("/AddCarPackage", (req, res) => {
