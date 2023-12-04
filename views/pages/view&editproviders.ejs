@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>View and edit user</title>
+  <title>View and edit Providers</title>
 
   <!-- Box Icons  -->
   <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
@@ -18,48 +18,32 @@
   <%- include('../partials/aside.ejs')%>
 
     <section class="users">
-      <% if (users.length> 0) { %>
+      <% if (providers.length> 0) { %>
         <div class="board">
           <table width="100%">
             <thead>
               <tr>
                 <th>Logo</th>
                 <th>Name</th>
-                <th colspan="3">Action</th>
+                <th colspan="2">Action</th>
               </tr>
             </thead>
-            <% users.forEach(us=> { %>
+            <% providers.forEach(prov=> { %>
               <tbody>
 
-                <tr id="user-<%=us.id%>">
+                <tr id="user-<%=prov.id%>">
                   <td class="people">
-                    <!-- <img src="bakry.jfif" alt=""> -->
                     <div class="people-de">
-                      
-                        
-
-                        <img src="../../images/<%= us.image %>" alt="" srcset="">
-                      
+                        <img src="../../images/<%= prov.image %>" alt="" srcset="">
                     </div>
                   </td>
                   <td class="people-des">
                     <p name="email">
-                      <%= us.name %>
+                      <%= prov.name %>
                     </p>
                   </td>
-                  <td class="edit">
-                    <% if (us.Email!==user.Email ){ %>
-                      <% if (us.role==='C' ){ %>
-                        <a href="/admin/toAdmin/<%= us.id %>">Make Admin</a>
-                        <% } else{ %>
-                          <a href="/admin/toClient/<%= us.id %>">Make Client</a>
-                          <% } %>
-                            <% }%>
-                  </td>
-                  <td class="edit"><a href="/admin/edituser/<%=us.id%>">Edit</a></td>
-                  <% if (us.Email!==user.Email ){ %>
-                    <td class="edit"> <a href="#" onclick="return deleteUser('<%=us.id%>');">Delete</a></td>
-                    <% }%>
+                  <td class="edit"><a href="/admin/edituser/<%=prov.id%>">Edit</a></td>
+                  <td class="edit"> <a href="#" onclick="return deleteProvider('<%=prov.id%>');">Delete</a></td>
                 </tr>
 
               </tbody>

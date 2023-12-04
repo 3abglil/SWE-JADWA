@@ -67,21 +67,7 @@ const GetAllUsers = async (req, res) => {
     throw error;
   }
 };
-const GetProviders = async (req, res) => {
-  try {
-    // Select all users from the 'users' table
-    const { data, error } = await supabase.from("Providers").select("*");
 
-    if (error) {
-      throw error;
-    }
-
-    return data;
-  } catch (error) {
-    console.error("Error fetching users:", error.message);
-    throw error;
-  }
-};
 
 const GET = async (req, res) => {
   try {
@@ -94,17 +80,7 @@ const GET = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
-const GETP = async (req, res) => {
-  try {
-    const users = await GetProviders();
-    res.render("pages/view&editproviders", {
-      users: users,
-      user: req.session.user === undefined ? "" : req.session.user,
-    });
-  } catch (error) {
-    res.status(500).send("Internal Server Error");
-  }
-};
+
 
 const deleteUser = async (req, res) => {
   try {
@@ -226,7 +202,6 @@ const editinguser = async (req, res) => {
 
 export {
   GET,
-  GETP,
   deleteUser,
   handleAdminSignup,
   toAdmin,

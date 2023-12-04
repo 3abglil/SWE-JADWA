@@ -1,15 +1,12 @@
 import { Router } from "express";
 import express from "express";
-
 import fileUpload from "express-fileupload";
-import multer from 'multer';
 const app = express();
 app.use(fileUpload());
 
 //import { handleAdminSignup,} from "../controller/applications.js";
 import {
   GET,
-  GETP,
   deleteUser,
   handleAdminSignup,
   toAdmin,
@@ -22,15 +19,14 @@ import {AddCarPackage,getCarPackages
 } from "../controller/adminpackagecontrol.js";
 
 import {
-  addProviders,getAllProviders
+  addProviders,GETP,getAllProviders,deleteProvider
 } from "../controller/adminprovidercontrol.js";
 const router = Router();
 import bodyParser from 'body-parser';
 
 router.use( bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }))
-const upload = multer({ dest: './public/images' }); // Adjust the destination directory as needed
-// const upload = multer({ storage: multer.memoryStorage() });
+
 
 
 // router.use((req, res, next) => {
@@ -51,6 +47,10 @@ router.get("/", (req, res) => {
   });
 });
 
+
+
+///////////////////////////////user/////////////////////////////////////
+
 router.get("/adduser", (req, res) => {
   res.render("pages/adduser", {
     user: req.session.user === undefined ? "" : req.session.user,
@@ -65,14 +65,6 @@ router.get("/view&edituser", GET, (req, res) => {
 });
 
 
-router.get("/view&editproviders",GETP , (req, res) => {
-  // res.render("pages/viwe&editproviders", {
-  //   user: req.session.user === undefined ? "" : req.session.user,
-  // });
-});
-
-
-
 router.delete("/delete/:id", deleteUser);
 router.get("/toAdmin/:id", toAdmin);
 router.get("/toClient/:id", toClient);
@@ -82,6 +74,8 @@ router.post("/editinguser/:id", editinguser);
 router.post("/adduser", handleAdminSignup);
 // router.get('/view&edituser',isAdmin,GET);
 
+/////////////////////////////providers/////////////////////////////////
+
 router.get("/addproviders", (req, res) => {
   res.render("pages/addproviders", {
     user: req.session.user === undefined ? "" : req.session.user,
@@ -89,10 +83,17 @@ router.get("/addproviders", (req, res) => {
 });
 
 router.post("/addproviders",addProviders);
-//upload.single('providerLogo'),addProviders
+
+router.get("/view&editproviders",GETP , (req, res) => {
+  res.render("pages/view&editproviders", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
+});
 
 
+router.delete("/deleteProvider/:id", deleteProvider);
 
+//////////////////////////////////packages////////////////////////////////////
 
 
 

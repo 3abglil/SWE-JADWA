@@ -4,6 +4,9 @@ import session from "express-session";
 import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+import fs from 'fs/promises'; // Using fs.promises for async file operations
+import { promisify } from 'util';
+const unlinkAsync = promisify(fs.unlink);
 
 const app = express();
 
@@ -46,11 +49,7 @@ const addProviders = async (req, res) => {
         vall = providerName + ".jpg";
       }
     }
-    // let base64Image=null;
-    // if (providerLogo) {
-    //   base64Image = providerLogo.buffer.toString('base64');
-    // }
-    // Convert binary data to base64-encoded string
+  
     // Insert the new provider into the 'Providers' table
     console.log(req.body);
     const { data, error } = await supabase.from("Providers").insert([
@@ -63,7 +62,7 @@ const addProviders = async (req, res) => {
     if (error) {
       throw new Error(error.message);
     }
-    res.redirect("/admin/addproviders");
+    res.redirect("/admin/view&editproviders");
   } catch (error) {
     console.error("Error:", error.message);
     res
@@ -88,4 +87,100 @@ const getAllProviders = async (req, res) => {
   }
 }
 
-export { addProviders,getAllProviders };
+const GETP = async (req, res) => {
+  try {
+    const providers = await getAllProviders();
+    res.render("pages/view&editproviders", {
+      providers: providers,
+      user: req.session.user === undefined ? "" : req.session.user,
+    });
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+// const deleteProvider = async (req, res) => {
+//   try {
+//     const providerId = req.params.id;
+
+//     // Fetch the provider details to get the image filename
+//     const { data: providerData, error: providerError } = await supabase
+//       .from('Providers')
+//       .select('name', 'image')
+//       .eq('id', providerId)
+//       .single(); // Ensure only one row is returned
+
+//     if (providerError) {
+//       throw new Error(providerError.message);
+//     }
+
+//     if (!providerData) {
+//       return res.status(404).send('Provider not found');
+//     }
+
+//     const { name, image } = providerData;
+
+//     // Delete the provider from the 'Providers' table
+//     const { error } = await supabase.from('Providers').delete().eq('id', providerId);
+
+//     if (error) {
+//       throw new Error(error.message);
+//     }
+
+//     // Unlink the associated image
+//     const imagePath = `./public/images/${name}.jpg`;
+//     await unlinkAsync(imagePath);
+
+//     res.redirect('/admin/view&editproviders'); // Redirect to the providers list page
+//   } catch (error) {
+//     console.error('Error:', error.message);
+//     res.status(500).send('An error occurred during provider deletion: ' + error.message);
+//   }
+// };
+
+
+
+
+
+const deleteProvider = async (req, res) => {
+  try {
+    const providerId = req.params.id;
+
+    // Fetch the provider details to get the name and image
+    const { data: providerData, error: providerError } = await supabase
+      .from('Providers')
+      .select('name', 'image')
+      .eq('id', providerId)
+      .single(); // Ensure only one row is returned
+
+    if (providerError) {
+      throw new Error(providerError.message);
+    }
+
+    if (!providerData) {
+      return res.status(404).send('Provider not found');
+    }
+
+    const { name, image } = providerData;
+
+    // Delete the provider from the 'Providers' table
+    const { error: deleteError } = await supabase.from('Providers').delete().eq('id', providerId);
+
+    if (deleteError) {
+      throw new Error(deleteError.message);
+    }
+
+    // Unlink the associated image
+    const imagePath = `./public/images/${name}.jpg`; // Update the path if needed
+    await unlinkAsync(imagePath);
+
+    res.redirect('/admin/view&editproviders'); // Redirect to the product list page
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).send('An error occurred during provider deletion: ' + error.message);
+  }
+};
+
+
+
+export { addProviders , getAllProviders, GETP , deleteProvider };
