@@ -15,8 +15,9 @@ import {
   editinguser,
 } from "../controller/adminusercontrol.js";
 
-import {AddCarPackage,getCarPackages
+import {AddCarPackage,getCarPackages,AddLifePackage,getLifePackages,AddMedicalPackage,getMedicalPackages
 } from "../controller/adminpackagecontrol.js";
+
 
 import {
   addProviders,GETP,getAllProviders,deleteProvider
@@ -96,6 +97,7 @@ router.delete("/deleteProvider/:id", deleteProvider);
 //////////////////////////////////packages////////////////////////////////////
 
 
+////////////////////////////////////////Car////////////////////////////////////
 
 
 router.get("/AddCarPackage", async(req, res) => {
@@ -110,7 +112,7 @@ router.post("/AddCarPackage", AddCarPackage);
 
 
 router.get("/abdelrahmaaaan", async(req, res) => {//m7desh yegeee gnbha na hzbotha (suezyy)
-  //ghyr rout ----get all packages 
+  //ghyr rout ----get all car packages 
   const packages = await getCarPackages();
   res.render("pages/AddCarPackage", {
     user: req.session.user === undefined ? "" : req.session.user,
@@ -128,16 +130,62 @@ router.get("/abdelrahmaaaan/:id", async(req, res) => {//m7desh yegeee gnbha na h
   });
 });
 
-router.get("/AddMedicalPackage", (req, res) => {
+//////////////////////////////////Medical///////////////////////////////////
+router.get("/AddMedicalPackage", async(req, res) => {
+  const providers = await getAllProviders();
   res.render("pages/AddMedicalPackage", {
     user: req.session.user === undefined ? "" : req.session.user,
+    providers:providers
+  });
+});
+router.post("/AddMedicalPackage", AddMedicalPackage);
+
+router.get("/abdelrahmaaaan", async(req, res) => {//m7desh yegeee gnbha na hzbotha (suezyy)
+  //ghyr rout ----get all car packages 
+  const packages = await getMedicalPackages();
+  res.render("pages/AddMedicalPackage", {
+    user: req.session.user === undefined ? "" : req.session.user,
+    packages:packages
   });
 });
 
-router.get("/AddLifePackage", (req, res) => {
-  res.render("pages/AddLifePackage", {
+router.get("/abdelrahmaaaan/:id", async(req, res) => {//m7desh yegeee gnbha na hzbotha (suezyy)
+  //specific package by id 
+  const packages = await getMedicalPackages(req.params.id);
+  res.render("pages/AddMedicalPackage", {
     user: req.session.user === undefined ? "" : req.session.user,
+    packages:packages
   });
 });
+
+////////////////////////life//////////////////////////////
+router.get("/AddLifePackage", async(req, res) => {
+  const providers = await getAllProviders();
+  res.render("pages/AddLifePackage", {
+    user: req.session.user === undefined ? "" : req.session.user,
+    providers:providers
+  });
+});
+router.post("/AddLifePackage", AddLifePackage);
+
+router.get("/abdelrahmaaaan", async(req, res) => {//m7desh yegeee gnbha na hzbotha (suezyy)
+  //ghyr rout ----get all car packages 
+  const packages = await getLifePackages();
+  res.render("pages/AddLifePackage", {
+    user: req.session.user === undefined ? "" : req.session.user,
+    packages:packages
+  });
+});
+
+
+router.get("/abdelrahmaaaan/:id", async(req, res) => {//m7desh yegeee gnbha na hzbotha (suezyy)
+  //specific package by id 
+  const packages = await getLifePackages(req.params.id);
+  res.render("pages/AddLifePackage", {
+    user: req.session.user === undefined ? "" : req.session.user,
+    packages:packages
+  });
+});
+
 
 export default router;
