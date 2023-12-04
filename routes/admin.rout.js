@@ -20,7 +20,7 @@ import {AddCarPackage,getCarPackages,AddLifePackage,getLifePackages,AddMedicalPa
 
 
 import {
-  addProviders,GETP,getAllProviders,deleteProvider
+  addProviders,GETP,getAllProviders,editprovider,editingprovider,deleteProvider
 } from "../controller/adminprovidercontrol.js";
 const router = Router();
 import bodyParser from 'body-parser';
@@ -91,7 +91,8 @@ router.get("/view&editproviders",GETP , (req, res) => {
   });
 });
 
-
+router.get("/editprovider/:id", editprovider);
+router.post("/editingprovider/:id", editingprovider);
 router.delete("/deleteProvider/:id", deleteProvider);
 
 //////////////////////////////////packages////////////////////////////////////

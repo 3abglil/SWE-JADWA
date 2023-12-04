@@ -99,6 +99,60 @@ const GETP = async (req, res) => {
   }
 };
 
+const editprovider = async (req, res) => {
+  try {
+    // Fetch the user from Supabase based on the provided ID
+    const { data, error } = await supabase
+      .from("Providers")
+      .select("id, name, image") // Adjust column names as per your database schema
+      .eq("id", req.params.id);
+
+    if (error) {
+      console.error("Error fetching user:", error);
+      return res.status(500).send("Internal Server Error");
+    }
+
+    if (data && data.length > 0) {
+      // Render the edituseradmin view with the user data
+      res.render("pages/editprovideradmin", {
+        provider: data[0],
+        user: req.session.user === undefined ? "" : req.session.user,
+      });
+    } else {
+      // User not found
+      res.status(404).send("User not found");
+    }
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+const editingprovider = async (req, res) => {
+  try {
+    const providerId = req.params.id;
+    const { name } = req.body;
+
+    const { data, error } = await supabase
+      .from("Providers")
+      .update({ name })
+      .eq("id", providerId);
+
+    if (error) {
+      console.error("Error updating provider:", error);
+      return res.status(500).send("Internal Server Error");
+    }
+
+    res.redirect("/admin/view&editproviders");
+  } catch (error) {
+    console.error("Error updating provider:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+
+
+
 // const deleteProvider = async (req, res) => {
 //   try {
 //     const providerId = req.params.id;
@@ -183,4 +237,4 @@ const deleteProvider = async (req, res) => {
 
 
 
-export { addProviders , getAllProviders, GETP , deleteProvider };
+export { addProviders , getAllProviders, GETP ,editprovider,editingprovider ,deleteProvider };
