@@ -149,53 +149,6 @@ const editingprovider = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
-
-
-
-
-// const deleteProvider = async (req, res) => {
-//   try {
-//     const providerId = req.params.id;
-
-//     // Fetch the provider details to get the image filename
-//     const { data: providerData, error: providerError } = await supabase
-//       .from('Providers')
-//       .select('name', 'image')
-//       .eq('id', providerId)
-//       .single(); // Ensure only one row is returned
-
-//     if (providerError) {
-//       throw new Error(providerError.message);
-//     }
-
-//     if (!providerData) {
-//       return res.status(404).send('Provider not found');
-//     }
-
-//     const { name, image } = providerData;
-
-//     // Delete the provider from the 'Providers' table
-//     const { error } = await supabase.from('Providers').delete().eq('id', providerId);
-
-//     if (error) {
-//       throw new Error(error.message);
-//     }
-
-//     // Unlink the associated image
-//     const imagePath = `./public/images/${name}.jpg`;
-//     await unlinkAsync(imagePath);
-
-//     res.redirect('/admin/view&editproviders'); // Redirect to the providers list page
-//   } catch (error) {
-//     console.error('Error:', error.message);
-//     res.status(500).send('An error occurred during provider deletion: ' + error.message);
-//   }
-// };
-
-
-
-
-
 const deleteProvider = async (req, res) => {
   try {
     const providerId = req.params.id;
@@ -203,38 +156,43 @@ const deleteProvider = async (req, res) => {
     // Fetch the provider details to get the name and image
     const { data: providerData, error: providerError } = await supabase
       .from('Providers')
-      .select('name', 'image')
+      .select("*")
       .eq('id', providerId)
       .single(); // Ensure only one row is returned
 
     if (providerError) {
       throw new Error(providerError.message);
     }
-
+console.log(providerData);
     if (!providerData) {
       return res.status(404).send('Provider not found');
     }
-
+    console.log("wslt hna");
     const { name, image } = providerData;
 
     // Delete the provider from the 'Providers' table
-    const { error: deleteError } = await supabase.from('Providers').delete().eq('id', providerId);
+    const { error: deleteError } = await supabase
+    .from("Providers")
+    .delete()
+    .eq("id", providerId);
 
     if (deleteError) {
       throw new Error(deleteError.message);
     }
-
+  
     // Unlink the associated image
-    const imagePath = `./public/images/${name}.jpg`; // Update the path if needed
-    await unlinkAsync(imagePath);
-
-    res.redirect('/admin/view&editproviders'); // Redirect to the product list page
+    const bee='./public/images/'+image; // Update the path if needed
+    fs.unlink(bee, (err) => {
+      if (err) {
+        throw new Error(err.message);
+      } // Redirect to the product list page
+    });
+    res.status(200).end();
   } catch (error) {
     console.error('Error:', error.message);
     res.status(500).send('An error occurred during provider deletion: ' + error.message);
   }
 };
-
 
 
 export { addProviders , getAllProviders, GETP ,editprovider,editingprovider ,deleteProvider };
