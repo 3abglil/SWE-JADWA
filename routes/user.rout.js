@@ -25,11 +25,7 @@ app.use(
 
 const router = Router();
 
-router.get('/viewprofile', async(req, res)=> {
-  res.render('pages/profile',{ user: (req.session.user === undefined ? "" : req.session.user) });
-});
 
-router.post("/edituser", editUserrr);
 
 router.post("/login", handlesignin);
 
@@ -48,6 +44,30 @@ router.post("/check-email", async (req, res) => {
   }
 });
 router.post("/checkEmail", checkEmail);
+
+
+
+router.use((req, res, next) => {
+  if (req.session.user !== undefined && (req.session.user.role === "A" ||req.session.user.role === "C") ) {
+    next();
+    console.log(req.session.user.role);
+  } else {
+    res.render("pages/err", {
+      err: "You must login first",
+      user: req.session.user === undefined ? "" : req.session.user,
+    });
+  }
+});
+
+
+router.get('/viewprofile', async(req, res)=> {
+  res.render('pages/profile',{ user: (req.session.user === undefined ? "" : req.session.user) });
+});
+
+router.post("/edituser", editUserrr);
+
+
+
 
 router.get("/logout", handleLogOut);
 

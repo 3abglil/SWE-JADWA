@@ -6,7 +6,7 @@ app.use(fileUpload());
 
 //import { handleAdminSignup,} from "../controller/applications.js";
 import {
-  GET,
+  display_all_users,
   deleteUser,
   handleAdminSignup,
   toAdmin,
@@ -15,7 +15,7 @@ import {
   editinguser,
 } from "../controller/adminusercontrol.js";
 
-import {AddCarPackage,getCarPackages,AddLifePackage,getLifePackages,AddMedicalPackage,getMedicalPackages
+import {AddCarPackage,getCarPackages,AddLifePackage,getLifePackages,AddMedicalPackage,getMedicalPackages,getAllPackages
 } from "../controller/adminpackagecontrol.js";
 
 
@@ -58,7 +58,7 @@ router.get("/adduser", (req, res) => {
   });
 });
 
-router.get("/view&edituser", GET, (req, res) => {
+router.get("/view&edituser", display_all_users, (req, res) => {
   res.render("pages/view&edituser", {
     user: req.session.user === undefined ? "" : req.session.user,
   });
@@ -96,6 +96,14 @@ router.post("/editingprovider/:id", editingprovider);
 router.delete("/deleteProvider/:id", deleteProvider);
 
 //////////////////////////////////packages////////////////////////////////////
+
+router.get("/view&editPackages",getAllPackages , (req, res) => {
+  res.render("pages/view&editPackages", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
+
+});
+
 
 
 ////////////////////////////////////////Car////////////////////////////////////

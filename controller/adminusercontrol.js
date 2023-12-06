@@ -69,7 +69,7 @@ const GetAllUsers = async (req, res) => {
 };
 
 
-const GET = async (req, res) => {
+const display_all_users = async (req, res) => {
   try {
     const users = await GetAllUsers();
     res.render("pages/view&edituser", {
@@ -201,7 +201,7 @@ const editinguser = async (req, res) => {
 };
 
 export {
-  GET,
+  display_all_users,
   deleteUser,
   handleAdminSignup,
   toAdmin,

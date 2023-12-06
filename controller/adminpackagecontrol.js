@@ -222,5 +222,47 @@ const getLifePackages = async (id) => {
 }
 
 
+const getAllPackages = async (req, res) => {
+  try {
+    // Select all car packages from the 'CarPackages' table
+    const { data: carPackagesData, error: carPackagesError } = await supabase.from("CarPackages").select("*");
 
-  export{AddCarPackage,getCarPackages,AddLifePackage,getLifePackages,getMedicalPackages,AddMedicalPackage}
+    // Select all medical packages from the 'MedicalPackages' table
+    const { data: medicalPackagesData, error: medicalPackagesError } = await supabase.from("MedicalPackages").select("*");
+
+    // Select all life packages from the 'LifePackages' table
+    const { data: lifePackagesData, error: lifePackagesError } = await supabase.from("LifePackages").select("*");
+
+    // Handle errors if any
+    if (carPackagesError) {
+      throw carPackagesError;
+    }
+
+    if (medicalPackagesError) {
+      throw medicalPackagesError;
+    }
+
+    if (lifePackagesError) {
+      throw lifePackagesError;
+    }
+
+    // Render the EJS template with the fetched data
+    res.render("pages/view&editPackages", {
+      carPackages: carPackagesData || [],
+      medicalPackages: medicalPackagesData || [],
+      lifePackages: lifePackagesData || [],
+    });
+
+  } catch (error) {
+    console.error("Error fetching packages:", error.message);
+    // Handle the error or send an error response
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+
+
+
+
+
+  export{AddCarPackage,getCarPackages,AddLifePackage,getLifePackages,getMedicalPackages,AddMedicalPackage ,getAllPackages}
