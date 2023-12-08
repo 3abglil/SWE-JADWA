@@ -61,7 +61,7 @@ const AddCarPackage = async (req, res) => {
       }
   
       if (creed) {
-        res.redirect("/admin/AddCarPackage");
+        res.redirect("/admin/view&editPackages");
       }
     } catch (error) {
       res.status(500).send("An error occurred during sign up: " + error.message);
@@ -88,6 +88,30 @@ const AddCarPackage = async (req, res) => {
       throw error;
     }
   }
+  const deleteCarPackages = async (req, res) =>  { 
+    try {
+      // Assuming you have the user's unique identifier, such as userId, in req.params.id
+      const packageId = req.params.id;
+  
+      // Use Supabase's delete method to remove the user based on their unique identifier
+      const { data, error } = await supabase
+        .from("CarPackages")
+        .delete()
+        .eq("id", packageId); // Assuming the field in your database is named 'id'
+  
+      if (error) {
+        throw new Error(error.message);
+      }
+  
+      
+      // User successfully deleted
+      res.status(200).end();
+    } catch (error) {
+      res.status(500).send("An error occurred during user deletion: " + error.message);
+      // Promise.resolve();
+    }
+  }
+
 
 /////////////////Medical//////////////////
 const AddMedicalPackage = async (req, res) => {
@@ -130,7 +154,7 @@ const AddMedicalPackage = async (req, res) => {
       }
   
       if (creed) {
-        res.redirect("/admin/AddMedicalPackage");
+        res.redirect("/admin/view&editPackages");
       }
     } catch (error) {
       res.status(500).send("An error occurred during sign up: " + error.message);
@@ -156,6 +180,31 @@ const AddMedicalPackage = async (req, res) => {
       throw error;
     }
   }
+
+  const deleteMedicalPackages = async (req, res) =>  { 
+    try {
+      // Assuming you have the user's unique identifier, such as userId, in req.params.id
+      const packageId = req.params.id;
+  
+      // Use Supabase's delete method to remove the user based on their unique identifier
+      const { data, error } = await supabase
+        .from("MedicalPackages")
+        .delete()
+        .eq("id", packageId); // Assuming the field in your database is named 'id'
+  
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      
+      // User successfully deleted
+      res.status(200).end();
+    } catch (error) {
+      res.status(500).send("An error occurred during user deletion: " + error.message);
+      // Promise.resolve();
+    }
+  }
+  
 
 /////////////////Life///////////////////
 const AddLifePackage = async (req, res) => {
@@ -194,7 +243,7 @@ const AddLifePackage = async (req, res) => {
       }
   
       if (creed) {
-        res.redirect("/admin/AddLifePackage");
+        res.redirect("/admin/view&editPackages");
       }
     } catch (error) {
       res.status(500).send("An error occurred during sign up: " + error.message);
@@ -221,7 +270,31 @@ const getLifePackages = async (id) => {
   }
 }
 
+const deleteLifePackages = async (req, res) =>  { 
+  try {
+    // Assuming you have the user's unique identifier, such as userId, in req.params.id
+    const packageId = req.params.id;
 
+    // Use Supabase's delete method to remove the user based on their unique identifier
+    const { data, error } = await supabase
+      .from("LifePackages")
+      .delete()
+      .eq("id", packageId); // Assuming the field in your database is named 'id'
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    
+    // User successfully deleted
+    res.status(200).end();
+  } catch (error) {
+    res.status(500).send("An error occurred during user deletion: " + error.message);
+    // Promise.resolve();
+  }
+}
+
+///////////////////////////////////////////////////////////////////////
 const getAllPackages = async (req, res) => {
   try {
     // Select all car packages from the 'CarPackages' table
@@ -265,4 +338,4 @@ const getAllPackages = async (req, res) => {
 
 
 
-  export{AddCarPackage,getCarPackages,AddLifePackage,getLifePackages,getMedicalPackages,AddMedicalPackage ,getAllPackages}
+  export{AddCarPackage,getCarPackages,deleteCarPackages,AddLifePackage,getLifePackages,deleteLifePackages,getMedicalPackages,deleteMedicalPackages,AddMedicalPackage ,getAllPackages}

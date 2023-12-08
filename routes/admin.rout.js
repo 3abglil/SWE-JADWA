@@ -15,7 +15,8 @@ import {
   editinguser,
 } from "../controller/adminusercontrol.js";
 
-import {AddCarPackage,getCarPackages,AddLifePackage,getLifePackages,AddMedicalPackage,getMedicalPackages,getAllPackages
+import {AddCarPackage,getCarPackages,deleteCarPackages,AddLifePackage,getLifePackages,deleteLifePackages,
+  AddMedicalPackage,getMedicalPackages,deleteMedicalPackages,getAllPackages
 } from "../controller/adminpackagecontrol.js";
 
 
@@ -139,6 +140,10 @@ router.get("/abdelrahmaaaan/:id", async(req, res) => {//m7desh yegeee gnbha na h
   });
 });
 
+
+router.delete("/deleteCarPackages/:id", deleteCarPackages);
+
+
 //////////////////////////////////Medical///////////////////////////////////
 router.get("/AddMedicalPackage", async(req, res) => {
   const providers = await getAllProviders();
@@ -148,6 +153,13 @@ router.get("/AddMedicalPackage", async(req, res) => {
   });
 });
 router.post("/AddMedicalPackage", AddMedicalPackage);
+
+
+
+
+
+
+
 
 router.get("/abdelrahmaaaan", async(req, res) => {//m7desh yegeee gnbha na hzbotha (suezyy)
   //ghyr rout ----get all car packages 
@@ -166,6 +178,11 @@ router.get("/abdelrahmaaaan/:id", async(req, res) => {//m7desh yegeee gnbha na h
     packages:packages
   });
 });
+
+
+router.delete("/deleteMedicalPackages/:id", deleteMedicalPackages);
+
+
 
 ////////////////////////life//////////////////////////////
 router.get("/AddLifePackage", async(req, res) => {
@@ -195,6 +212,8 @@ router.get("/abdelrahmaaaan/:id", async(req, res) => {//m7desh yegeee gnbha na h
     packages:packages
   });
 });
+
+router.delete("/deleteLifePackages/:id", deleteLifePackages);
 
 
 export default router;
