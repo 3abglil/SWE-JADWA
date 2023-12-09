@@ -28,7 +28,7 @@
                 <th>Type</th>
                 <th>Name</th>
                 <th>Price</th>
-                <th>Provider Id</th>
+                <th>Provider Name</th>
                 <th colspan="2">Action</th>
               </tr>
             </thead>
@@ -53,10 +53,13 @@
                   </td>
                   <td class="people-des">
                     <p name="name">
-                      <%= Packages.providerid %>
-                      <!-- provider id -->
+                      <%= Packages.Providers.name %>
+                      <!-- provider name -->
                     </p>
                   </td>
+                  <script>
+                    // console.log("Provider Object for Package <%= Packages.id %>: ",  JSON.stringify(Packages.provider));
+                  </script>
                   <td class="edit"><a href="/admin/editCarPackages/<%=Packages.id%>">Edit</a></td>
                   <td class="edit"> <a href="/admin" onclick="return deleteCarPackages('<%=Packages.id%>');">Delete</a></td>
                 </tr>
@@ -83,7 +86,7 @@
                 <th>Type</th>
                 <th>Name</th>
                 <th>Price</th>
-                <th>Provider Id</th>
+                <th>Provider Name</th>
                 <th colspan="2">Action</th>
               </tr>
             </thead>
@@ -108,8 +111,8 @@
                   </td>
                   <td class="people-des">
                     <p name="name">
-                      <%= Packages.providerid %>
-                      <!-- provider id -->
+                      <%= Packages.Providers.name %>
+                      <!-- provider name -->
                     </p>
                   </td>
                   <td class="edit"><a href="/admin/editMedicalPackages/<%=Packages.id%>">Edit</a></td>
@@ -137,7 +140,7 @@
                 <th>Type</th>
                 <th>Name</th>
                 <th>Price</th>
-                <th>Provider Id</th>
+                <th>Provider Name</th>
                 <th colspan="2">Action</th>
               </tr>
             </thead>
@@ -162,8 +165,8 @@
                   </td>
                   <td class="people-des">
                     <p name="name">
-                      <%= Packages.providerid %>
-                      <!-- provider id -->
+                      <%= Packages.Providers.name %>
+                      <!-- provider name -->
                     </p>
                   </td>
                   <td class="edit"><a href="/admin/editLifePackages/<%=Packages.id%>">Edit</a></td>

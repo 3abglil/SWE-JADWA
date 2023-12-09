@@ -510,15 +510,16 @@ const getAllPackages = async (req, res) => {
     .select("*, Providers(id,name)")
 
     // Select all medical packages from the 'MedicalPackages' table
-    const { data: medicalPackagesData, error: medicalPackagesError } = await supabase.from("MedicalPackages").select("*");
+    const { data: medicalPackagesData, error: medicalPackagesError } = await supabase.from("MedicalPackages").select("*,Providers(id,name)");
 
     // Select all life packages from the 'LifePackages' table
-    const { data: lifePackagesData, error: lifePackagesError } = await supabase.from("LifePackages").select("*");
+    const { data: lifePackagesData, error: lifePackagesError } = await supabase.from("LifePackages").select("*,Providers(id,name)");
 
     // Handle errors if any
     if (carPackagesError) {
       throw carPackagesError;
     }
+    console.log("Car Packages Data:", carPackagesData);
 
     if (medicalPackagesError) {
       throw medicalPackagesError;
