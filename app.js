@@ -56,10 +56,11 @@ app.use("/user", user_Router);
 app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
+  let error = res.locals.error
   res.status(err.status || 500);
   res.render("pages/err" , {
     user: req.session.user === undefined ? "" : req.session.user,
-  } , {err : req.locals.error});
+  } , {err : "HELLO"});
 });
 
 // 404 page if ml2ash el page
@@ -118,6 +119,6 @@ export default app;
 
 // // ... additional routes and server configuration
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
+// app.listen(3000, () => {
+//   console.log('Server is running on port 3000');
+// });

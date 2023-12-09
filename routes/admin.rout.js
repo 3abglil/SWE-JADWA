@@ -21,7 +21,12 @@ import {AddCarPackage,getCarPackages,deleteCarPackages,AddLifePackage,getLifePac
 
 
 import {
-  addProviders,GETP,getAllProviders,editprovider,editingprovider,deleteProvider
+  addProviders,GETP,getAllProviders,editprovider,editingprovider,deleteProvider 
+  , 
+  editproviderdata,
+  GetProviderImage,
+  updatedata,
+  updataimage
 } from "../controller/adminprovidercontrol.js";
 const router = Router();
 import bodyParser from 'body-parser';
@@ -85,6 +90,25 @@ router.get("/addproviders", (req, res) => {
 });
 
 router.post("/addproviders",addProviders);
+//upload.single('providerLogo'),addProviders
+
+router.post("/epg/:id",updataimage);
+
+router.post("/epd/:id",updatedata);
+
+
+
+router.get("/editprovider/:id", GetProviderImage );
+  
+
+router.get("/editproviderdata/:id" , editproviderdata  );
+
+
+
+router.get("/AddCarPackage", (req, res) => {
+  res.render("pages/AddCarPackage" , {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });});
 
 router.get("/view&editproviders",GETP , (req, res) => {
   res.render("pages/view&editproviders", {
