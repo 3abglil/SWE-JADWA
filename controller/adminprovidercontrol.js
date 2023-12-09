@@ -195,4 +195,81 @@ console.log(providerData);
 };
 
 
-export { addProviders , getAllProviders, GETP ,editprovider,editingprovider ,deleteProvider };
+const editproviderdata = async (req, res) => {
+  try {
+   
+    const { data, error } = await supabase
+      .from("Providers")
+      .select("*")
+      .eq("id", req.params.id);
+
+    if (error) {
+      console.error("Error fetching product:", error);
+      return res.status(500).send("Internal Server Error");
+    }
+
+    if (data && data.length > 0) {
+      res.render("pages/editproviderdata", {
+        ProvData: data[0],
+        user: req.session.user === undefined ? "" : req.session.user,
+      });
+     
+    } else {
+      res.status(404).send("User not found");
+    }
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+const GetProviderImage = async (req, res) => {
+  try {
+   
+    const { data, error } = await supabase
+      .from("Providers")
+      .select("*")
+      .eq("id", req.params.id);
+
+    if (error) {
+      console.error("Error fetching product:", error);
+      return res.status(500).send("Internal Server Error");
+    }
+
+    if (data && data.length > 0) {
+      res.render("pages/editprovider", {
+        ProvData: data[0],
+        user: req.session.user === undefined ? "" : req.session.user,
+      });
+     
+    } else {
+      res.status(404).send("User not found");
+    }
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+const updataimage = async (req, res) => {
+
+
+
+    const { data, error } = await supabase
+    .from("Providers")
+    .update({ image: req.body.image })
+    .eq("id", req.params.id);
+
+    res.redirect(req.get('referer'));
+
+};
+const updatedata = async (req, res) => {
+
+    const { data, error } = await supabase
+    .from("Providers")
+    .update({ name: req.body.name , email: req.body.email , phone: req.body.phone })
+    .eq("id", req.params.id);
+
+    res.redirect(req.get('referer'));
+};
+export { addProviders,editproviderdata, GetProviderImage , updataimage , updatedata, getAllProviders, GETP ,editprovider,editingprovider ,deleteProvider };
