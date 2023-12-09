@@ -478,9 +478,6 @@ const editLifePackage = async (req, res) => {
 
 
 
-
-
-
 const deleteLifePackages = async (req, res) =>  { 
   try {
     // Assuming you have the user's unique identifier, such as userId, in req.params.id
@@ -509,7 +506,8 @@ const deleteLifePackages = async (req, res) =>  {
 const getAllPackages = async (req, res) => {
   try {
     // Select all car packages from the 'CarPackages' table
-    const { data: carPackagesData, error: carPackagesError } = await supabase.from("CarPackages").select("*");
+    const { data: carPackagesData, error: carPackagesError } = await supabase.from("CarPackages")
+    .select("*, Providers(id,name)")
 
     // Select all medical packages from the 'MedicalPackages' table
     const { data: medicalPackagesData, error: medicalPackagesError } = await supabase.from("MedicalPackages").select("*");
