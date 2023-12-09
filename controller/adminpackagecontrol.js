@@ -88,6 +88,73 @@ const AddCarPackage = async (req, res) => {
       throw error;
     }
   }
+  const get_car_to_edit = async (req, res) => {
+    try {
+      // Fetch the product from Supabase based on the provided ID
+      const { data, error } = await supabase
+        .from("CarPackages")
+        .select("*")
+        .eq("id", req.params.id);
+  
+      if (error) {
+        console.error("Error fetching product:", error);
+        return res.status(500).send("Internal Server Error");
+      }
+  
+      if (data && data.length > 0) {
+        // Render the editprod view with the product data
+        res.render("pages/editCarPackages", {
+          car: data[0],
+          user: req.session.user === undefined ? "" : req.session.user,
+        });
+      } else {
+        // Product not found
+        res.status(404).send("User not found");
+      }
+    } catch (error) {
+      console.error("Error fetching product:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  };
+
+  const editCarPackage = async (req, res) => {
+    try {
+      const PackageId = req.params.id;
+      const {price, Dfixing, COinsurance, AgencyCOinsurance, Roadside_Assistance, Personal_Accident, Civil_Liability, Police_Report } = req.body;
+  
+      const { data: existingPackage, error } = await supabase
+        .from("CarPackages")
+        .update({
+          price,
+          Dfixing,
+          COinsurance,
+          AgencyCOinsurance,
+          Roadside_Assistance,
+          Personal_Accident,
+          Civil_Liability,
+          Police_Report,
+        })
+        .eq("id", PackageId)
+        .select();
+  
+      if (error) {
+        throw new Error(error.message);
+      }
+  
+      if (!existingPackage || existingPackage.length < 1) {
+        return res.status(400).send("Car package does not exist");
+      }
+  
+      res.redirect("/admin/view&editPackages");
+    } catch (error) {
+      res.status(500).send("An error occurred during update: " + error.message);
+    }
+  };
+
+
+
+
+
   const deleteCarPackages = async (req, res) =>  { 
     try {
       // Assuming you have the user's unique identifier, such as userId, in req.params.id
@@ -181,6 +248,79 @@ const AddMedicalPackage = async (req, res) => {
     }
   }
 
+  const get_Med_to_edit = async (req, res) => {
+    try {
+      // Fetch the product from Supabase based on the provided ID
+      const { data, error } = await supabase
+        .from("MedicalPackages")
+        .select("*")
+        .eq("id", req.params.id);
+  
+      if (error) {
+        console.error("Error fetching product:", error);
+        return res.status(500).send("Internal Server Error");
+      }
+  
+      if (data && data.length > 0) {
+        // Render the editprod view with the product data
+        res.render("pages/editMedicalPackages", {
+          Med: data[0],
+          user: req.session.user === undefined ? "" : req.session.user,
+        });
+      } else {
+        // Product not found
+        res.status(404).send("User not found");
+      }
+    } catch (error) {
+      console.error("Error fetching product:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  };
+
+  const editMedicalPackage = async (req, res) => {
+    try {
+      const PackageId = req.params.id;
+
+      const {price, HospitalizationAndSurgery, Emergency, Medication_Coverage, Clinics_Coverage, XrayAndScans, Maternity_Coverage, Dental_Coverage, Optical_Coverage, Preexisting_Conditions } = req.body;
+  
+     
+      const { data: existingPackage, error } = await supabase
+        .from("MedicalPackages")
+        .update({
+          price,
+          HospitalizationAndSurgery,
+          Emergency,
+          Medication_Coverage,
+          Clinics_Coverage,
+          XrayAndScans,
+          Maternity_Coverage,
+          Dental_Coverage,
+          Optical_Coverage,
+          Preexisting_Conditions,
+        })
+        .eq("id", PackageId)
+        .select();
+  
+      if (error) {
+        throw new Error(error.message);
+      }
+  
+      if (!existingPackage || existingPackage.length < 1) {
+        return res.status(400).send("Medical package does not exist");
+      }
+  
+      res.redirect("/admin/view&editPackages");
+    } catch (error) {
+      res.status(500).send("An error occurred during update: " + error.message);
+    }
+  };
+
+
+
+
+
+
+
   const deleteMedicalPackages = async (req, res) =>  { 
     try {
       // Assuming you have the user's unique identifier, such as userId, in req.params.id
@@ -270,6 +410,77 @@ const getLifePackages = async (id) => {
   }
 }
 
+const get_Life_to_edit = async (req, res) => {
+  try {
+    // Fetch the product from Supabase based on the provided ID
+    const { data, error } = await supabase
+      .from("LifePackages")
+      .select("*")
+      .eq("id", req.params.id);
+
+    if (error) {
+      console.error("Error fetching product:", error);
+      return res.status(500).send("Internal Server Error");
+    }
+
+    if (data && data.length > 0) {
+      // Render the editprod view with the product data
+      res.render("pages/editLifePackages", {
+        Life: data[0],
+        user: req.session.user === undefined ? "" : req.session.user,
+      });
+    } else {
+      // Product not found
+      res.status(404).send("User not found");
+    }
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+
+const editLifePackage = async (req, res) => {
+  try {
+    const PackageId = req.params.id;
+
+    const {price, Income, Marriage, Starting_Career, Retirement, Age, Taxes } = req.body;
+
+   
+    const { data: existingPackage, error } = await supabase
+      .from("LifePackages")
+      .update({
+        price,
+        Income,
+        Marriage,
+        Starting_Career,
+        Retirement,
+        Age,
+        Taxes
+      })
+      .eq("id", PackageId)
+      .select();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    if (!existingPackage || existingPackage.length < 1) {
+      return res.status(400).send("Medical package does not exist");
+    }
+
+    res.redirect("/admin/view&editPackages");
+  } catch (error) {
+    res.status(500).send("An error occurred during update: " + error.message);
+  }
+};
+
+
+
+
+
+
+
 const deleteLifePackages = async (req, res) =>  { 
   try {
     // Assuming you have the user's unique identifier, such as userId, in req.params.id
@@ -338,4 +549,7 @@ const getAllPackages = async (req, res) => {
 
 
 
-  export{AddCarPackage,getCarPackages,deleteCarPackages,AddLifePackage,getLifePackages,deleteLifePackages,getMedicalPackages,deleteMedicalPackages,AddMedicalPackage ,getAllPackages}
+  export{AddCarPackage,getCarPackages,get_car_to_edit,editCarPackage,deleteCarPackages,
+    AddLifePackage,getLifePackages,deleteLifePackages,get_Life_to_edit,editLifePackage,
+    getMedicalPackages,deleteMedicalPackages,AddMedicalPackage,get_Med_to_edit,editMedicalPackage ,
+    getAllPackages}

@@ -15,9 +15,10 @@ import {
   editinguser,
 } from "../controller/adminusercontrol.js";
 
-import {AddCarPackage,getCarPackages,deleteCarPackages,AddLifePackage,getLifePackages,deleteLifePackages,
-  AddMedicalPackage,getMedicalPackages,deleteMedicalPackages,getAllPackages
-} from "../controller/adminpackagecontrol.js";
+import {AddCarPackage,getCarPackages,get_car_to_edit,editCarPackage,deleteCarPackages,
+  AddLifePackage,getLifePackages,get_Life_to_edit,editLifePackage,deleteLifePackages,
+  AddMedicalPackage,getMedicalPackages,get_Med_to_edit,editMedicalPackage,deleteMedicalPackages,
+  getAllPackages} from "../controller/adminpackagecontrol.js";
 
 
 import {
@@ -141,6 +142,11 @@ router.get("/abdelrahmaaaan/:id", async(req, res) => {//m7desh yegeee gnbha na h
 });
 
 
+
+
+router.get("/editCarPackages/:id", get_car_to_edit);
+router.post("/editCarPackage/:id",editCarPackage)
+
 router.delete("/deleteCarPackages/:id", deleteCarPackages);
 
 
@@ -180,6 +186,10 @@ router.get("/abdelrahmaaaan/:id", async(req, res) => {//m7desh yegeee gnbha na h
 });
 
 
+
+router.get("/editMedicalPackages/:id", get_Med_to_edit);
+router.post("/editMedicalPackage/:id",editMedicalPackage)
+
 router.delete("/deleteMedicalPackages/:id", deleteMedicalPackages);
 
 
@@ -212,6 +222,11 @@ router.get("/abdelrahmaaaan/:id", async(req, res) => {//m7desh yegeee gnbha na h
     packages:packages
   });
 });
+
+
+
+router.get("/editLifePackages/:id", get_Life_to_edit);
+router.post("/editLifePackage/:id",editLifePackage)
 
 router.delete("/deleteLifePackages/:id", deleteLifePackages);
 

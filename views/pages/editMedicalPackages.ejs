@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add product</title>
+
+  <!-- Box Icons  -->
+  <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+  <!-- Styles  -->
+  <link rel="stylesheet" href="/css/adminDashboard.css" />
+</head>
+
+<body>
+  <%- include('../partials/aside.ejs')%>
+
+
+    <!-- add prod -->
+    <section class="home">
+        <div class="container">
+            <div class="right">
+                <h2 id="j">Edit Medical Packages</h2>
+                <form action="/admin/editMedicalPackage/<%=Med.id%>" method="post">
+                    price:
+                    <input type="text" name="price" class="field" value="<%=Med.price%>" />
+                    HospitalizationAndSurgery:
+                    <input type="text" name="HospitalizationAndSurgery" class="field" value="<%=Med.HospitalizationAndSurgery%>" />
+                    Emergency:
+                    <input type="text" name="Emergency" class="field" value="<%=Med.Emergency%>"  />
+                    Medication_Coverage:
+                    <input type="text" name="Medication_Coverage" class="field"value="<%=Med.Medication_Coverage%>" />
+                    Clinics_Coverage:
+                    <input type="text" name="Clinics_Coverage" class="field" value="<%=Med.Clinics_Coverage%>" />
+                    XrayAndScans_Coverage:
+                    <input type="text" name="XrayAndScans" class="field" value="<%=Med.XrayAndScans%>" />
+                    Maternity_Coverage:
+                    <input type="text" name="Maternity_Coverage" class="field" value="<%=Med.Maternity_Coverage%>" />
+                    Dental_Coverage:
+                    <input type="text" name="Dental_Coverage" class="field"value="<%=Med.Dental_Coverage%>" />
+                    Optical_Coverage:
+                    <input type="text" name="Optical_Coverage" class="field" value="<%=Med.Optical_Coverage%>" />
+                    Preexisting_Conditions:
+                    <input type="text" name="Preexisting_Conditions" class="field" value="<%=Med.Preexisting_Conditions%>" />
+                    
+                    <input type="submit" class="btn" value="Edit">
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Link JS -->
+    <script src="/js/adminDashboard.js"></script>
+
+</body>
+
+</html>
