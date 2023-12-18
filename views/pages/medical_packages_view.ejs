@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>packages</title>
+  <link rel="stylesheet" href="./css/packages_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+  <header id="abth"><%- include('../partials/header')%></header>
+  <div class="pricing-table">
+    <% if (package.length> 0) { %>
+      <% package.forEach(p=> { %>
+        <div class="pricing-card">
+          <h3 class="pricing-card-header">
+            <%=p.type%>
+          </h3>
+          <div class="price">
+            <%=p.price%><sup>EGP</sup><span>/year</span>
+          </div>
+          <ul>
+            <% if (p.Emergency=="yes" ) { %>
+              <li><i class="fas fa-check"></i> Emergency</li>
+              <% } else { %>
+                <li><i class="fas fa-times"></i> Emergency</li>
+                <% } %>
+            <% if (p.HospitalizationAndSurgery=="yes" ) { %>
+              <li><i class="fas fa-check"></i> Hospitalization And Surgery</li>
+              <% } else { %>
+                <li><i class="fas fa-times"></i> Hospitalization And Surgery</li>
+                <% } %>
+            <% if (p.Optical_Coverage=="yes" ) { %>
+              <li><i class="fas fa-check"></i> Optical Coverage</li>
+            <% } else { %>
+              <li><i class="fas fa-times"></i> Optical Coverage</li>
+            <% } %>
+            <% if (p.Maternity_Coverage=="yes" ) { %>
+              <li><i class="fas fa-check"></i> Maternity Coverage</li>
+                <% } else { %>
+                <li><i class="fas fa-times"></i> Maternity Coverage</li>
+                                  <% } %>
+                                    <% if (p.Dental_Coverage=="yes" ) { %>
+                                      <li><i class="fas fa-check"></i> Dental Coverage</li>
+                                      <% } else { %>
+                                        <li><i class="fas fa-times"></i> Dental Coverage</li>
+                                        <% } %>
+                                          <% if (p.Medication_Coverage=="yes" ) { %>
+                                            <li><i class="fas fa-check"></i> Medication Coverage</li>
+                                            <% } else { %>
+                                              <li><i class="fas fa-times"></i> Medication Coverage</li>
+                                              <% } %>
+                                                <% if (p.XrayAndScans=="yes" ) { %>
+                                                  <li><i class="fas fa-check"></i> Xray And Scans</li>
+                                                  <% } else { %>
+                                                    <li><i class="fas fa-times"></i> Xray And Scans</li>
+                                                    <% } %>
+                                                      <% if (p.Clinics_Coverage=="yes" ) { %>
+                                                        <li><i class="fas fa-check"></i> Clinics Coverage</li>
+                                                        <% } else { %>
+                                                          <li><i class="fas fa-times"></i> Clinics Coverage</li>
+                                                          <% } %>
+                                                            <% if (p.Preexisting_Conditions=="yes" ) { %>
+                                                              <li><i class="fas fa-check"></i> Preexisting Conditions
+                                                              </li>
+                                                              <% } else { %>
+                                                                <li><i class="fas fa-times"></i> Preexisting Conditions
+                                                                </li>
+                                                                <% } %>
+          </ul>
+          </ul>
+          <a href="#" class="order-btn">Order now</a>
+        </div>
+        <% }) %>
+          <% } else { %>
+            <p>There are no Medical Packages to display...</p>
+            <% } %>
+  </div>
+</body>
+<footer id="fff"> <%- include('../partials/footer'); %></footer>
+
+</html>

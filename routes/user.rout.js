@@ -63,9 +63,22 @@ router.use((req, res, next) => {
 router.get('/viewprofile', async(req, res)=> {
   res.render('pages/profile',{ user: (req.session.user === undefined ? "" : req.session.user) });
 });
-
+router.get("/car", async (req, res) => {
+  res.render("pages/car_insurance", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
+});
+router.get("/medical", async (req, res) => {
+  res.render("pages/medical_insurance", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
+});
+router.get("/life", async (req, res) => {
+  res.render("pages/life_incurance", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
+});
 router.post("/edituser", editUserrr);
-
 
 
 
