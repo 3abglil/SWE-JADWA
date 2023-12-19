@@ -1,14 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser";
 import session from "express-session";
-import path from "path";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
 import fs from 'fs/promises'; // Using fs.promises for async file operations
 import { promisify } from 'util';
 const unlinkAsync = promisify(fs.unlink);
-
 const app = express();
+import providerDatabase from './Provider_Class.js';
+const database=new providerDatabase();
 
 // Other middleware configurations
 app.use(express.urlencoded({ extended: false }));
@@ -26,167 +24,102 @@ app.use(
   })
 );
 
-import supabase from "../models/database.js";
+// import supabase from "../models/database.js";
 
-//HAMADAAA
+// Controller function
 const addProviders = async (req, res) => {
   try {
-    console.log("Before Supabase Insert");
     const providerName = req.body.name;
-    // const providerLogo = req.files;
     let imgFile;
     let uploadPath;
     let vall;
-    if (req.files !== null) {
-      if (Object.keys(req.files).length !== 0) {
-        imgFile = req.files.logo;
 
-        uploadPath = "./public/images/" + providerName + ".jpg";
-        // Use the mv() method to place the file somewhere on your server
-        imgFile.mv(uploadPath, function (err) {
-          if (err) return res.status(500).send(err);
-        });
-        vall = providerName + ".jpg";
-      }
+    if (req.files !== null && Object.keys(req.files).length !== 0) {
+      imgFile = req.files.logo;
+      uploadPath = "./public/images/" + providerName + ".jpg";
+
+      // Use the mv() method to place the file somewhere on your server
+      imgFile.mv(uploadPath, function (err) {
+        if (err) return res.status(500).send(err);
+      });
+
+      vall = providerName + ".jpg";
     }
-  
-    // Insert the new provider into the 'Providers' table
-    console.log(req.body);
-    const { data, error } = await supabase.from("Providers").insert([
-      {
-        name: providerName,
-        image: vall,
-      },
-    ]);
-    console.log("After Supabase Insert");
-    if (error) {
-      throw new Error(error.message);
+
+    // Call the class method to handle the insertion
+    const isAdded = await database.addProviders(providerName, vall);
+
+    if (!isAdded) {
+      return res.status(500).send('Internal Server Error');
     }
+
     res.redirect("/admin/view&editproviders");
   } catch (error) {
-    console.error("Error:", error.message);
-    res
-      .status(500)
-      .send("An error occurred during adding provider: " + error.message);
+    console.error('Error:', error.message);
+    res.status(500).send('An error occurred during adding provider: ' + error.message);
   }
 };
 
+
+// Controller function
 const getAllProviders = async (req, res) => {
   try {
-    // Select all providers from the 'Poviders' table
-    const { data, error } = await supabase.from("Providers").select("*");
+    // Call the class method to handle fetching all providers
+    const providers = await database.getAllProviders(req,res);
 
-    if (error) {
-      throw error;
+    // Check if providers were successfully fetched
+    if (!providers) {
+      return res.status(500).send('Internal Server Error');
     }
 
-    return data;
+    // Render or send the response as needed
+    res.render('pages/allproviders', { providers });
   } catch (error) {
-    console.error("Error fetching Providers:", error.message);
-    throw error;
+    console.error('Error fetching Providers:', error.message);
+    res.status(500).send('Internal Server Error');
   }
-}
+};
 
 const GETP = async (req, res) => {
   try {
-    const providers = await getAllProviders();
-    res.render("pages/view&editproviders", {
+    const providers = await database.getAllProviders(req,res);
+console.log(providers)   
+ res.render("pages/view&editproviders", {
       providers: providers,
       user: req.session.user === undefined ? "" : req.session.user,
+  
     });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
-  }
-};
-
-const editprovider = async (req, res) => {
-  try {
-    // Fetch the user from Supabase based on the provided ID
-    const { data, error } = await supabase
-      .from("Providers")
-      .select("id, name, image") // Adjust column names as per your database schema
-      .eq("id", req.params.id);
-
-    if (error) {
-      console.error("Error fetching user:", error);
-      return res.status(500).send("Internal Server Error");
-    }
-
-    if (data && data.length > 0) {
-      // Render the edituseradmin view with the user data
-      res.render("pages/editprovideradmin", {
-        provider: data[0],
-        user: req.session.user === undefined ? "" : req.session.user,
-      });
-    } else {
-      // User not found
-      res.status(404).send("User not found");
-    }
-  } catch (error) {
-    console.error("Error fetching user:", error);
     res.status(500).send("Internal Server Error");
   }
 };
 
 const editingprovider = async (req, res) => {
-  try {
+  
     const providerId = req.params.id;
     const { name } = req.body;
 
-    const { data, error } = await supabase
-      .from("Providers")
-      .update({ name })
-      .eq("id", providerId);
+    const isedited = await database.editingprovider(providerId,name)
 
-    if (error) {
-      console.error("Error updating provider:", error);
+    if (!isedited) {
       return res.status(500).send("Internal Server Error");
     }
 
     res.redirect("/admin/view&editproviders");
-  } catch (error) {
-    console.error("Error updating provider:", error);
-    res.status(500).send("Internal Server Error");
   }
-};
+
+// Controller function
 const deleteProvider = async (req, res) => {
   try {
     const providerId = req.params.id;
 
-    // Fetch the provider details to get the name and image
-    const { data: providerData, error: providerError } = await supabase
-      .from('Providers')
-      .select("*")
-      .eq('id', providerId)
-      .single(); // Ensure only one row is returned
+    // Call the class method to handle the deletion
+    const isDeleted = await database.deleteProvider(providerId);
 
-    if (providerError) {
-      throw new Error(providerError.message);
+    if (!isDeleted) {
+      return res.status(500).send('Internal Server Error');
     }
-console.log(providerData);
-    if (!providerData) {
-      return res.status(404).send('Provider not found');
-    }
-    console.log("wslt hna");
-    const { name, image } = providerData;
 
-    // Delete the provider from the 'Providers' table
-    const { error: deleteError } = await supabase
-    .from("Providers")
-    .delete()
-    .eq("id", providerId);
-
-    if (deleteError) {
-      throw new Error(deleteError.message);
-    }
-  
-    // Unlink the associated image
-    const bee='./public/images/'+image; // Update the path if needed
-    fs.unlink(bee, (err) => {
-      if (err) {
-        throw new Error(err.message);
-      } // Redirect to the product list page
-    });
     res.status(200).end();
   } catch (error) {
     console.error('Error:', error.message);
@@ -194,82 +127,84 @@ console.log(providerData);
   }
 };
 
-
+// Controller function
 const editproviderdata = async (req, res) => {
   try {
-   
-    const { data, error } = await supabase
-      .from("Providers")
-      .select("*")
-      .eq("id", req.params.id);
+    // Call the class method to handle fetching provider data
+    const providerData = await database.editproviderdata(req.params.id);
 
-    if (error) {
-      console.error("Error fetching product:", error);
-      return res.status(500).send("Internal Server Error");
+    if (!providerData) {
+      return res.status(404).send('Provider not found');
     }
 
-    if (data && data.length > 0) {
-      res.render("pages/editproviderdata", {
-        ProvData: data[0],
-        user: req.session.user === undefined ? "" : req.session.user,
-      });
-     
-    } else {
-      res.status(404).send("User not found");
-    }
+    res.render('pages/editproviderdata', {
+      ProvData: providerData,
+      user: req.session.user === undefined ? '' : req.session.user,
+    });
   } catch (error) {
-    console.error("Error fetching product:", error);
-    res.status(500).send("Internal Server Error");
+    console.error('Error fetching provider data:', error);
+    res.status(500).send('Internal Server Error');
   }
 };
 
+
+// Controller function
 const GetProviderImage = async (req, res) => {
   try {
-   
-    const { data, error } = await supabase
-      .from("Providers")
-      .select("*")
-      .eq("id", req.params.id);
+    // Call the class method to handle fetching provider image
+    const providerData = await database.GetProviderImage(req.params.id);
 
-    if (error) {
-      console.error("Error fetching product:", error);
-      return res.status(500).send("Internal Server Error");
+    if (!providerData) {
+      return res.status(404).send('Provider not found');
     }
 
-    if (data && data.length > 0) {
-      res.render("pages/editprovider", {
-        ProvData: data[0],
-        user: req.session.user === undefined ? "" : req.session.user,
-      });
-     
-    } else {
-      res.status(404).send("User not found");
-    }
+    res.render('pages/editprovider', {
+      ProvData: providerData,
+      user: req.session.user === undefined ? '' : req.session.user,
+    });
   } catch (error) {
-    console.error("Error fetching product:", error);
-    res.status(500).send("Internal Server Error");
+    console.error('Error fetching provider image:', error);
+    res.status(500).send('Internal Server Error');
   }
 };
 
-const updataimage = async (req, res) => {
 
+// Controller function
+const updateimage = async (req, res) => {
+  try {
+    // Call the class method to handle updating the provider image
+    const isUpdated = await database.updateimage(req.params.id, req.body.image);
 
-
-    const { data, error } = await supabase
-    .from("Providers")
-    .update({ image: req.body.image })
-    .eq("id", req.params.id);
+    if (!isUpdated) {
+      return res.status(500).send('Internal Server Error');
+    }
 
     res.redirect(req.get('referer'));
-
+  } catch (error) {
+    console.error('Error updating provider image:', error);
+    res.status(500).send('Internal Server Error');
+  }
 };
+
+// Controller function
 const updatedata = async (req, res) => {
+  try {
+    // Call the class method to handle updating provider data
+    const isUpdated = await database.updatedata(req.params.id, {
+      name: req.body.name,
+      email: req.body.email,
+      phone: req.body.phone,
+    });
 
-    const { data, error } = await supabase
-    .from("Providers")
-    .update({ name: req.body.name , email: req.body.email , phone: req.body.phone })
-    .eq("id", req.params.id);
+    if (!isUpdated) {
+      return res.status(500).send('Internal Server Error');
+    }
 
     res.redirect(req.get('referer'));
+  } catch (error) {
+    console.error('Error updating provider data:', error);
+    res.status(500).send('Internal Server Error');
+  }
 };
-export { addProviders,editproviderdata, GetProviderImage , updataimage , updatedata, getAllProviders, GETP ,editprovider,editingprovider ,deleteProvider };
+
+export { addProviders,editproviderdata, GetProviderImage , updateimage , updatedata, getAllProviders, GETP ,editingprovider ,deleteProvider };

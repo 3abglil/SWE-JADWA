@@ -17,102 +17,51 @@ app.use(
     saveUninitialized: false,
   })
 );
+import packagesDatabase from './Packages_class.js';
 
-import supabase from "../models/database.js";
+const database=new packagesDatabase();
 
 
 ////////////////////Car///////////////////////
 
+
 const AddCarPackage = async (req, res) => {
-  const existingPackage = await supabase
-        .from("Providers")
-        .select("*")
-        .eq("id", req.body.providerId);
-  
-      if (!existingPackage.data || existingPackage.data.length < 1) {
-        // Email already exists, handle accordingly (e.g., send an error response)
-        return res.status(400).send("provider doesnot exist");
-      }
-      console.log(req.body);
-    try {
-      const { data: creed, error } = await supabase
-        .from("CarPackages")
-        .insert([
-          {
-            Personal_Accident: req.body.Personal_Accident,
-            COinsurance: req.body.COinsurance,
-            AgencyCOinsurance: req.body.AgencyCOinsurance,
-            Roadside_Assistance: req.body.Roadside_Assistance,
-            Civil_Liability: req.body.Civil_Liability,
-            Police_Report: req.body.Police_Report,
-            Personal_Accident:req.body.Personal_Accident,
-            Dfixing:req.body.Dfixing,
-            providerid:req.body.providerId,
-            price:req.body.price,
-            type:req.body.type
-          },
-        ])
-        .select();
-  
-      if (error) {
-        console.log(error);
-        throw new Error(error.message); // Throw an error if there is an error during insertion
-        
-      }
-  
-      if (creed) {
-        res.redirect("/admin/view&editPackages");
-      }
-    } catch (error) {
-      res.status(500).send("An error occurred during sign up: " + error.message);
-    }
-  };
+  try {
+    const { data: creed, error } = await database.addCarPackage(req.body);
 
-
-  const getCarPackages = async (id) => { 
-    try {
-      // Select all packages from the 'CarPackages' table
-      let query=supabase.from("CarPackages").select("providers(id, name),id,price,Personal_Accident,COinsurance,AgencyCOinsurance,Roadside_Assistance,Civil_Liability,Police_Report,Dfixing,type");
-      if(id){
-        query=query.eq("id", req.body.id);
-      }
-      const { data, error } = await query 
-  
-      if (error) {
-        throw error;
-      }
-  
-      return data;
-    } catch (error) {
-      console.error("Error fetching Providers:", error.message);
-      throw error;
+    if (error) {
+      console.log(error);
+      throw new Error(error.message); // Throw an error if there is an error during insertion
     }
+
+    if (creed) {
+      res.redirect('/admin/view&editPackages');
+    } else {
+      // Handle case where the car package was not added successfully
+      res.status(500).send('An error occurred during car package addition.');
+    }
+  } catch (error) {
+    res.status(500).send('An error occurred during car package addition: ' + error.message);
   }
+};
+
   const get_car_to_edit = async (req, res) => {
     try {
-      // Fetch the product from Supabase based on the provided ID
-      const { data, error } = await supabase
-        .from("CarPackages")
-        .select("*")
-        .eq("id", req.params.id);
+      // Call the class method to handle fetching the car package
+      const carPackage = await database.get_car_to_edit(req.params.id);
   
-      if (error) {
-        console.error("Error fetching product:", error);
-        return res.status(500).send("Internal Server Error");
-      }
-  
-      if (data && data.length > 0) {
-        // Render the editprod view with the product data
+      if (carPackage) {
+        // Render the editCarPackages view with the car package data
         res.render("pages/editCarPackages", {
-          car: data[0],
+          car: carPackage,
           user: req.session.user === undefined ? "" : req.session.user,
         });
       } else {
-        // Product not found
-        res.status(404).send("User not found");
+        // Car package not found
+        res.status(404).send("Car package not found");
       }
     } catch (error) {
-      console.error("Error fetching product:", error);
+      console.error("Error fetching car package:", error);
       res.status(500).send("Internal Server Error");
     }
   };
@@ -120,11 +69,21 @@ const AddCarPackage = async (req, res) => {
   const editCarPackage = async (req, res) => {
     try {
       const PackageId = req.params.id;
-      const {price, Dfixing, COinsurance, AgencyCOinsurance, Roadside_Assistance, Personal_Accident, Civil_Liability, Police_Report } = req.body;
+      const {
+        price,
+        Dfixing,
+        COinsurance,
+        AgencyCOinsurance,
+        Roadside_Assistance,
+        Personal_Accident,
+        Civil_Liability,
+        Police_Report,
+      } = req.body;
   
-      const { data: existingPackage, error } = await supabase
-        .from("CarPackages")
-        .update({
+      // Use the carPackagesDatabase object to edit the car package
+      const { data: existingPackage, error } = await database.editCarPackage(
+        PackageId,
+        {
           price,
           Dfixing,
           COinsurance,
@@ -133,9 +92,8 @@ const AddCarPackage = async (req, res) => {
           Personal_Accident,
           Civil_Liability,
           Police_Report,
-        })
-        .eq("id", PackageId)
-        .select();
+        }
+      );
   
       if (error) {
         throw new Error(error.message);
@@ -147,294 +105,183 @@ const AddCarPackage = async (req, res) => {
   
       res.redirect("/admin/view&editPackages");
     } catch (error) {
-      res.status(500).send("An error occurred during update: " + error.message);
-    }
-  };
-
-
-
-
-
-  const deleteCarPackages = async (req, res) =>  { 
-    try {
-      // Assuming you have the user's unique identifier, such as userId, in req.params.id
-      const packageId = req.params.id;
-  
-      // Use Supabase's delete method to remove the user based on their unique identifier
-      const { data, error } = await supabase
-        .from("CarPackages")
-        .delete()
-        .eq("id", packageId); // Assuming the field in your database is named 'id'
-  
-      if (error) {
-        throw new Error(error.message);
-      }
-  
-      
-      // User successfully deleted
-      res.status(200).end();
-    } catch (error) {
-      res.status(500).send("An error occurred during user deletion: " + error.message);
-      // Promise.resolve();
-    }
-  }
-
-
-/////////////////Medical//////////////////
-const AddMedicalPackage = async (req, res) => {
-  const existingPackage = await supabase
-        .from("Providers")
-        .select("*")
-        .eq("id", req.body.providerId);
-  
-      if (!existingPackage.data || existingPackage.data.length < 1) {
-        // Email already exists, handle accordingly (e.g., send an error response)
-        return res.status(400).send("provider doesnot exist");
-      }
-      console.log(req.body);
-    try {
-      const { data: creed, error } = await supabase
-        .from("MedicalPackages")
-        .insert([
-          {
-            price: req.body.price,
-            HospitalizationAndSurgery: req.body.HospitalizationAndSurgery,
-            Emergency: req.body.Emergency,
-            Medication_Coverage: req.body.Medication_Coverage,
-            Clinics_Coverage: req.body.Clinics_Coverage,
-            XrayAndScans: req.body.XrayAndScans_Coverage,
-            Maternity_Coverage:req.body.Maternity_Coverage,
-            Dental_Coverage:req.body.Dental_Coverage,
-            Optical_Coverage:req.body.Optical_Coverage,
-            Preexisting_Conditions:req.body.Preexisting_Conditions,
-            providerid:req.body.providerId,
-            price:req.body.price,
-            type:req.body.type
-          },
-        ])
-        .select();
-  
-      if (error) {
-        console.log(error);
-        throw new Error(error.message); // Throw an error if there is an error during insertion
-        
-      }
-  
-      if (creed) {
-        res.redirect("/admin/view&editPackages");
-      }
-    } catch (error) {
-      res.status(500).send("An error occurred during sign up: " + error.message);
-    }
-  };
-
-  const getMedicalPackages = async (id) => { 
-    try {
-      // Select all packages from the 'CarPackages' table
-      let query=supabase.from("MedicalPackages").select("providers(id, name),id,price,HospitalizationAndSurgery,XrayAndScans,Emergency,Medication_Coverage,Clinics_Coverage,Preexisting_Conditions,Maternity_Coverage,Dental_Coverage,Optical_Coverage,type");
-      if(id){
-        query=query.eq("id", req.body.id);
-      }
-      const { data, error } = await query 
-  
-      if (error) {
-        throw error;
-      }
-  
-      return data;
-    } catch (error) {
-      console.error("Error fetching Providers:", error.message);
-      throw error;
-    }
-  }
-
-  const get_Med_to_edit = async (req, res) => {
-    try {
-      // Fetch the product from Supabase based on the provided ID
-      const { data, error } = await supabase
-        .from("MedicalPackages")
-        .select("*")
-        .eq("id", req.params.id);
-  
-      if (error) {
-        console.error("Error fetching product:", error);
-        return res.status(500).send("Internal Server Error");
-      }
-  
-      if (data && data.length > 0) {
-        // Render the editprod view with the product data
-        res.render("pages/editMedicalPackages", {
-          Med: data[0],
-          user: req.session.user === undefined ? "" : req.session.user,
-        });
-      } else {
-        // Product not found
-        res.status(404).send("User not found");
-      }
-    } catch (error) {
-      console.error("Error fetching product:", error);
+      console.error("An error occurred during update:", error.message);
       res.status(500).send("Internal Server Error");
     }
   };
 
-  const editMedicalPackage = async (req, res) => {
+
+  const deleteCarPackages = async (req, res) => {
     try {
-      const PackageId = req.params.id;
-
-      const {price, HospitalizationAndSurgery, Emergency, Medication_Coverage, Clinics_Coverage, XrayAndScans, Maternity_Coverage, Dental_Coverage, Optical_Coverage, Preexisting_Conditions } = req.body;
-  
-     
-      const { data: existingPackage, error } = await supabase
-        .from("MedicalPackages")
-        .update({
-          price,
-          HospitalizationAndSurgery,
-          Emergency,
-          Medication_Coverage,
-          Clinics_Coverage,
-          XrayAndScans,
-          Maternity_Coverage,
-          Dental_Coverage,
-          Optical_Coverage,
-          Preexisting_Conditions,
-        })
-        .eq("id", PackageId)
-        .select();
-  
-      if (error) {
-        throw new Error(error.message);
-      }
-  
-      if (!existingPackage || existingPackage.length < 1) {
-        return res.status(400).send("Medical package does not exist");
-      }
-  
-      res.redirect("/admin/view&editPackages");
-    } catch (error) {
-      res.status(500).send("An error occurred during update: " + error.message);
-    }
-  };
-
-
-
-
-
-
-
-  const deleteMedicalPackages = async (req, res) =>  { 
-    try {
-      // Assuming you have the user's unique identifier, such as userId, in req.params.id
+      // Assuming you have the car package's unique identifier in req.params.id
       const packageId = req.params.id;
   
-      // Use Supabase's delete method to remove the user based on their unique identifier
-      const { data, error } = await supabase
-        .from("MedicalPackages")
-        .delete()
-        .eq("id", packageId); // Assuming the field in your database is named 'id'
+      // Delete the car package using the class method
+      const isDeleted = await database.deleteCarPackages(packageId);
   
-      if (error) {
-        throw new Error(error.message);
+      if (isDeleted) {
+        res.status(200).end();
+      } else {
+        res.status(404).send('Car package not found');
       }
-
-      
-      // User successfully deleted
-      res.status(200).end();
     } catch (error) {
-      res.status(500).send("An error occurred during user deletion: " + error.message);
-      // Promise.resolve();
+      console.error('Error during car package deletion:', error.message);
+      res.status(500).send('An error occurred during car package deletion: ' + error.message);
     }
-  }
+  };
   
+
+
+/////////////////Medical//////////////////
+const AddMedicalPackage = async (req, res) => {
+  try {
+    // Assuming the medical package data is in req.body
+    const packageData = req.body;
+
+    // Add the medical package using the class method
+    const result = await database.AddMedicalPackage(packageData);
+
+    if (result) {
+      res.redirect('/admin/view&editPackages');
+    } else {
+      res.status(400).send('Failed to add medical package');
+    }
+  } catch (error) {
+    console.error('An error occurred during medical package addition:', error.message);
+    res.status(500).send('An error occurred during medical package addition: ' + error.message);
+  }
+};
+
+const get_Med_to_edit = async (req, res) => {
+  try {
+    // Fetch the medical package by ID
+    const packageId = req.params.id;
+    const medicalPackage = await database.get_Med_to_edit(packageId);
+
+    if (medicalPackage) {
+      // Render the editMedicalPackages view with the medical package data
+      res.render('pages/editMedicalPackages', {
+        Med: medicalPackage,
+        user: req.session.user === undefined ? '' : req.session.user,
+      });
+    } else {
+      // Medical package not found
+      res.status(404).send('Medical package not found');
+    }
+  } catch (error) {
+    console.error('Error fetching medical package:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+const editMedicalPackage = async (req, res) => {
+  try {
+    const packageId = req.params.id;
+    const {
+      price,
+      HospitalizationAndSurgery,
+      Emergency,
+      Medication_Coverage,
+      Clinics_Coverage,
+      XrayAndScans,
+      Maternity_Coverage,
+      Dental_Coverage,
+      Optical_Coverage,
+      Preexisting_Conditions,
+    } = req.body;
+
+    const updatedData = {
+      price,
+      HospitalizationAndSurgery,
+      Emergency,
+      Medication_Coverage,
+      Clinics_Coverage,
+      XrayAndScans,
+      Maternity_Coverage,
+      Dental_Coverage,
+      Optical_Coverage,
+      Preexisting_Conditions,
+    };
+
+    const isUpdated = await database.editMedicalPackage(packageId, updatedData);
+
+    if (isUpdated) {
+      res.redirect('/admin/view&editPackages');
+    } else {
+      res.status(400).send('Medical package not found');
+    }
+  } catch (error) {
+    console.error('An error occurred during update:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+
+const deleteMedicalPackages = async (req, res) => {
+  try {
+    // Assuming you have the medical package's unique identifier in req.params.id
+    const packageId = req.params.id;
+
+    // Delete the medical package using the class method
+    const isDeleted = await database.deleteMedicalPackages(packageId);
+
+    if (isDeleted) {
+      res.status(200).end();
+    } else {
+      res.status(404).send('Medical package not found');
+    }
+  } catch (error) {
+    console.error('Error during medical package deletion:', error.message);
+    res.status(500).send('An error occurred during medical package deletion: ' + error.message);
+  }
+};
+
 
 /////////////////Life///////////////////
 const AddLifePackage = async (req, res) => {
-  const existingPackage = await supabase
-        .from("Providers")
-        .select("*")
-        .eq("id", req.body.providerId);
-  
-      if (!existingPackage.data || existingPackage.data.length < 1) {
-        // Email already exists, handle accordingly (e.g., send an error response)
-        return res.status(400).send("provider doesnot exist");
-      }
-      console.log(req.body);
-    try {
-      const { data: creed, error } = await supabase
-        .from("LifePackages")
-        .insert([
-          {
-            Income: req.body.Income,
-            Marriage: req.body.Marriage,
-            Starting_Career: req.body.Starting_Career,
-            Retirement: req.body.Retirement,
-            Age: req.body.Age,
-            Taxes: req.body.Taxes,
-            providerid:req.body.providerId,
-            price:req.body.price,
-            type:req.body.type
-          },
-        ])
-        .select();
-  
-      if (error) {
-        console.log(error);
-        throw new Error(error.message); // Throw an error if there is an error during insertion
-        
-      }
-  
-      if (creed) {
-        res.redirect("/admin/view&editPackages");
-      }
-    } catch (error) {
-      res.status(500).send("An error occurred during sign up: " + error.message);
-    }
-  };
-
-const getLifePackages = async (id) => { 
   try {
-    // Select all packages from the 'CarPackages' table
-    let query=supabase.from("LifePackages").select("providers(id, name),id,price,Income,Marriage,Starting_Career,Retirement,Age,Taxes,type");
-    if(id){
-      query=query.eq("id", req.body.id);
-    }
-    const { data, error } = await query 
+    // Use the lifePackagesDatabase object to add the life package
+    const lifePackageData = {
+      Income: req.body.Income,
+      Marriage: req.body.Marriage,
+      Starting_Career: req.body.Starting_Career,
+      Retirement: req.body.Retirement,
+      Age: req.body.Age,
+      Taxes: req.body.Taxes,
+      providerId: req.body.providerId,
+      price: req.body.price,
+      type: req.body.type,
+    };
 
-    if (error) {
-      throw error;
-    }
+    const result = await database.AddLifePackage(lifePackageData);
 
-    return data;
+    if (result) {
+      res.redirect("/admin/view&editPackages");
+    }
   } catch (error) {
-    console.error("Error fetching Providers:", error.message);
-    throw error;
+    res.status(500).send("An error occurred during sign up: " + error.message);
   }
-}
+};
+
 
 const get_Life_to_edit = async (req, res) => {
   try {
-    // Fetch the product from Supabase based on the provided ID
-    const { data, error } = await supabase
-      .from("LifePackages")
-      .select("*")
-      .eq("id", req.params.id);
+    // Use the lifePackagesDatabase object to get the life package details by ID
+    const lifePackageId = req.params.id;
+    const lifePackageData = await database.get_Life_to_edit(lifePackageId);
 
-    if (error) {
-      console.error("Error fetching product:", error);
-      return res.status(500).send("Internal Server Error");
-    }
-
-    if (data && data.length > 0) {
-      // Render the editprod view with the product data
+    if (lifePackageData) {
+      // Render the editLifePackages view with the life package data
       res.render("pages/editLifePackages", {
-        Life: data[0],
+        Life: lifePackageData,
         user: req.session.user === undefined ? "" : req.session.user,
       });
     } else {
-      // Product not found
-      res.status(404).send("User not found");
+      // Life package not found
+      res.status(404).send("Life package not found");
     }
   } catch (error) {
-    console.error("Error fetching product:", error);
+    console.error("Error fetching life package:", error);
     res.status(500).send("Internal Server Error");
   }
 };
@@ -443,30 +290,25 @@ const get_Life_to_edit = async (req, res) => {
 const editLifePackage = async (req, res) => {
   try {
     const PackageId = req.params.id;
+    const { price, Income, Marriage, Starting_Career, Retirement, Age, Taxes } = req.body;
 
-    const {price, Income, Marriage, Starting_Career, Retirement, Age, Taxes } = req.body;
-
-   
-    const { data: existingPackage, error } = await supabase
-      .from("LifePackages")
-      .update({
-        price,
-        Income,
-        Marriage,
-        Starting_Career,
-        Retirement,
-        Age,
-        Taxes
-      })
-      .eq("id", PackageId)
-      .select();
+    // Use the lifePackagesDatabase object to update the life package
+    const { data: existingPackage, error } = await database.editLifePackage(PackageId, {
+      price,
+      Income,
+      Marriage,
+      Starting_Career,
+      Retirement,
+      Age,
+      Taxes,
+    });
 
     if (error) {
       throw new Error(error.message);
     }
 
     if (!existingPackage || existingPackage.length < 1) {
-      return res.status(400).send("Medical package does not exist");
+      return res.status(400).send("Life package does not exist");
     }
 
     res.redirect("/admin/view&editPackages");
@@ -476,79 +318,51 @@ const editLifePackage = async (req, res) => {
 };
 
 
-
-
-const deleteLifePackages = async (req, res) =>  { 
+const deleteLifePackages = async (req, res) => {
   try {
-    // Assuming you have the user's unique identifier, such as userId, in req.params.id
+    // Assuming you have the life package's unique identifier in req.params.id
     const packageId = req.params.id;
 
-    // Use Supabase's delete method to remove the user based on their unique identifier
-    const { data, error } = await supabase
-      .from("LifePackages")
-      .delete()
-      .eq("id", packageId); // Assuming the field in your database is named 'id'
+    // Delete the life package using the class method
+    const isDeleted = await database.deleteLifePackages(packageId);
 
-    if (error) {
-      throw new Error(error.message);
+    if (isDeleted) {
+      res.status(200).end();
+    } else {
+      res.status(404).send('Life package not found');
     }
-
-    
-    // User successfully deleted
-    res.status(200).end();
   } catch (error) {
-    res.status(500).send("An error occurred during user deletion: " + error.message);
-    // Promise.resolve();
-  }
-}
-
-///////////////////////////////////////////////////////////////////////
-const getAllPackages = async (req, res) => {
-  try {
-    // Select all car packages from the 'CarPackages' table
-    const { data: carPackagesData, error: carPackagesError } = await supabase.from("CarPackages")
-    .select("*, Providers(id,name)")
-
-    // Select all medical packages from the 'MedicalPackages' table
-    const { data: medicalPackagesData, error: medicalPackagesError } = await supabase.from("MedicalPackages").select("*,Providers(id,name)");
-
-    // Select all life packages from the 'LifePackages' table
-    const { data: lifePackagesData, error: lifePackagesError } = await supabase.from("LifePackages").select("*,Providers(id,name)");
-
-    // Handle errors if any
-    if (carPackagesError) {
-      throw carPackagesError;
-    }
-    console.log("Car Packages Data:", carPackagesData);
-
-    if (medicalPackagesError) {
-      throw medicalPackagesError;
-    }
-
-    if (lifePackagesError) {
-      throw lifePackagesError;
-    }
-
-    // Render the EJS template with the fetched data
-    res.render("pages/view&editPackages", {
-      carPackages: carPackagesData || [],
-      medicalPackages: medicalPackagesData || [],
-      lifePackages: lifePackagesData || [],
-    });
-
-  } catch (error) {
-    console.error("Error fetching packages:", error.message);
-    // Handle the error or send an error response
-    res.status(500).send("Internal Server Error");
+    console.error('Error during life package deletion:', error.message);
+    res.status(500).send('An error occurred during life package deletion: ' + error.message);
   }
 };
 
+// In your controller function
+const getAllPackages = async (req, res) => {
+  try {
+    console.log('Inside getAllPackages controller'); // Log to check if the function is being called
 
+    // Call the class method to fetch all packages
+    const packagesData = await database.getAllPackages();
 
+    // Log the fetched data
+    console.log('Fetched packages data:', packagesData);
 
+    // Render the EJS template with the fetched data
+    res.render('pages/view&editPackages', {
+      user: req.session.user === undefined ? '' : req.session.user,
+      carPackages:packagesData?.carPackages || [],
+      medicalPackages:packagesData?.medicalPackages||[],
+      lifePackages:packagesData?.lifePackages || [] 
+    });
+  } catch (error) {
+    console.error('Error fetching packages:', error.message);
+    // Handle the error or send an error response
+    res.status(500).send('Internal Server Error');
+  }
+};
 
-
-  export{AddCarPackage,getCarPackages,get_car_to_edit,editCarPackage,deleteCarPackages,
-    AddLifePackage,getLifePackages,deleteLifePackages,get_Life_to_edit,editLifePackage,
-    getMedicalPackages,deleteMedicalPackages,AddMedicalPackage,get_Med_to_edit,editMedicalPackage ,
-    getAllPackages}
+export{AddCarPackage,get_car_to_edit,editCarPackage,deleteCarPackages,
+       AddLifePackage,deleteLifePackages,get_Life_to_edit,editLifePackage,
+       deleteMedicalPackages,AddMedicalPackage,get_Med_to_edit,editMedicalPackage
+       ,getAllPackages}
