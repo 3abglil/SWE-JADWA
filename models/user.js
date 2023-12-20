@@ -1,6 +1,6 @@
 import supabase from "../db/database.js";
 import user_constroct from "./user_construct.js"; 
-class User extends user_constroct {
+class User  {
   /**
    * @param {int} id
    * @param {string} Fname

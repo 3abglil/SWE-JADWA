@@ -2,7 +2,7 @@ import supabase from "../db/database.js";
 import User from "./user.js";
 import users_constroct from "./users_construct.js";
 const users=new User();
-class Users extends users_constroct{
+class Users {
   async GetAllUsers(req,res){
     try {
       // Select all users from the 'users' table

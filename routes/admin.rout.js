@@ -11,7 +11,7 @@ app.use(router);
 import AdminController from "../controller/Admin_controller.js";
 import providerDatabase from '../controller/Provider_class.js';
 const admin=new AdminController();
-const database=new providerDatabase();//import { handleAdminSignup,} from "../controller/applications.js";
+const database=new providerDatabase();
 
 import {
   display_all_users,

@@ -37,8 +37,6 @@ class UserController extends user_controller_constroct{
     const Password= req.body.Password;
     const Phone= req.body.Phone;
     const Address= req.body.Address;
-    console.log("zbyyyyy")
-    console.log(Fname+Lname+Email+Password+Phone+Address)
     try{
     const value=await users.AddUser(Fname,Lname,Email,Password,Phone,Address,req,res)
     console.log(value);
