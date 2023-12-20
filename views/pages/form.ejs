@@ -1,137 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="../css/form.css">
+  <meta charset="utf-8" />
+  <title>JADWA</title>
+  <link rel="stylesheet" href="../../css/form.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  <script>
+    function validate() {
+      if (document.getElementById('result').innerHTML.includes('taken'))
+        return false;
+      else
+        return true;
+    }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Assuming you have included the necessary jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+
 </head>
 
 <body>
-  <div id="fillform">
-    <button id="CLOSE" class="fbutton">
-      <i class="fa-regular fa-circle-xmark fa-2xl"></i>
-    </button>
-    <form method="POST" action="/form" id="myForm">
-
-      <div id="floatcont">
-        <div class="form-control fdata">
-          <input type="text" name="Fname" required />
-          <label>First Name</label>
+  <div class="container">
+    <header>Application Form</header>
+    <div class="progress-bar">
+      <div class="step">
+        <p>Name</p>
+        <div class="bullet">
+          <span>1</span>
         </div>
-        <div class="form-control fdata">
-          <input type="text" name="Lname" required />
-          <label>Last Name</label>
+        <div class="check fas fa-check"></div>
+      </div>
+      <div class="step">
+        <p>Contact</p>
+        <div class="bullet">
+          <span>2</span>
         </div>
+        <div class="check fas fa-check"></div>
+      </div>
+      <div class="step">
+        <p>Birth</p>
+        <div class="bullet">
+          <span>3</span>
+        </div>
+        <div class="check fas fa-check"></div>
       </div>
 
-      <div class="form-control fdata">
-        <input type="date" required />
-      </div>
+    </div>
+    <div class="form-outer">
 
+      <% if (SRC="car" ){ %>
+        <form action="/form-1" method='post'>
 
+          <% } else if (SRC="life" ) {%>
+            <form action="/form-2" method='post'>
+              <%} else {%>
+                <form action="/form-2" method='post'>
+                  <%}%>
 
-
-
-
-      <div class="form-control fdata" id="email">
-        <input type="text" name="Email" required />
-        <label>Email</label>
-      </div>
-
-      <div class="form-control fdata" id="phone">
-        <input type="number" name="Phone" required />
-        <label>Phone Number</label>
-      </div>
-
-      <!-- <div class="choose">
-          <div id="gender">
-            <h3>Gender :-</h3>
-          </div>
-          <div class="rating-container">
-              
-                <div class="rating">
                     
-  
-                        <label for="super-happy">
-                            <input type="radio" name="rating" class="super-happy inp" id="super-happy"
-                                value="super-happy" />
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512">
-                                <path
-                                    d="M112 48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm40 304V480c0 
-                            17.7-14.3 32-32 32s-32-14.3-32-32V256.9L59.4 304.5c-9.1 15.1-28.8 20-43.9 10.9s-20-28.8-10.9-43.9l58.3-97c17.4-28.9 48.6-46.6 82.3-46.6h29.7c33.7
-                            0 64.9 17.7 82.3 46.6l58.3 97c9.1 15.1 4.2 34.8-10.9 43.9s-34.8 4.2-43.9-10.9L232 256.9V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V352H152z" />
-                            </svg> </label>
-  
-                        <label for="happy">
-                            <input type="radio" name="rating" class="happy inp" id="happy" value="happy" checked />
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                                viewBox="0 0 320 512">
-                                <path
-                                    d="M160 0a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM88 384H70.2c-10.9 0-18.6-10.7-15.2-21.1L93.3 248.1 59.4 304.5c-9.1 15.1-28.8 20-43.9 10.9s-20-28.8-10.9-43.9l53.6-89.2c20.3-33.7 56.7-54.3 96-54.3h11.6c39.3 0 75.7 20.6 96 54.3l53.6 89.2c9.1 15.1 4.2 34.8-10.9 43.9s-34.8 4.2-43.9-10.9l-33.9-56.3L265 362.9c3.5 10.4-4.3 21.1-15.2 21.1H232v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V384H152v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V384z" />
-                            </svg>
-                            </svg> </label>
-  
-  
-  
-                    
-                </div>
-            </div>
-        </div> -->
-
-      <div class="card">
-        <div class="rating-container">
-          <div class="rating-text">
-            <p>Gender :-</p>
-          </div>
-          <div class="rating">
-            <form class="rating-form">
-
-              <label for="super-happy">
-                <input type="radio" name="gender" class="super-happy" id="super-happy" value="female" />
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                  viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                  <path
-                    d="M160 0a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM88 384H70.2c-10.9 0-18.6-10.7-15.2-21.1L93.3 248.1 59.4 304.5c-9.1 15.1-28.8 20-43.9 10.9s-20-28.8-10.9-43.9l53.6-89.2c20.3-33.7 56.7-54.3 96-54.3h11.6c39.3 0 75.7 20.6 96 54.3l53.6 89.2c9.1 15.1 4.2 34.8-10.9 43.9s-34.8 4.2-43.9-10.9l-33.9-56.3L265 362.9c3.5 10.4-4.3 21.1-15.2 21.1H232v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V384H152v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V384z" />
-                </svg> </label>
-
-              <label for="happy">
-                <input type="radio" name="gender" class="happy" id="happy" value="male" checked />
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                  viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                  <path
-                    d="M112 48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm40 304V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V256.9L59.4 304.5c-9.1 15.1-28.8 20-43.9 10.9s-20-28.8-10.9-43.9l58.3-97c17.4-28.9 48.6-46.6 82.3-46.6h29.7c33.7 0 64.9 17.7 82.3 46.6l58.3 97c9.1 15.1 4.2 34.8-10.9 43.9s-34.8 4.2-43.9-10.9L232 256.9V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V352H152z" />
-                </svg> </label>
-
-          </div>
-
-          <div class="form-control fdata adress">
-            <input type="text" id="Address" name="Address" required />
-            <label for="Address" id="LAB">Address</label>
-          </div>
-
-
-
-          <div class="container">
-
-            <button id="btn" class="button" type="submit">
-              <p id="btnText">Submit</p>
-              <div class="check-box">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" id="sb-btn">
-                  <path id="p-sb-btn" fill="transparent" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-                </svg>
-              </div>
-            </button>
-            <!-- <button type="submit">Submit</button> -->
-          </div>
-
-
-    </form>
-
-
+                      <div class="page slide-page">
+                        <div class="title">Basic Info:</div>
+                        <div class="field">
+                          <div class="label">First Name</div>
+                          <input type="text" id="fn" name="Fname" required>
+                          <i class="fas fa-exclamation-circle failure-icon"></i>
+                          <i class="far fa-check-circle success-icon"></i><br>
+                        </div>
+                        <div class="error"></div>
+                        <div class="field">
+                          <div class="label">Last Name</div>
+                          <input type="text" id="ln" name="Lname" required>
+                          <i class="fas fa-exclamation-circle failure-icon"></i>
+                          <i class="far fa-check-circle success-icon"></i>
+                        </div>
+                        <div class="error"></div>
+                        <div class="field">
+                          <button class="firstNext next">Next</button>
+                        </div>
+                      </div>
+                      <div class="page">
+                        <div class="title">Contact Info:</div>
+                        <div class="field">
+                          <div class="label">Email Address</div>
+                          <input type="text" id="mail" name="Email" required>
+                          <span id="email-error"></span>
+                          <i class="fas fa-exclamation-circle failure-icon"></i>
+                          <i class="far fa-check-circle success-icon"></i>
+                        </div>
+                        <div class="error"></div>
+                        <div class="field">
+                          <div class="label">Phone Number</div>
+                          <input type="number" id="phone" name="phone" required>
+                          <i class="fas fa-exclamation-circle failure-icon"></i>
+                          <i class="far fa-check-circle success-icon"></i>
+                        </div>
+                        <div class="error"><span id="mailerr"></span> </div>
+                        <div class="field btns">
+                          <button class="prev-1 prev">Previous</button>
+                          <button id="next1btn" class="next-1 next">Next</button>
+                        </div>
+                      </div>
+                      <div class="page">
+                        <div class="title">Date of Birth:</div>
+                        <div class="field">
+                          <div class="label">Age</div>
+                          <input type="number" id="dob" name="dob" required>
+                          <i class="fas fa-exclamation-circle failure-icon"></i>
+                          <i class="far fa-check-circle success-icon"></i>
+                        </div>
+                        <div class="error"></div>
+                        <div class="field">
+                          <div class="label">Gender</div>
+                          <select name="option" id="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                          </select>
+                        </div>
+                        <div class="field btns">
+                          <button class="prev-2 prev">Previous</button>
+                          <button class="submit">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+    </div>
   </div>
+  <script src="../js/form.js"></script>
+
+
+
+
 </body>
-<script src="/js/form.js"></script>
 
 </html>
