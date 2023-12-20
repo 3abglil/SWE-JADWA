@@ -21,7 +21,7 @@ app.use(
   })
 );
 
-import supabase from "../models/database.js";
+import supabase from "../db/database.js";
 
 const handleAdminSignup = async (req, res) => {
   try {

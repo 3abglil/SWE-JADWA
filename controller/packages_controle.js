@@ -1,4 +1,4 @@
-import supabase from "../models/database.js";
+import supabase from "../db/database.js";
 
 const get_car_packages = async (req, res) => {
   try {

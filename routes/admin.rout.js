@@ -8,8 +8,9 @@ app.use(fileUpload());
 app.use( bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(router);
-
+import AdminController from "../controller/Admin_controller.js";
 import providerDatabase from '../controller/Provider_class.js';
+const admin=new AdminController();
 const database=new providerDatabase();//import { handleAdminSignup,} from "../controller/applications.js";
 
 import {
@@ -63,21 +64,30 @@ router.get("/adduser", (req, res) => {
   });
 });
 
-router.get("/view&edituser", display_all_users, (req, res) => {
-  res.render("pages/view&edituser", {
-    user: req.session.user === undefined ? "" : req.session.user,
-  });
-
+router.get("/view&edituser", (req, res) =>{
+  admin.Get_Users(req,res);
 });
 
 
-router.delete("/delete/:id",deleteUser);
-router.get("/toAdmin/:id", toAdmin);
-router.get("/toClient/:id", toClient);
-router.get("/edituser/:id", edituser);
-router.post("/editinguser/:id", editinguser);
+router.delete("/delete/:id",(req, res) =>{
+  admin.user_delete(req,res);
+});
+router.get("/toAdmin/:id", (req, res) =>{
+  admin.user_to_admin(req,res);
+});
+router.get("/toClient/:id", (req, res) =>{
+  admin.user_to_client(req,res);
+});
+router.get("/edituser/:id", (req, res) =>{
+  admin.Get_user(req,res);
+});
+router.post("/editinguser/:id", (req, res) =>{
+  admin.edit_user(req,res);
+});
 
-router.post("/adduser", handleAdminSignup);
+router.post("/adduser", (req, res) =>{
+  admin.add_user(req,res);
+});
 // router.get('/view&edituser',isAdmin,GET);
 
 /////////////////////////////providers/////////////////////////////////

@@ -1,4 +1,4 @@
-import supabase from "../models/database.js";
+import supabase from "../db/database.js";
 const unlinkAsync = promisify(fs.unlink);
 import fs from 'fs/promises'; // Using fs.promises for async file operations
 import { promisify } from 'util';

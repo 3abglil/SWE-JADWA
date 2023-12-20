@@ -1,19 +1,14 @@
 import { Router } from "express";
 import {
-  handlesignin,
-  handleSignup,
-  handleLogOut,
   checkEmail,
-  editUserrr,
 } from "../controller/applications.js";
 
 import express from "express";
 import bodyParser from "body-parser";
-import path from "path";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import UserController from "../controller/User_controller.js";
 
 const app = express();
+const user_controller=new UserController();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -27,21 +22,15 @@ const router = Router();
 
 
 
-router.post("/login", handlesignin);
+router.post("/login", (req, res) =>{
+  user_controller.UserSignin(req,res);
+});
 
 router.get("/signup", (req, res) => {
   res.render("pages/reg");
 });
-router.post("/signup", handleSignup);
-router.post("/check-email", async (req, res) => {
-  const { email } = req.body;
-
-  try {
-    const isEmailTaken = await checkEmailExistence(email);
-    res.json({ exists: isEmailTaken });
-  } catch (error) {
-    res.status(500).send("Error checking email existence: " + error.message);
-  }
+router.post("/signup",(req, res) =>{ 
+  user_controller.UserSignup(req,res);
 });
 router.post("/checkEmail", checkEmail);
 
@@ -78,10 +67,13 @@ router.get("/life", async (req, res) => {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 });
-router.post("/edituser", editUserrr);
+router.post("/edituser", (req, res) =>{ 
+  user_controller.edit(req,res);
+});
 
 
-
-router.get("/logout", handleLogOut);
+router.get("/logout", (req, res) =>{ 
+  user_controller.UserLogout(req,res);
+});
 
 export default router;
