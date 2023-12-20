@@ -9,7 +9,8 @@ app.use( bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(router);
 import AdminController from "../controller/Admin_controller.js";
-import providerDatabase from '../controller/Provider_class.js';
+// import providerDatabase from '../controller/Provider_class.js';
+import providerDatabase from "../controller/Provider_Class.js";
 const admin=new AdminController();
 const database=new providerDatabase();
 
