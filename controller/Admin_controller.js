@@ -66,7 +66,7 @@ class AdminController extends admin_controller_constroct{
     const Id=req.params.id;
     const data=await user.GetUser(Id,req,res);
     console.log(data);
-    if (data && data.length > 0) {
+    if (data) {
       // Render the editprod view with the product data
       res.render("pages/edituseradmin", {
         edituser: data,
