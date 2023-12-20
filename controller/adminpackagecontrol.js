@@ -99,9 +99,7 @@ const AddCarPackage = async (req, res) => {
         throw new Error(error.message);
       }
   
-      if (!existingPackage || existingPackage.length < 1) {
-        return res.status(400).send("Car package does not exist");
-      }
+      
   
       res.redirect("/admin/view&editPackages");
     } catch (error) {

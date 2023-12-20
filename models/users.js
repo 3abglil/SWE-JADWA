@@ -61,5 +61,26 @@ class Users extends users_constroct{
       res.status(500).send("An error occurred during sign up: " + error.message);
     }
   }
+
+  async GETAPP(req,res){
+    try {
+      // Select all users from the 'users' table
+      const { data : cred, error } = await supabase.from("applicants").select("*");
+  
+      if (error) {
+        throw error;
+      }
+      if (cred && cred.length > 0) {
+        // Render the editprod view with the product data
+        return cred;
+      } else {
+        // Product not found
+        res.status(404).send("User not found");
+      }
+    } catch (error) {
+      console.error("Error fetching users:", error.message);
+      throw error;
+    }
+  }
 }
 export default Users;

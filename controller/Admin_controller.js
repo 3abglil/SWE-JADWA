@@ -50,7 +50,6 @@ class AdminController extends admin_controller_constroct{
     user.DeleteUser(userId,req,res);
   }
   async Get_Users(req,res){
-    console.log("walahy da5alt")
     try {
       const data = await users.GetAllUsers(req,res);
       console.log(data)
@@ -65,7 +64,6 @@ class AdminController extends admin_controller_constroct{
   async Get_user(req,res){
     const Id=req.params.id;
     const data=await user.GetUser(Id,req,res);
-    console.log(data);
     if (data) {
       // Render the editprod view with the product data
       res.render("pages/edituseradmin", {
@@ -75,6 +73,18 @@ class AdminController extends admin_controller_constroct{
     } else {
       // Product not found
       res.status(404).send("User not found");
+    }
+  }
+  async DisplayApps(req,res){
+    try {
+      const data = await users.GETAPP(req,res);
+      console.log(data)
+      res.render("pages/ViewApp", {
+        users: data,
+        user: req.session.user === undefined ? "" : req.session.user,
+      });
+    } catch (error) {
+      res.status(500).send("Internal Server Error");
     }
   }
 }

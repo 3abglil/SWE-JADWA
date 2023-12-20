@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View Applicants</title>
+
+  <!-- Box Icons  -->
+  <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+  <!-- Styles  -->
+  <link rel="stylesheet" href="../../css/adminDashboard.css" />
+</head>
+
+<body>
+  <%- include('../partials/aside.ejs')%>
+
+    <section class="users">
+      <% if (users.length> 0) { %>
+        <div class="board">
+          <table width="100%">
+            <thead>
+              <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                
+                <!-- <th colspan="3">Action</th> -->
+              </tr>
+            </thead>
+            <% users.forEach(us=> { %>
+              <tbody>
+                <tr id="user-<%=us.id%>">
+                  <td class="people">
+                    <div class="people-de">
+                      <p>
+                        <%= us.Fname %>
+                      </p>
+                    </div>
+                  </td>
+                  <td class="people-des">
+                    <p name="email">
+                      <%= us.Lname %>
+                    </p>
+                  </td>
+                  <td class="people-des">
+                    <p name="email">
+                      <%= us.Email %>
+                    </p>
+                  </td>
+                  
+                  
+                  
+                </tr>
+
+              </tbody>
+              <% }) %>
+          </table>
+          <% } else { %>
+            <p>There are no users to display...</p>
+            <% } %>
+        </div>
+    </section>
+
+    <!-- Link JS -->
+    <script src="../../js/adminDashboard.js"></script>
+
+</body>
+
+</html>

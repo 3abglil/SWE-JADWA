@@ -67,6 +67,9 @@ router.get("/adduser", (req, res) => {
 router.get("/view&edituser", (req, res) =>{
   admin.Get_Users(req,res);
 });
+router.get("/viewApp", (req, res) =>{
+  admin.DisplayApps(req,res);
+});
 
 
 router.delete("/delete/:id",(req, res) =>{
