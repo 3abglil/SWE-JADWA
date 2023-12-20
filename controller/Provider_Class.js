@@ -4,7 +4,7 @@ import fs from 'fs/promises'; // Using fs.promises for async file operations
 import { promisify } from 'util';
 import provider_DB from './Providerconstruct.js';
 
-class providerDatabase {
+class providerDatabase extends provider_DB {
     /**
         * @param {string} name The id takes string
         * @param {string} image The string

@@ -4,7 +4,7 @@ import fs from 'fs/promises'; // Using fs.promises for async file operations
 import { promisify } from 'util';
 import packages_DB from './PackagesConstruct.js';
 
-class packagesDatabase  {
+class packagesDatabase extends packages_DB {
  /**
         * @param {string} newData The id takes string
         * @param {string} carPackageData The string
