@@ -36,17 +36,17 @@ import {
 
 
 
-// router.use((req, res, next) => {
-//   if (req.session.user !== undefined && req.session.user.role === "A") {
-//     next();
-//     console.log(req.session.user.role);
-//   } else {
-//     res.render("pages/err", {
-//       err: "You are not an Admin",
-//       user: req.session.user === undefined ? "" : req.session.user,
-//     });
-//   }
-// });
+router.use((req, res, next) => {
+  if (req.session.user !== undefined && req.session.user.role === "A") {
+    next();
+    console.log(req.session.user.role);
+  } else {
+    res.render("pages/err", {
+      err: "You are not an Admin",
+      user: req.session.user === undefined ? "" : req.session.user,
+    });
+  }
+});
 
 router.get("/", (req, res) => {
   res.render("pages/admin", {
