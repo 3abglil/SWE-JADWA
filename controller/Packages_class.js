@@ -23,7 +23,7 @@ class packagesDatabase extends packages_DB {
 
     //////////////////////////////////////////Car///////////////////////////////////
     
-    async addCarPackage(carPackageData) {
+    async AddCarPackage(carPackageData) {
       try {
         const existingProvider = await supabase
           .from('Providers')

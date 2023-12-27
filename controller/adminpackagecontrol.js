@@ -18,7 +18,6 @@ app.use(
   })
 );
 import packagesDatabase from './Packages_class.js';
-
 const database=new packagesDatabase();
 
 
@@ -27,21 +26,20 @@ const database=new packagesDatabase();
 
 const AddCarPackage = async (req, res) => {
   try {
-    const { data: creed, error } = await database.addCarPackage(req.body);
+    // Assuming the medical package data is in req.body
+    const packageData = req.body;
 
-    if (error) {
-      console.log(error);
-      throw new Error(error.message); // Throw an error if there is an error during insertion
-    }
+    // Add the medical package using the class method
+    const result = await database.AddCarPackage(packageData);
 
-    if (creed) {
+    if (result) {
       res.redirect('/admin/view&editPackages');
     } else {
-      // Handle case where the car package was not added successfully
-      res.status(500).send('An error occurred during car package addition.');
+      res.status(400).send('Failed to add car package');
     }
   } catch (error) {
-    res.status(500).send('An error occurred during car package addition: ' + error.message);
+    console.error('An error occurred during medical package addition:', error.message);
+    res.status(500).send('An error occurred during medical package addition: ' + error.message);
   }
 };
 
@@ -257,7 +255,7 @@ const AddLifePackage = async (req, res) => {
       res.redirect("/admin/view&editPackages");
     }
   } catch (error) {
-    res.status(500).send("An error occurred during sign up: " + error.message);
+    res.status(500).send("An error occurred during add life packages: " + error.message);
   }
 };
 
@@ -301,15 +299,14 @@ const editLifePackage = async (req, res) => {
       Taxes,
     });
 
+    
     if (error) {
       throw new Error(error.message);
     }
 
     if (!existingPackage || existingPackage.length < 1) {
-      return res.status(400).send("Life package does not exist");
+      res.redirect("/admin/view&editPackages");
     }
-
-    res.redirect("/admin/view&editPackages");
   } catch (error) {
     res.status(500).send("An error occurred during update: " + error.message);
   }
