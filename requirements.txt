@@ -1,0 +1,6 @@
+fastapi
+fastapi.middleware.cors
+whisper
+os
+fastapi.responses
+transformers
