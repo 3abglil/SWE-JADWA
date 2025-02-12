@@ -1,4 +1,3 @@
 fastapi
 whisper
-os
 transformers
