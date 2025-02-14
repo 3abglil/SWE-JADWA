@@ -3,10 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 import whisper
 import os
 from fastapi.responses import JSONResponse
-from transformers import pipeline
+# from transformers import pipeline
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-summarizer = pipeline("summarization",model="facebook/bart-large-cnn",device=-1)  
+# summarizer = pipeline("summarization",model="facebook/bart-large-cnn",device=-1)  
 model = whisper.load_model("large")
 
 
@@ -43,12 +43,12 @@ async def transcribe_audio(file: UploadFile = File(...)):
 
 
         ARTICLE=result["text"]
-        fnl = summarizer(ARTICLE, max_length=130, min_length=30, do_sample=False)
-        print(fnl)
+        # fnl = summarizer(ARTICLE, max_length=130, min_length=30, do_sample=False)
+        # print(fnl)
         print(ARTICLE)
         return JSONResponse(content={
-            "transcription": fnl[0]["summary_text"],    
-            # "transcription": result["text"],    
+            # "transcription": fnl[0]["summary_text"],    
+            "transcription": result["text"],    
             # "detected_language": result.get("language", "Unknown")
         })
     
