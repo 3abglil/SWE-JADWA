@@ -7,7 +7,7 @@ from fastapi.responses import JSONResponse
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 # summarizer = pipeline("summarization",model="facebook/bart-large-cnn",device=-1)  
-model = whisper.load_model("large")
+model = whisper.load_model("small")
 
 
 app = FastAPI()
